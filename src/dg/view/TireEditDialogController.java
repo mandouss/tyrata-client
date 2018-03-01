@@ -1,0 +1,160 @@
+package dg.view;
+
+
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+//import org.controlsfx.dialog.Dialogs;
+
+import dg.model.Tire;
+import dg.util.DateUtil;
+
+
+public class TireEditDialogController {
+
+
+	@FXML
+	private TextField tireIDField;
+	@FXML
+	private TextField tirePosField;
+	@FXML
+	private TextField initS11Field;
+	@FXML
+	private TextField startTimeField;
+	@FXML
+	private TextField timeIntervalField;
+
+	@FXML
+	private Text warningText;
+
+	private Stage dialogStage;
+	private Tire tire;
+	private boolean saveClicked = false;
+
+	/**
+	 * Initializes the controller class. This method is automatically called
+	 * after the fxml file has been loaded.
+	 */
+	@FXML
+	private void initialize() {
+		warningText.setText("");
+	}
+
+	/**
+	 * Sets the stage of this dialog.
+	 * 
+	 * @param dialogStage
+	 */
+	public void setDialogStage(Stage dialogStage) {
+		this.dialogStage = dialogStage;
+	}
+
+	/**
+	 * Sets the tire to be edited in the dialog.
+	 * 
+	 * @param tire
+	 */
+	public void setTire(Tire tire) {
+		this.tire = tire;
+
+		tireIDField.setText(tire.getTireID());
+		tirePosField.setText(tire.getTirePos());
+		initS11Field.setText(Double.toString(tire.getInitS11()));
+		startTimeField.setPromptText("-2.5 ~ -1 (dB)");
+		startTimeField.setText(DateUtil.format(tire.getStartDate()));
+		startTimeField.setPromptText("yyyy-mm-dd");
+		timeIntervalField.setText(Integer.toString(tire.getTimeInterval()));
+	}
+
+	/**
+	 * Returns true if the user clicked Save, false otherwise.
+	 * 
+	 * @return
+	 */
+	public boolean isSaveClicked() {
+		return saveClicked;
+	}
+
+	/**
+	 * Called when the user clicks save.
+	 */
+	@FXML
+	private void handleSave() {
+		if (isInputValid()) {
+			tire.setTireID(tireIDField.getText());
+			tire.setTirePos(tirePosField.getText());
+			tire.setInitS11(Double.parseDouble(initS11Field.getText()));
+			tire.setStartDate(DateUtil.parse(startTimeField.getText()));
+			tire.setTimeInterval(Integer.parseInt(timeIntervalField.getText()));
+
+			saveClicked = true;
+			dialogStage.close();
+		}
+	}
+
+	/**
+	 * Called when the user clicks cancel.
+	 */
+	@FXML
+	private void handleCancel() {
+		dialogStage.close();
+	}
+
+	/**
+	 * Validates the user input in the text fields.
+	 * 
+	 * @return true if the input is valid
+	 */
+	private boolean isInputValid() {
+		String errorMessage = "";
+
+		if (tireIDField.getText() == null || tireIDField.getText().length() == 0) {
+			errorMessage += "Lack tire ID!\n"; 
+		}
+		if (tirePosField.getText() == null || tirePosField.getText().length() == 0) {
+			errorMessage += "Lack tire Position!\n"; 
+		} else {
+			//TODO: Handle duplicate tire position
+		}
+		
+		if (initS11Field.getText() == null || initS11Field.getText().length() == 0) {
+			errorMessage += "Lack S11!\n"; 
+		} else {
+			//TODO: Handle S11 Range
+		}
+
+		if (timeIntervalField.getText() == null || timeIntervalField.getText().length() == 0) {
+			errorMessage += "Lack time Interval!\n"; 
+		} else {
+			// try to parse the postal code into an int.
+			try {
+				Integer.parseInt(timeIntervalField.getText());
+			} catch (NumberFormatException e) {
+				errorMessage += "Invalid postal code (must be an integer)!\n"; 
+			}
+		}
+
+		if (startTimeField.getText() == null || startTimeField.getText().length() == 0) {
+			errorMessage += "Lack start Time!\n";
+		} else {
+			if (!DateUtil.validDate(startTimeField.getText())) {
+				errorMessage += "No valid start Time. Use the format yyyy-mm-dd!\n";
+			}
+		}
+
+		if (errorMessage.length() == 0) {
+			return true;
+		} else {
+			// Show the error message.
+			//	            Dialogs.create()
+			//	                .title("Invalid Fields")
+			//	                .masthead("Please correct invalid fields")
+			//	                .message(errorMessage)
+			//	                .showError();
+			warningText.setText(errorMessage);
+			return false;
+		}
+	}
+}
