@@ -112,7 +112,7 @@ public class MainApp extends Application {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Set the person into the controller.
+            // Set the tire into the controller.
             TireEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setTire(tire);

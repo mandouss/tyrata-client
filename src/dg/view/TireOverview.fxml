@@ -120,7 +120,7 @@
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="350.0">
                <children>
-                  <SplitPane dividerPositions="0.5" layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="398.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.5378787878787878" layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="398.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
@@ -163,9 +163,9 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                               </GridPane>
-                              <HBox layoutX="89.0" layoutY="153.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                              <HBox layoutX="85.0" layoutY="150.0" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="10.0">
                                  <children>
-                                    <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="78.0" text="Generate" />
+                                    <Button mnemonicParsing="false" onAction="#handleDataGenerate" prefHeight="27.0" prefWidth="78.0" text="Generate" />
                                     <Button mnemonicParsing="false" text="Save">
                                        <HBox.margin>
                                           <Insets left="10.0" />
@@ -178,6 +178,7 @@
                                     </Button>
                                  </children>
                               </HBox>
+                              <Text fx:id="statusText" fill="#1ca357" layoutX="245.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="10.0" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

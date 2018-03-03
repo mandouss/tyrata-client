@@ -6,6 +6,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 
 import java.util.List;
 import java.time.LocalDate;
@@ -31,6 +32,7 @@ public class TireOverviewController {
     @FXML private DatePicker startDatePicker;
     @FXML private TextField timeSpanField;
     @FXML private TextField dailyMileageField;
+    @FXML private Text statusText;
     
     // Reference to the main application.
     private MainApp mainApp;
@@ -144,9 +146,10 @@ public class TireOverviewController {
 		dailyMileageField.setPromptText("(Integer) Miles");
 		//initS11Field.setFocusTraversable(false);
 		startDatePicker.setValue(LocalDate.now());
+		statusText.setText("");
 	}
 	
-	public void configDataGen() {
+	public void handleDataGenerate() {
 		LocalDate startDate = startDatePicker.getValue();
 		int timeSpan = Integer.parseInt(timeSpanField.getText());
 		int dailyMileage = Integer.parseInt(dailyMileageField.getText());
@@ -155,8 +158,9 @@ public class TireOverviewController {
         //dataGen
         DataGenerator dataGen = new DataGenerator(startDate, timeSpan, dailyMileage, tireList);
         //day_list
-        ArrayList<DailyS11> result = dataGen.GenerateSeries();
+        ArrayList<DailyS11> result = dataGen.generateSeries();
         result.forEach((dailyResult) -> dailyResult.print());
+        statusText.setText("Data Generated");
 	}
     
     
