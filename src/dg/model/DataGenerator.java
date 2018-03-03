@@ -12,22 +12,35 @@ import javafx.beans.property.SimpleObjectProperty;
 
 public class DataGenerator {
 
-	private IntegerProperty timeLength;
+	private IntegerProperty timeSpan;
 	private IntegerProperty dailyMileage;
 	private int currentMileage;
 	private List<Tire> tireInfoList;
+	private ObjectProperty<LocalDate> startDate;
 	private LocalDate currentDate;
 	
 
-	public DataGenerator(ObjectProperty<LocalDate> startDate, IntegerProperty timeLength, IntegerProperty dailyMileage,
+	public DataGenerator(ObjectProperty<LocalDate> startDate, IntegerProperty timeSpan, IntegerProperty dailyMileage,
 			List<Tire> tireInfoList) {
 		super();
-		this.timeLength = timeLength;
+		this.timeSpan = timeSpan;
 		this.dailyMileage = dailyMileage;
 		this.tireInfoList = tireInfoList;
+		this.startDate = startDate;
 		this.currentDate = startDate.get();
 		this.currentMileage = 0;
 	}
+
+    public DataGenerator(LocalDate startDate, int timeSpan, int dailyMileage,
+                         List<Tire> tireInfoList) {
+        super();
+        this.timeSpan = new SimpleIntegerProperty(timeSpan);
+        this.dailyMileage = new SimpleIntegerProperty(dailyMileage);
+        this.tireInfoList = tireInfoList;
+        this.startDate = new SimpleObjectProperty<>(startDate);
+        this.currentDate = startDate;
+        this.currentMileage = 0;
+    }
 
 	private DailyS11 computeNextS11() {
 		
@@ -47,7 +60,7 @@ public class DataGenerator {
 	
 	public ArrayList<DailyS11> GenerateSeries() {
 		ArrayList<DailyS11> result = new ArrayList<>();
-		for (int i = 0; i < timeLength.get(); i++) {
+		for (int i = 0; i < timeSpan.get(); i++) {
 			result.add(computeNextS11());
 		}
 		return result;
@@ -61,13 +74,13 @@ public class DataGenerator {
         tireList.add(tireLF);
         tireList.add(tireRF);
         //startDate
-        ObjectProperty<LocalDate> startDate = new SimpleObjectProperty<>(LocalDate.of(2018,03,01));
-        //timeLength
-        IntegerProperty timeLength = new SimpleIntegerProperty(10);
+        LocalDate startDate = LocalDate.of(2018,03,01);
+        //timeSpan
+        int timeSpan = 10;
         //dailyMileage
-        IntegerProperty dailyMileage = new SimpleIntegerProperty(15);
+        int dailyMileage = 15;
         //dataGen
-        DataGenerator dataGen = new DataGenerator(startDate, timeLength, dailyMileage, tireList);
+        DataGenerator dataGen = new DataGenerator(startDate, timeSpan, dailyMileage, tireList);
         //day_list
         ArrayList<DailyS11> result = dataGen.GenerateSeries();
         result.forEach((dailyResult) -> dailyResult.print());
