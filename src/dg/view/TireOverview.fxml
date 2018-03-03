@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tyrata.view.TireOverviewController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.TireOverviewController">
    <children>
       <SplitPane dividerPositions="0.5" layoutX="42.0" layoutY="55.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -57,7 +58,7 @@
                                           <Insets left="30.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="Start Time" GridPane.rowIndex="3">
+                                    <Label text="Created_at" GridPane.rowIndex="3">
                                        <GridPane.margin>
                                           <Insets left="30.0" />
                                        </GridPane.margin>
@@ -87,7 +88,7 @@
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="tirePressureLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                    <Label fx:id="timeIntervalLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
@@ -95,7 +96,7 @@
                                  </children>
                               </GridPane>
                               <Label layoutX="8.0" layoutY="1.0" prefHeight="17.0" prefWidth="60.0" text="Tire info" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="1.0" />
-                              <HBox layoutX="31.0" layoutY="153.0" prefHeight="27.0" prefWidth="219.0">
+                              <HBox layoutX="31.0" layoutY="153.0" prefHeight="27.0" prefWidth="167.0">
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#handleNewTire" text="New" />
                                     <Button mnemonicParsing="false" onAction="#handleEditTire" text="Edit">
@@ -123,7 +124,7 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
                               <Label layoutX="7.0" layoutY="6.0" prefHeight="17.0" prefWidth="96.0" text="Data Generator" />
-                              <GridPane layoutY="23.0" prefHeight="101.0" prefWidth="280.0">
+                              <GridPane layoutY="23.0" prefHeight="101.0" prefWidth="280.0" AnchorPane.leftAnchor="0.0">
                                  <children>
                                     <Label text="Start Date">
                                        <GridPane.margin>
@@ -140,21 +141,15 @@
                                           <Insets left="30.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label fx:id="startDateDGLabel" text="Label" GridPane.columnIndex="1">
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Label text="Label" textAlignment="CENTER" GridPane.rowIndex="3">
                                        <GridPane.margin>
-                                          <Insets left="10.0" />
+                                          <Insets left="30.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label fx:id="timeLengthLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                                       <padding>
-                                          <Insets left="10.0" />
-                                       </padding>
-                                    </Label>
-                                    <Label fx:id="dailyMileageLabel1" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                       <padding>
-                                          <Insets left="10.0" />
-                                       </padding>
-                                    </Label>
+                                    <DatePicker GridPane.columnIndex="1" />
                                  </children>
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -167,7 +162,7 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                               </GridPane>
-                              <HBox layoutX="24.0" layoutY="153.0" prefHeight="27.0" prefWidth="264.0">
+                              <HBox layoutX="89.0" layoutY="153.0" prefHeight="27.0" prefWidth="199.0" AnchorPane.rightAnchor="10.0">
                                  <children>
                                     <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="78.0" text="Generate" />
                                     <Button mnemonicParsing="false" text="Save">
@@ -180,16 +175,19 @@
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="56.0" text="Send">
-                                       <HBox.margin>
-                                          <Insets left="10.0" />
-                                       </HBox.margin>
-                                    </Button>
                                  </children>
                               </HBox>
                            </children>
                         </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" />
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                           <children>
+                              <ImageView fitHeight="34.0" fitWidth="142.0" layoutX="137.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
+                                 <image>
+                                    <Image url="@../../../file/tyrata%20logo.png" />
+                                 </image>
+                              </ImageView>
+                              <Button layoutX="50.0" layoutY="84.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="129.0" text="Broadcast" />
+                           </children></AnchorPane>
                     </items>
                   </SplitPane>
                </children>
