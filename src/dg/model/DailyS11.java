@@ -21,7 +21,7 @@ public class DailyS11 {
 	public void addTireS11(String tireinfo, double s11) {
 		tireInfoAndS11_list.add(new Pair<String, Double>(tireinfo, s11));
 	}
-	//this is a try
+	//
 	
 	public void print() {
 		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;

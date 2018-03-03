@@ -28,7 +28,6 @@ public class DataGenerator {
 	}
 
 	//this is a try
-	//another try
 
 	private DailyS11 computeNextS11() {
 		

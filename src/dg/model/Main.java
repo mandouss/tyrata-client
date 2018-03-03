@@ -28,5 +28,6 @@ public class Main {
         //day_list
         ArrayList<DailyS11> result = dataGen.GenerateSeries();
         result.forEach((dailyResult) -> dailyResult.print());
+        //
     }
 }
