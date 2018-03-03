@@ -38,24 +38,19 @@ public class DailyS11 {
 			System.out.println("S11: " + tireInfoAndS11_list.get(i).getValue());
 		}
 	}
-    public static void main(String[] args) {
-        //tireInfo_list
-        Tire tireLF = new Tire("C-1", "LF", -2.0);
-        Tire tireRF = new Tire("C-154", "RF", -1.5);
-        List<Tire> tireList = new ArrayList<>();
-        tireList.add(tireLF);
-        tireList.add(tireRF);
-        //startDate
-        ObjectProperty<LocalDate> startDate = new SimpleObjectProperty<>(LocalDate.of(2018,03,01));
-        //timeLength
-        IntegerProperty timeLength = new SimpleIntegerProperty(10);
-        //dailyMileage
-        IntegerProperty dailyMileage = new SimpleIntegerProperty(15);
-        //dataGen
-        DataGenerator dataGen = new DataGenerator(startDate, timeLength, dailyMileage, tireList);
-        //day_list
-        ArrayList<DailyS11> result = dataGen.GenerateSeries();
-        result.forEach((dailyResult) -> dailyResult.print());
-        //
-    }
+
+	public String convertToString() {
+		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+		String result = "";
+		result += "Timestamp:" + timestamp.format(formatter) + "\n";
+		result += "Mileage: " + mileage + "\n";
+
+		for (int i = 0; i < tireInfoAndS11_list.size(); i++) {
+			result += "String: "+ tireInfoAndS11_list.get(i).getKey() + "\n";
+			result += "S11: " + tireInfoAndS11_list.get(i).getValue() + "\n";
+		}
+
+		return result;
+	}
+
 }
