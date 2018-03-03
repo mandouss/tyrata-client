@@ -5,7 +5,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-import java.time.LocalDate;
 
 import dg.MainApp;
 import dg.model.Tire;
@@ -16,8 +15,10 @@ public class TireOverviewController {
     private TableView<Tire> tireTable;
     @FXML
     private TableColumn<Tire, String> tirePosColumn;
+    //@FXML
+    //private TableColumn<Tire, LocalDate> startTimeColumn;
     @FXML
-    private TableColumn<Tire, LocalDate> startTimeColumn;
+    private TableColumn<Tire, Number> initS11Column;  //Integer, Double ... Should be Number
 
     @FXML
     private Label tireIDLabel;
@@ -123,7 +124,8 @@ public class TireOverviewController {
     private void initialize() {
         // Initialize the person table with the two columns.
     	    tirePosColumn.setCellValueFactory(cellData -> cellData.getValue().getTirePosProperty());
-    	    startTimeColumn.setCellValueFactory(cellData -> cellData.getValue().getStartDateProperty());
+    	    //startTimeColumn.setCellValueFactory(cellData -> cellData.getValue().getStartDateProperty());
+    	    initS11Column.setCellValueFactory(cellData -> cellData.getValue().getInitS11Property());
     	    
     	    // Clear person details.
     	    showTireDetails(null);
