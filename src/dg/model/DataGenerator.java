@@ -103,7 +103,7 @@ public class DataGenerator {
         //day_list
         ArrayList<DailyS11> result = dataGen.generateSeries(3);
         result.forEach((dailyResult) -> dailyResult.print());
-        //
+        
     }
 	
 }
