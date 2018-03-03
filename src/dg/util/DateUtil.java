@@ -8,9 +8,10 @@ public class DateUtil {
 
     /** The date pattern that is used for conversion. For now I am using
      *  the default ISO_LOCAL_DATE: yyyy-MM-dd */
-    //private static final String DATE_PATTERN = "dd/MM/yyyy";
+    private static final String DATE_PATTERN = "MM/dd/yyyy";
     /** The date formatter. */
-	public static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
+    public static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_PATTERN);
+	//public static final DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
 
     /**
      * Returns the given date as a well formatted String. The above defined 

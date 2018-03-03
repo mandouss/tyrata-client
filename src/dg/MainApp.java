@@ -1,9 +1,11 @@
 package dg;
+import dg.model.DailyS11;
 import dg.model.Tire;
 import dg.view.TireEditDialogController;
 import dg.view.TireOverviewController;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -25,6 +27,7 @@ public class MainApp extends Application {
      * The data as an observable list of Tires.
      */
     private ObservableList<Tire> tireData = FXCollections.observableArrayList();
+    private ArrayList<DailyS11> s11List = new ArrayList<DailyS11>();
 
     public MainApp() {
     		tireData	.add(new Tire("C-1234","LF",-1));
@@ -34,11 +37,14 @@ public class MainApp extends Application {
     }
 
     /**
-     * Returns the data as an observable list of Persons. 
+     * Return the data as an observable list of Tires. 
      * @return
      */
     public ObservableList<Tire> getTireData() {
         return tireData;
+    }
+    public ArrayList<DailyS11> getS11List(){
+    		return s11List;
     }
     
 	@Override
@@ -50,7 +56,7 @@ public class MainApp extends Application {
         showTireOverview();
 	}
     /**
-     * Initializes the root layout.
+     * Initialize root layout.
      */
     public void initRootLayout() {
         try {
@@ -69,7 +75,7 @@ public class MainApp extends Application {
     }
     
     /**
-     * Shows the person overview inside the root layout.
+     * Show tire overview inside the root layout.
      */
     public void showTireOverview() {
         try {
@@ -78,10 +84,10 @@ public class MainApp extends Application {
             loader.setLocation(MainApp.class.getResource("view/TireOverview.fxml"));
             AnchorPane tireOverview = (AnchorPane) loader.load();
 
-            // Set person overview into the center of root layout.
+            // Insert mainframe into the center of root layout.
             rootLayout.setCenter(tireOverview);
 
-            // Give the controller access to the main app.
+            // Give controller access to the main app.
             TireOverviewController controller = loader.getController();
             controller.setMainApp(this);
             
@@ -91,11 +97,10 @@ public class MainApp extends Application {
     }
     
     /**
-     * Opens a dialog to edit details for the specified person. If the user
-     * clicks OK, the changes are saved into the provided person object and true
-     * is returned.
+     * Opens a dialog to edit details for the specified tire. If the user clicks OK,
+     * the changes are saved into the provided tire object and true is returned.
      * 
-     * @param person the person object to be edited
+     * @param Tire the tire object to be edited
      * @return true if the user clicked OK, false otherwise.
      */
     public boolean showTireEditDialog(Tire tire) {
@@ -113,7 +118,7 @@ public class MainApp extends Application {
             Scene scene = new Scene(page);
             dialogStage.setScene(scene);
 
-            // Set the person into the controller.
+            // Set the tire into the controller.
             TireEditDialogController controller = loader.getController();
             controller.setDialogStage(dialogStage);
             controller.setTire(tire);
@@ -126,6 +131,10 @@ public class MainApp extends Application {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    public void showGeneratedData() {
+    		
     }
     
     /**

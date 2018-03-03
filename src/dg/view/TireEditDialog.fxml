@@ -8,10 +8,11 @@
 
 <AnchorPane prefHeight="210.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.TireEditDialogController">
    <children>
-      <GridPane layoutX="-26.0" layoutY="14.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+      <GridPane layoutX="-26.0" layoutY="14.0" prefHeight="150.0" prefWidth="229.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.0" minWidth="10.0" prefWidth="88.0" />
-          <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.0" minWidth="10.0" prefWidth="142.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.0" minWidth="10.0" prefWidth="130.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="174.0" minWidth="8.0" prefWidth="21.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -24,13 +25,13 @@
             <Label text="TireID" />
             <Label text="TirePos" GridPane.rowIndex="1" />
             <Label text="S11_i" GridPane.rowIndex="2" />
-            <Label text="Start Date" GridPane.rowIndex="3" />
-            <Label text="Time Interval" GridPane.rowIndex="4" />
+            <Label text="Tire Pressure" GridPane.rowIndex="3" />
+            <Label text="Create Date" GridPane.rowIndex="4" />
             <TextField fx:id="tireIDField" GridPane.columnIndex="1" />
             <TextField fx:id="tirePosField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="initS11Field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="startTimeField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="timeIntervalField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="timeIntervalField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <DatePicker fx:id="installDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <HBox layoutX="80.0" layoutY="155.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
