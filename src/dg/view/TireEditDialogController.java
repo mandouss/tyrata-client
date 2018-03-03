@@ -2,6 +2,7 @@ package dg.view;
 
 
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -9,7 +10,6 @@ import javafx.stage.Stage;
 //import org.controlsfx.dialog.Dialogs;
 
 import dg.model.Tire;
-import dg.util.DateUtil;
 
 
 public class TireEditDialogController {
@@ -21,10 +21,12 @@ public class TireEditDialogController {
 	private TextField tirePosField;
 	@FXML
 	private TextField initS11Field;
+
 	@FXML
-	private TextField startTimeField;
-	@FXML
-	private TextField timeIntervalField;
+	private TextField timeIntervalField; 
+	//TODO: change to tire pressure
+	@FXML 
+	private DatePicker installDatePicker;
 
 	@FXML
 	private Text warningText;
@@ -58,14 +60,14 @@ public class TireEditDialogController {
 	 */
 	public void setTire(Tire tire) {
 		this.tire = tire;
-
+		
 		tireIDField.setText(tire.getTireID());
 		tirePosField.setText(tire.getTirePos());
 		initS11Field.setText(Double.toString(tire.getInitS11()));
-		startTimeField.setPromptText("-2.5 ~ -1 (dB)");
-		startTimeField.setText(DateUtil.format(tire.getStartDate()));
-		startTimeField.setPromptText("yyyy-mm-dd");
+		initS11Field.setPromptText("-2.5 ~ -1 (dB)");
+		//initS11Field.setFocusTraversable(false);
 		timeIntervalField.setText(Integer.toString(tire.getTimeInterval()));
+		installDatePicker.setValue(tire.getStartDate());
 	}
 
 	/**
@@ -86,7 +88,7 @@ public class TireEditDialogController {
 			tire.setTireID(tireIDField.getText());
 			tire.setTirePos(tirePosField.getText());
 			tire.setInitS11(Double.parseDouble(initS11Field.getText()));
-			tire.setStartDate(DateUtil.parse(startTimeField.getText()));
+			tire.setStartDate(installDatePicker.getValue());
 			tire.setTimeInterval(Integer.parseInt(timeIntervalField.getText()));
 
 			saveClicked = true;
@@ -135,7 +137,7 @@ public class TireEditDialogController {
 				errorMessage += "Invalid postal code (must be an integer)!\n"; 
 			}
 		}
-
+/*
 		if (startTimeField.getText() == null || startTimeField.getText().length() == 0) {
 			errorMessage += "Lack start Time!\n";
 		} else {
@@ -143,7 +145,7 @@ public class TireEditDialogController {
 				errorMessage += "No valid start Time. Use the format yyyy-mm-dd!\n";
 			}
 		}
-
+*/
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {

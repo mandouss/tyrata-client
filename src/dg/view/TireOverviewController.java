@@ -40,6 +40,11 @@ public class TireOverviewController {
      */
     public TireOverviewController() {
     }
+    
+    /********************************************************************
+    *********************    Tire Config Part  *************************
+    ********************************************************************/
+    
     /**
      * Called when the user clicks on the new button.
      */
@@ -115,6 +120,15 @@ public class TireOverviewController {
         		timeIntervalLabel.setText("");
         }
     }
+    
+    
+    /********************************************************************
+     ********************  DataGen Config Part  *************************
+     ********************************************************************/
+    
+    
+    
+    
     
     /**
      * Initializes the controller class. This method is automatically called
