@@ -89,11 +89,7 @@
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="timeIntervalLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                                       <GridPane.margin>
-                                          <Insets left="10.0" />
-                                       </GridPane.margin>
-                                    </Label>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Not yet available" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                  </children>
                               </GridPane>
                               <Label layoutX="8.0" layoutY="1.0" prefHeight="17.0" prefWidth="60.0" text="Tire info" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="1.0" />
@@ -144,13 +140,13 @@
                                     </Label>
                                     <TextField fx:id="timeSpanField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <TextField fx:id="dailyMileageField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <Label text="Outlier Rate" textAlignment="CENTER" GridPane.rowIndex="3">
+                                    <Label text="Outlier Interval" textAlignment="CENTER" GridPane.rowIndex="3">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
                                     <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" />
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Not yet available" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <TextField fx:id="outlierIntervalField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                  </children>
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -163,7 +159,7 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                               </GridPane>
-                              <HBox layoutX="85.0" layoutY="150.0" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="10.0">
+                              <HBox layoutX="85.0" layoutY="150.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="160.0">
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#handleDataGenerate" prefHeight="27.0" prefWidth="78.0" text="Generate" />
                                     <Button mnemonicParsing="false" text="Save">
@@ -178,7 +174,7 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <Text fx:id="statusText" fill="#1ca357" layoutX="245.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="10.0" />
+                              <Text fx:id="statusText" fill="#1ca357" layoutX="245.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="20.0" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

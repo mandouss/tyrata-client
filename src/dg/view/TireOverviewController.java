@@ -8,8 +8,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
 
-import java.util.List;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.ArrayList;
 
 import dg.MainApp;
@@ -27,11 +27,12 @@ public class TireOverviewController {
     @FXML private Label tirePosLabel;
     @FXML private Label initS11Label;
     @FXML private Label startTimeLabel;
-    @FXML private Label timeIntervalLabel;
+    //@FXML private Label timeIntervalLabel;
 
     @FXML private DatePicker startDatePicker;
     @FXML private TextField timeSpanField;
     @FXML private TextField dailyMileageField;
+    @FXML private TextField outlierIntervalField;
     @FXML private Text statusText;
     
     // Reference to the main application.
@@ -60,8 +61,8 @@ public class TireOverviewController {
         		tireIDLabel.setText(tire.getTireID());
         		tirePosLabel.setText(tire.getTirePos());
         		initS11Label.setText(Double.toString(tire.getInitS11()));
-        		timeIntervalLabel.setText(Integer.toString(tire.getTimeInterval()));
         		startTimeLabel.setText(DateUtil.format(tire.getStartDate()));
+        		//timeIntervalLabel.setText(Integer.toString(tire.getTimeInterval()));
 
         } else {
             // Tire is null, remove all the text.
@@ -69,7 +70,7 @@ public class TireOverviewController {
         		tirePosLabel.setText("");
         		initS11Label.setText("");
         		startTimeLabel.setText("");
-        		timeIntervalLabel.setText("");
+        		//timeIntervalLabel.setText("");
         }
     }
     
@@ -141,28 +142,94 @@ public class TireOverviewController {
 		//this.tire = tire;
 		
 		timeSpanField.setText("");
-		timeSpanField.setPromptText("(Integer) Days");
+		timeSpanField.setPromptText("(1-3650) Days");
 		dailyMileageField.setText("");
-		dailyMileageField.setPromptText("(Integer) Miles");
+		dailyMileageField.setPromptText("(1-5000) Miles");
+		outlierIntervalField.setText("-1");
+		outlierIntervalField.setPromptText("Days (-1 to Disable)");
 		//initS11Field.setFocusTraversable(false);
 		startDatePicker.setValue(LocalDate.now());
 		statusText.setText("");
 	}
 	
 	public void handleDataGenerate() {
-		LocalDate startDate = startDatePicker.getValue();
-		int timeSpan = Integer.parseInt(timeSpanField.getText());
-		int dailyMileage = Integer.parseInt(dailyMileageField.getText());
-		List<Tire> tireList = mainApp.getTireData();
-		
-        //dataGen
-        DataGenerator dataGen = new DataGenerator(startDate, timeSpan, dailyMileage, tireList);
-        //day_list
-        ArrayList<DailyS11> result = dataGen.generateSeries();
-        result.forEach((dailyResult) -> dailyResult.print());
-        statusText.setText("Data Generated");
+		if(isDataInputValid()) {
+			LocalDate startDate = startDatePicker.getValue();
+			int timeSpan = Integer.parseInt(timeSpanField.getText());
+			int dailyMileage = Integer.parseInt(dailyMileageField.getText());
+			List<Tire> tireList = mainApp.getTireData();
+			int outlierInterval = Integer.parseInt(outlierIntervalField.getText());
+			boolean outlierEnabled = true;
+			if(outlierInterval == -1) {
+				outlierEnabled = false;
+			}
+	        //dataGen
+	        DataGenerator dataGen = new DataGenerator(startDate, timeSpan, dailyMileage, 
+	        								tireList, outlierEnabled, outlierInterval);
+	        //day_list
+	        ArrayList<DailyS11> newS11List = dataGen.generateSeries();
+	        newS11List.forEach((dailyS11) -> dailyS11.print());
+	        statusText.setText("Data Generated");
+	        mainApp.getS11List().clear();
+	        mainApp.getS11List().addAll(newS11List);
+		}
 	}
+	
+	
     
+	/**
+	 * Validates the user input in the text fields.
+	 * 
+	 * @return true if the input is valid
+	 */
+	private boolean isDataInputValid() {
+		String errorMessage = "";
+		/*
+		if (startDatePicker.getValue() == null || startDatePicker.getText().length() == 0) {
+			errorMessage += "Lack tire ID!\n"; 
+		}
+		*/
+		
+		if (timeSpanField.getText() == null || timeSpanField.getText().length() == 0) {
+			errorMessage += "Lack Time Span!\n"; 
+		} else {
+			try {
+				int timeSpan = Integer.parseInt(timeSpanField.getText());
+				if(timeSpan <= 0 || timeSpan > 3650) {
+					errorMessage += "Invalid Time Span (Between 0 and 3650)\n";
+				}
+			} catch (NumberFormatException e) {
+				errorMessage += "Invalid postal code (must be an integer)!\n"; 
+			}
+		}
+		
+		if (dailyMileageField.getText() == null || dailyMileageField.getText().length() == 0) {
+			errorMessage += "Lack Daily Mileage!\n"; 
+		} else {
+			try {
+				int dailyMile = Integer.parseInt(dailyMileageField.getText());
+				if(dailyMile <= 0 || dailyMile > 5000) {
+					errorMessage += "Invalid Time Span (Between 0 and 5000)\n";
+				}
+			} catch (NumberFormatException e) {
+				errorMessage += "Invalid postal code (must be an integer)!\n"; 
+			}
+		}
+		
+		if (errorMessage.length() == 0) {
+			return true;
+		} else {
+			// Show the error message.
+			//	            Dialogs.create()
+			//	                .title("Invalid Fields")
+			//	                .masthead("Please correct invalid fields")
+			//	                .message(errorMessage)
+			//	                .showError();
+			statusText.setText(errorMessage);
+			//TODO: Change color
+			return false;
+		}
+	}
     
     /**
      * Initializes the controller class. This method is automatically called

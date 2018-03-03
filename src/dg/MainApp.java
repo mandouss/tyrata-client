@@ -1,9 +1,11 @@
 package dg;
+import dg.model.DailyS11;
 import dg.model.Tire;
 import dg.view.TireEditDialogController;
 import dg.view.TireOverviewController;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -25,6 +27,7 @@ public class MainApp extends Application {
      * The data as an observable list of Tires.
      */
     private ObservableList<Tire> tireData = FXCollections.observableArrayList();
+    private ArrayList<DailyS11> s11List = new ArrayList<DailyS11>();
 
     public MainApp() {
     		tireData	.add(new Tire("C-1234","LF",-1));
@@ -39,6 +42,9 @@ public class MainApp extends Application {
      */
     public ObservableList<Tire> getTireData() {
         return tireData;
+    }
+    public ArrayList<DailyS11> getS11List(){
+    		return s11List;
     }
     
 	@Override
@@ -125,6 +131,10 @@ public class MainApp extends Application {
             e.printStackTrace();
             return false;
         }
+    }
+    
+    public void showGeneratedData() {
+    		
     }
     
     /**

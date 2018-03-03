@@ -130,11 +130,11 @@ public class TireEditDialogController {
 		if (timeIntervalField.getText() == null || timeIntervalField.getText().length() == 0) {
 			errorMessage += "Lack time Interval!\n"; 
 		} else {
-			// try to parse the postal code into an int.
+			// try to parse the time interval into an int.
 			try {
 				Integer.parseInt(timeIntervalField.getText());
 			} catch (NumberFormatException e) {
-				errorMessage += "Invalid postal code (must be an integer)!\n"; 
+				errorMessage += "Invalid time Interval (must be an integer)!\n"; 
 			}
 		}
 /*
