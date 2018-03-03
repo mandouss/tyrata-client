@@ -1,12 +1,9 @@
 package dg.model;
 
-import java.awt.print.Printable;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -54,6 +51,14 @@ public class DataGenerator {
         this.outlierInterval = new SimpleIntegerProperty(outlierInterval);
         this.dayCounter = 0;
     }
+
+	public ObjectProperty<LocalDate> getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(ObjectProperty<LocalDate> startDate) {
+		this.startDate = startDate;
+	}
 
 	private DailyS11 computeNextS11() {
 		
