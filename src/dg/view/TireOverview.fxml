@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -58,7 +59,7 @@
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="Created_at" GridPane.rowIndex="3">
+                                    <Label text="Install Date" GridPane.rowIndex="3">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
@@ -131,7 +132,7 @@
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="Time Length" GridPane.rowIndex="1">
+                                    <Label text="Time Span" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
@@ -141,15 +142,15 @@
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Label text="Interval" textAlignment="CENTER" GridPane.rowIndex="3">
+                                    <TextField fx:id="timeSpanField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="dailyMileageField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label text="Outlier Rate" textAlignment="CENTER" GridPane.rowIndex="3">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <DatePicker GridPane.columnIndex="1" />
+                                    <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Not yet available" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                  </children>
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -162,7 +163,7 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                               </GridPane>
-                              <HBox layoutX="89.0" layoutY="153.0" prefHeight="27.0" prefWidth="199.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
+                              <HBox layoutX="89.0" layoutY="153.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
                                  <children>
                                     <Button mnemonicParsing="false" prefHeight="27.0" prefWidth="78.0" text="Generate" />
                                     <Button mnemonicParsing="false" text="Save">
@@ -186,7 +187,7 @@
                                     <Image url="@../../../file/tyrata%20logo.png" />
                                  </image>
                               </ImageView>
-                              <Button layoutX="50.0" layoutY="84.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="129.0" text="Broadcast" />
+                              <Button layoutX="87.0" layoutY="70.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Broadcast" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="60.0" />
                            </children></AnchorPane>
                     </items>
                   </SplitPane>

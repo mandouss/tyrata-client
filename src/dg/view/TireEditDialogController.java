@@ -90,7 +90,7 @@ public class TireEditDialogController {
 			tire.setInitS11(Double.parseDouble(initS11Field.getText()));
 			tire.setStartDate(installDatePicker.getValue());
 			tire.setTimeInterval(Integer.parseInt(timeIntervalField.getText()));
-
+			
 			saveClicked = true;
 			dialogStage.close();
 		}
