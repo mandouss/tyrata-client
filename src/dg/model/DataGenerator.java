@@ -1,6 +1,7 @@
 package dg.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -58,13 +59,31 @@ public class DataGenerator {
 		return result;
 	}
 	
-	public ArrayList<DailyS11> GenerateSeries() {
+	public ArrayList<DailyS11> generateSeries() {
 		ArrayList<DailyS11> result = new ArrayList<>();
 		for (int i = 0; i < timeSpan.get(); i++) {
 			result.add(computeNextS11());
 		}
 		return result;
 	}
+
+    public ArrayList<DailyS11> generateSeries(int timeSpan) {
+        ArrayList<DailyS11> result = new ArrayList<>();
+        for (int i = 0; i < timeSpan; i++) {
+            result.add(computeNextS11());
+        }
+        return result;
+    }
+
+    // will be implemented by OTHERS
+//    public String convertToString() {
+//        String result = "";
+//        for (int i = 0; i < timeSpan.get(); i++) {
+//            result += computeNextS11().convertToString();
+//        }
+//
+//        return result;
+//    }
 	
     public static void main(String[] args) {
         //tireInfo_list
@@ -82,7 +101,7 @@ public class DataGenerator {
         //dataGen
         DataGenerator dataGen = new DataGenerator(startDate, timeSpan, dailyMileage, tireList);
         //day_list
-        ArrayList<DailyS11> result = dataGen.GenerateSeries();
+        ArrayList<DailyS11> result = dataGen.generateSeries(3);
         result.forEach((dailyResult) -> dailyResult.print());
         //
     }
