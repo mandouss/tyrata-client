@@ -15,6 +15,7 @@ public class DailyS11 {
 		super();
 		this.timestamp = timestamp;
 		this.mileage = mileage;
+		this.tireInfoAndS11_list = new ArrayList<>();
 	}
 	
 	public void addTireS11(String tireinfo, double s11) {

@@ -27,6 +27,7 @@ public class DataGenerator {
 		this.currentMileage = 0;
 	}
 
+	//this is a try
 
 	private DailyS11 computeNextS11() {
 		
@@ -39,7 +40,7 @@ public class DataGenerator {
 			result.addTireS11(tireinfo, s11_m);
 		}
 		
-		currentDate.plusDays(1);
+		currentDate = currentDate.plusDays(1);
 		currentMileage += dailyMileage.get();
 		return result;
 	}
