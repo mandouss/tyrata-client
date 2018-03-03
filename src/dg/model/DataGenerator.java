@@ -1,12 +1,9 @@
 package dg.model;
 
-import java.awt.print.Printable;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -55,11 +52,19 @@ public class DataGenerator {
         this.dayCounter = 0;
     }
 
+	public ObjectProperty<LocalDate> getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(ObjectProperty<LocalDate> startDate) {
+		this.startDate = startDate;
+	}
+
 	private DailyS11 computeNextS11() {
 		
 		DailyS11 result = new DailyS11(currentDate, currentMileage);
 		boolean isOutlierDay = false;
-		if (dayCounter == outlierInterval.get()) {
+		if (dayCounter == outlierInterval.get() && outlierEnabled.get() == true) {
 			isOutlierDay = true;
 		}
 		for (int i = 0; i < tireInfoList.size(); i++) {
@@ -69,7 +74,7 @@ public class DataGenerator {
 			} else {
 				x = rollNormal();
 			}
-			System.out.println("number " + x);
+//			System.out.println("number " + x);
 			double s11_m = tireInfoList.get(i).getInitS11()  + this.currentMileage * 0.08 / 5000 * x;
 			
 			String tireinfo = tireInfoList.get(i).getTireID() + " " + tireInfoList.get(i).getTirePos();
@@ -153,7 +158,7 @@ public class DataGenerator {
         //dailyMileage
         int dailyMileage = 15;
         //dataGen
-        DataGenerator dataGen = new DataGenerator(startDate, timeSpan, dailyMileage, tireList, true, 0);
+        DataGenerator dataGen = new DataGenerator(startDate, timeSpan, dailyMileage, tireList, true, 1);
         //day_list
         ArrayList<DailyS11> result = dataGen.generateSeries();
         result.forEach((dailyResult) -> dailyResult.print());
