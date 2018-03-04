@@ -28,7 +28,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 public class MainApp extends Application {
 	
     private Stage primaryStage;
@@ -222,7 +221,7 @@ public class MainApp extends Application {
      * @param file the file or null to remove the path
      */
     public void setTireFilePath(File file) {
-    	Preferences prefs = Preferences.systemNodeForPackage(MainApp.class);
+    	Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
     	if(file != null) {
     		prefs.put("filePath", file.getPath());
 
