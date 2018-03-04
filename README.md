@@ -1,10 +1,12 @@
 ## TyrataSimulator 1.0.0
 
+![screen shot](./file/Screen_Shot.png)
+
 The project now implements following functionality on the client application. 
 
 **Configure Tire Info**, including tireID, Position, S11_i, installationDate(for record)
 
-**Tire Configuration Export to/Import from file system** as .xml files.
+**Export/Import Tire Configuration** as .xml files.
 
 **Generate Data**, with specified startDate, timeSpan, dailyMileage, outlierInterval
 
