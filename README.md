@@ -1,6 +1,6 @@
 # Issue
----
 You may notice that when you launch the application, the following warning information will prompt in the console:
+
 ```Mar 04, 2018 9:37:13 AM java.util.prefs.WindowsPreferences <init>
 WARNING: Could not open/create prefs root node Software\JavaSoft\Prefs at root 0x80000002. Windows RegCreateKeyEx(...) returned error code 5.```
 
