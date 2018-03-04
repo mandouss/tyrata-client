@@ -2,6 +2,9 @@ package dg.model;
 
 import java.time.LocalDate;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import dg.util.LocalDateAdapter;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
@@ -69,6 +72,7 @@ public class Tire {
         return s11_i;
     }
     
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     public LocalDate getStartDate() {
         return startDate.get();
     }
