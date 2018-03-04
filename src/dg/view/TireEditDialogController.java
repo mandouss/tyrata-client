@@ -60,7 +60,7 @@ public class TireEditDialogController {
 	 */
 	public void setTire(Tire tire) {
 		this.tire = tire;
-		
+
 		tireIDField.setText(tire.getTireID());
 		tirePosField.setText(tire.getTirePos());
 		initS11Field.setText(Double.toString(tire.getInitS11()));
@@ -90,7 +90,7 @@ public class TireEditDialogController {
 			tire.setInitS11(Double.parseDouble(initS11Field.getText()));
 			tire.setStartDate(installDatePicker.getValue());
 			tire.setTimeInterval(Integer.parseInt(timeIntervalField.getText()));
-			
+
 			saveClicked = true;
 			dialogStage.close();
 		}
@@ -120,7 +120,7 @@ public class TireEditDialogController {
 		} else {
 			//TODO: Handle duplicate tire position
 		}
-		
+
 		if (initS11Field.getText() == null || initS11Field.getText().length() == 0) {
 			errorMessage += "Lack S11!\n"; 
 		} else {
@@ -137,7 +137,7 @@ public class TireEditDialogController {
 				errorMessage += "Invalid time Interval (must be an integer)!\n"; 
 			}
 		}
-/*
+		/*
 		if (startTimeField.getText() == null || startTimeField.getText().length() == 0) {
 			errorMessage += "Lack start Time!\n";
 		} else {
@@ -145,7 +145,7 @@ public class TireEditDialogController {
 				errorMessage += "No valid start Time. Use the format yyyy-mm-dd!\n";
 			}
 		}
-*/
+		 */
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
