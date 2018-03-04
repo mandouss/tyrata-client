@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 import dg.model.DailyS11;
+import dg.util.DailyS11ToStringUtil;
 
 
 public class GeneratedDataViewController {
@@ -41,9 +42,11 @@ public class GeneratedDataViewController {
 	 * @param tire
 	 */
 	public void setDataContent(ArrayList<DailyS11> s11List) {
-		dataArea.setText("hahahah\nhahahah\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nnhashdfhsaf");
-		dataArea.setWrapText(true);
-		//dataArea.setText(toString(s11List));
+		
+        String resultString = DailyS11ToStringUtil.dailyS11ToString(s11List);
+
+		dataArea.setText(resultString);
+        dataArea.setWrapText(true);
 		//dataArea.setDisable(true);
 	}
 
