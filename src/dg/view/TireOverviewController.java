@@ -152,6 +152,7 @@ public class TireOverviewController {
 		statusText.setText("");
 	}
 	
+	@FXML
 	public void handleDataGenerate() {
 		if(isDataInputValid()) {
 			LocalDate startDate = startDatePicker.getValue();
@@ -175,7 +176,20 @@ public class TireOverviewController {
 		}
 	}
 	
-	
+	@FXML
+    private void handleDataShow() {
+        
+        //if(!mainApp.getS11List().isEmpty()) {
+        if(mainApp.getS11List() != null) {
+        		statusText.setText("");
+        		mainApp.showGeneratedData(); //the method returns a boolean if succeed
+        }
+        else {
+        		//List is empty
+        		//do nothing
+        		//TODO: Maybe I can prompt a warning sign
+        }
+    }
     
 	/**
 	 * Validates the user input in the text fields.

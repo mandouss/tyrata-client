@@ -1,6 +1,7 @@
 package dg;
 import dg.model.DailyS11;
 import dg.model.Tire;
+import dg.view.GeneratedDataViewController;
 import dg.view.TireEditDialogController;
 import dg.view.TireOverviewController;
 
@@ -133,8 +134,34 @@ public class MainApp extends Application {
         }
     }
     
-    public void showGeneratedData() {
-    		
+    public boolean showGeneratedData() {
+    		try {
+            // Load the fxml file and create a new stage for the popup dialog.
+    			FXMLLoader loader = new FXMLLoader();
+    			loader.setLocation(MainApp.class.getResource("view/GeneratedDataView.fxml"));
+    			AnchorPane page = (AnchorPane) loader.load();
+    			
+    			// Create the dialog Stage;
+    			Stage dialogStage = new Stage();
+    			dialogStage.setTitle("Generated Data");
+    			dialogStage.initModality(Modality.WINDOW_MODAL);
+    			dialogStage.initOwner(primaryStage);
+    			Scene scene = new Scene(page);
+    			dialogStage.setScene(scene);
+    			
+    			// Set the tire into the controller.
+            GeneratedDataViewController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setDataContent(s11List);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+    			
+    			return true;
+    		} catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
     }
     
     /**
