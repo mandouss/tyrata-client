@@ -6,5 +6,5 @@ WARNING: Could not open/create prefs root node Software\JavaSoft\Prefs at root 0
 
 I digged up and found that this is a JDK bug. According to the resources, this bug may disappear if you have a higher version of JDK. However, it doesn't affect
 the deployment of our simulator.
-To see more information about this issue, go[here](https://stackoverflow.com/questions/5354838/java-java-util-preferences-failing).
+To see more information about this issue, go [here](https://stackoverflow.com/questions/5354838/java-java-util-preferences-failing).
 
