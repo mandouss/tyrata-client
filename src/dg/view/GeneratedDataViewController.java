@@ -42,15 +42,15 @@ public class GeneratedDataViewController {
 	 * @param tire
 	 */
 	public void setDataContent(ArrayList<DailyS11> s11List) {
-		
-        String resultString = DailyS11ToStringUtil.dailyS11ToString(s11List);
+
+		String resultString = DailyS11ToStringUtil.dailyS11ToString(s11List);
 
 		dataArea.setText(resultString);
-        dataArea.setWrapText(true);
-		//dataArea.setDisable(true);
+		dataArea.setWrapText(true);
+		dataArea.setEditable(false);
 	}
 
-	
+
 	/**
 	 * Called when the user clicks cancel.
 	 */
