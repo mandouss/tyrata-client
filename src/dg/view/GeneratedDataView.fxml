@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="400.0" prefWidth="250.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.GeneratedDataViewController">
+   <children>
+      <Button layoutX="285.0" layoutY="328.0" mnemonicParsing="false" onAction="#handleClose" prefHeight="30.0" prefWidth="59.0" text="Close" AnchorPane.bottomAnchor="8.0" AnchorPane.rightAnchor="10.0" />
+      <TextArea fx:id="dataArea" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="46.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+   </children>
+</AnchorPane>
