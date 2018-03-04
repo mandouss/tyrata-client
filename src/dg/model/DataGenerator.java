@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import dg.util.DailyS11ToStringUtil;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
@@ -161,7 +163,9 @@ public class DataGenerator {
         DataGenerator dataGen = new DataGenerator(startDate, timeSpan, dailyMileage, tireList, true, 1);
         //day_list
         ArrayList<DailyS11> result = dataGen.generateSeries();
-        result.forEach((dailyResult) -> dailyResult.print());
+        String resultInString = DailyS11ToStringUtil.dailyS11ToString(result);
+        System.out.println(resultInString);
+        //result.forEach((dailyResult) -> dailyResult.print());
         
     }
 	
