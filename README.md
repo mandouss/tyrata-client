@@ -1,10 +1,16 @@
-# Issue
-You may notice that when you launch the application, the following warning information will prompt in the console:
+## TyrataSimulator 1.0.0
 
-```Mar 04, 2018 9:37:13 AM java.util.prefs.WindowsPreferences <init>
-WARNING: Could not open/create prefs root node Software\JavaSoft\Prefs at root 0x80000002. Windows RegCreateKeyEx(...) returned error code 5.```
+![screen shot](./file/Screen_Shot.png)
 
-I digged up and found that this is a JDK bug. According to the resources, this bug may disappear if you have a higher version of JDK. However, it doesn't affect
-the deployment of our simulator.
-To see more information about this issue, go [here](https://stackoverflow.com/questions/5354838/java-java-util-preferences-failing).
+The project now implements following functionality on the client application. 
+
+**Configure Tire Info**, including tireID, Position, S11_i, installationDate(for record)
+
+**Export/Import Tire Configuration** as .xml files.
+
+**Generate Data**, with specified startDate, timeSpan, dailyMileage, outlierInterval
+
+**Display Data** on screen.
+
+Note: unresolved issues logged in [issuenote.md](./issuenote.md)
 
