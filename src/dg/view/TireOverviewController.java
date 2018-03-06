@@ -114,7 +114,7 @@ public class TireOverviewController {
 	@FXML
 	private void handleDeleteTire() {
 		int selectedIndex = tireTable.getSelectionModel().getSelectedIndex();
-		if(selectedIndex > 0) {
+		if(selectedIndex >= 0) {
 			tireTable.getItems().remove(selectedIndex);
 		}
 		else {
