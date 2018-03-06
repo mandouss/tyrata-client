@@ -108,7 +108,7 @@ public class RootLayoutController {
 		String versionInfo = "Version: 1.0.0 \nAuthor: ECE651 Tyrata Client Team\n";
 		alert.setContentText(versionInfo);
 
-		String copyrightInfo = versionInfo + "(c) Copyright TyrataSimulator contributors and others 2018.  All rights reserved. Tyrata logo is trademark of the Tyrata Inc., https://www.xxx.com/.";
+		String copyrightInfo = versionInfo + "(c) Copyright TyrataSimulator contributors and others 2018.  All rights reserved. Tyrata logo is trademark of the Tyrata Inc., https://www.tyrata.com/.";
 		Label label = new Label("Copyright Info");
 		
 		TextArea textArea = new TextArea(copyrightInfo);

@@ -23,14 +23,7 @@ public class DailyS11 {
 	}
 	
 	public void print() {
-		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
-		System.out.println("Timestamp:" + timestamp.format(formatter));
-		System.out.println("Mileage: " + mileage);
-		
-		for (int i = 0; i < tireInfoAndS11_list.size(); i++) {
-			System.out.println("String: "+ tireInfoAndS11_list.get(i).getKey());
-			System.out.println("S11: " + tireInfoAndS11_list.get(i).getValue());
-		}
+		System.out.print(convertToString());
 	}
 
 	public String convertToString() {
@@ -40,7 +33,7 @@ public class DailyS11 {
 		result += "Mileage: " + mileage + "\n";
 
 		for (int i = 0; i < tireInfoAndS11_list.size(); i++) {
-			result += "String: "+ tireInfoAndS11_list.get(i).getKey() + "\n";
+			result += "Tire: "+ tireInfoAndS11_list.get(i).getKey() + "\n";
 			result += "S11: " + tireInfoAndS11_list.get(i).getValue() + "\n";
 		}
 

@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class TireListWrapper {
 	private List<Tire> tires;
 	
-	@XmlElement(name = "tires")
+	@XmlElement(name = "tire")
 	public List<Tire> getTires(){
 		return tires;
 	}

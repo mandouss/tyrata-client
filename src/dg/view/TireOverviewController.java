@@ -210,10 +210,10 @@ public class TireOverviewController {
 			try {
 				int timeSpan = Integer.parseInt(timeSpanField.getText());
 				if(timeSpan <= 0 || timeSpan > 3650) {
-					errorMessage += "Invalid Time Span (Between 0 and 3650)\n";
+					errorMessage += "Invalid Time Span (Between 1 and 3650)\n";
 				}
 			} catch (NumberFormatException e) {
-				errorMessage += "Invalid Time Span (Between 0 and 3650)\\n"; 
+				errorMessage += "Invalid Time Span (Between 1 and 3650)\\n"; 
 			}
 		}
 
@@ -223,10 +223,10 @@ public class TireOverviewController {
 			try {
 				int dailyMile = Integer.parseInt(dailyMileageField.getText());
 				if(dailyMile <= 0 || dailyMile > 5000) {
-					errorMessage += "Invalid Daily Mileage (Between 0 and 5000)\n";
+					errorMessage += "Invalid Daily Mileage (Between 1 and 5000)\n";
 				}
 			} catch (NumberFormatException e) {
-				errorMessage += "Invalid Daily Mileage (Between 0 and 5000)\n"; 
+				errorMessage += "Invalid Daily Mileage (Between 1 and 5000)\n"; 
 			}
 		}
 
