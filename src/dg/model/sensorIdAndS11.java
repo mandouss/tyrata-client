@@ -1,8 +1,11 @@
 package dg.model;
 
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 @XmlRootElement(name = "tire")
+@XmlType(propOrder = {"sensorID", "s11"})
+
 public class sensorIdAndS11 {
 	private String sensorID;
 	private Double S11;
