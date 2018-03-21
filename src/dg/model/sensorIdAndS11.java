@@ -1,6 +1,8 @@
 package dg.model;
 
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement(name = "tire")
 public class sensorIdAndS11 {
 	private String sensorID;
 	private Double S11;
