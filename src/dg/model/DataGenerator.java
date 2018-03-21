@@ -79,7 +79,9 @@ public class DataGenerator {
 //			System.out.println("number " + x);
 			double s11_m = tireInfoList.get(i).getInitS11()  + this.currentMileage * 0.08 / 5000 * x;
 			
-			String tireinfo = tireInfoList.get(i).getTireID() + " " + tireInfoList.get(i).getTirePos();
+			//remove show tire location, tyrata mobile will calibrate tire location
+			String tireinfo = tireInfoList.get(i).getTireID();
+					//+ " " + tireInfoList.get(i).getTirePos();
 			result.addTireS11(tireinfo, s11_m);
 		}
 		dayCounter++;
