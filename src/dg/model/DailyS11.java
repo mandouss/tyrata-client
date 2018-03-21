@@ -4,11 +4,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement(name = "dailyS11")
+
 
 public class DailyS11 {
 	private LocalDate timestamp;
 	private int mileage;
 	private ArrayList<sensorIdAndS11> sensorIdAndS11_list;
+	@XmlElement(name = "tire")
 	
 	public void setSensorIdAndS11_List(ArrayList<sensorIdAndS11> sensorIdAndS11_list) {
 		this.sensorIdAndS11_list = sensorIdAndS11_list;
