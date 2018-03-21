@@ -7,7 +7,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
@@ -275,4 +277,68 @@ public class TireOverviewController {
 		// Add observable list data to the table
 		tireTable.setItems(mainApp.getTireData());
 	}
+	
+	
+	
+	
+	
+	
+	 /*******************************************************************
+     *********************    Save Data Branch   *************************
+     ********************************************************************/
+     /**
+      
+      /**
+     * Opens a FileChooser to let the user select a file to save to.
+     */
+    
+	@FXML
+	private void DG_handleOpen() {
+		// getS11list clear
+		mainApp.getS11List().clear();
+		FileChooser fileChooser = new FileChooser();
+
+		// Set extension filter
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+				"XML files (*.xml)", "*.xml");
+		fileChooser.getExtensionFilters().add(extFilter);
+
+		// Show open file dialog
+		File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
+
+		if (file != null) {
+			mainApp.loadDGDataFromFile(file);
+		}
+	}
+
+    @FXML
+    private void DG_handleSaveAs() {
+        FileChooser fileChooser = new FileChooser();
+
+        // Set extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+                "XML files (*.xml)", "*.xml");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Show save file dialog
+        File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
+
+        if (file != null) {
+            // Make sure it has the correct extension
+            if (!file.getPath().endsWith(".xml")) {
+                file = new File(file.getPath() + ".xml");
+            }
+            mainApp.saveDGDataToFile(file);
+        }
+    }
+
+    /*******************************************************************
+     *********************    Save Data Branch   *************************
+     ********************************************************************/
+    
+    
+    
+    
+    
+    
 }
