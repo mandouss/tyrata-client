@@ -6,11 +6,12 @@ import java.util.ArrayList;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement(name = "dailyS11")
 
-
 public class DailyS11 {
+	@XmlJavaTypeAdapter(value = LocalDateAdapter.class)
 	private LocalDate timestamp;
 	private int mileage;
 	private ArrayList<sensorIdAndS11> sensorIdAndS11_list;
