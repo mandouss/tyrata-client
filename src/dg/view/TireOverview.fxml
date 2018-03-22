@@ -162,7 +162,7 @@
                               <HBox layoutX="85.0" layoutY="150.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="160.0">
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#handleDataGenerate" prefHeight="27.0" prefWidth="78.0" text="Generate" />
-                                    <Button mnemonicParsing="false" onAction="#handleDataShow" text="Save">
+                                    <Button mnemonicParsing="false" onAction="#DG_handleSaveAs" text="Save">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
