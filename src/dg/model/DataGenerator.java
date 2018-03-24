@@ -150,8 +150,8 @@ public class DataGenerator {
 	
     public static void main(String[] args) {
         //tireInfo_list
-        Tire tireLF = new Tire("C-1", "LF", -2.0);
-        Tire tireRF = new Tire("C-154", "RF", -1.5);
+        Tire tireLF = new Tire("C-1", "LF", -2.0, 3.5);
+        Tire tireRF = new Tire("C-154", "RF", -1.5, 3.5);
         List<Tire> tireList = new ArrayList<>();
         tireList.add(tireLF);
         tireList.add(tireRF);
