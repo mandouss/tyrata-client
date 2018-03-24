@@ -48,8 +48,8 @@ public class Tire {
     public String getTireID() {
         return tireID.get();
     }
-    public void setTireID(String firstName) {
-        this.tireID.set(firstName);
+    public void setTireID(String TireID) {
+        this.tireID.set(TireID);
     }
     public StringProperty getTireIDProperty() {
         return tireID;
@@ -58,8 +58,8 @@ public class Tire {
     public String getTirePos() {
         return tirePosition.get();
     }
-    public void setTirePos(String firstName) {
-        this.tirePosition.set(firstName);
+    public void setTirePos(String TirePos) {
+        this.tirePosition.set(TirePos);
     }
     public StringProperty getTirePosProperty() {
         return tirePosition;

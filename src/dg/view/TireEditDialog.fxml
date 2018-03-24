@@ -30,7 +30,7 @@
             <TextField fx:id="tireIDField" GridPane.columnIndex="1" />
             <TextField fx:id="tirePosField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="initS11Field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="timeIntervalField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="pressureField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <DatePicker fx:id="installDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>

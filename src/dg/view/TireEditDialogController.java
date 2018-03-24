@@ -23,8 +23,8 @@ public class TireEditDialogController {
 	private TextField initS11Field;
 
 	@FXML
-	private TextField timeIntervalField; 
-	//TODO: change to tire pressure
+	private TextField pressureField; 
+	//changed to tire pressure
 	@FXML 
 	private DatePicker installDatePicker;
 
@@ -66,7 +66,7 @@ public class TireEditDialogController {
 		initS11Field.setText(Double.toString(tire.getInitS11()));
 		initS11Field.setPromptText("-2.5 ~ -1 (dB)");
 		//initS11Field.setFocusTraversable(false);
-		timeIntervalField.setText(Integer.toString(tire.getTimeInterval()));
+		pressureField.setText(Double.toString(tire.getPressure()));
 		installDatePicker.setValue(tire.getStartDate());
 	}
 
@@ -89,7 +89,7 @@ public class TireEditDialogController {
 			tire.setTirePos(tirePosField.getText());
 			tire.setInitS11(Double.parseDouble(initS11Field.getText()));
 			tire.setStartDate(installDatePicker.getValue());
-			tire.setTimeInterval(Integer.parseInt(timeIntervalField.getText()));
+			tire.setPressure(Double.parseDouble(pressureField.getText()));
 
 			saveClicked = true;
 			dialogStage.close();
@@ -127,14 +127,14 @@ public class TireEditDialogController {
 			//TODO: Handle S11 Range
 		}
 
-		if (timeIntervalField.getText() == null || timeIntervalField.getText().length() == 0) {
-			errorMessage += "Lack time Interval!\n"; 
+		if (pressureField.getText() == null || pressureField.getText().length() == 0) {
+			errorMessage += "Lack Pressure!\n"; 
 		} else {
 			// try to parse the time interval into an int.
 			try {
-				Integer.parseInt(timeIntervalField.getText());
+				Double.parseDouble(pressureField.getText());
 			} catch (NumberFormatException e) {
-				errorMessage += "Invalid time Interval (must be an integer)!\n"; 
+				errorMessage += "Invalid tire pressure (must be an double)!\n"; 
 			}
 		}
 		/*
