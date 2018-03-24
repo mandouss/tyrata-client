@@ -82,7 +82,8 @@ public class DataGenerator {
 			//remove show tire location, tyrata mobile will calibrate tire location
 			String tireinfo = tireInfoList.get(i).getTireID();
 					//+ " " + tireInfoList.get(i).getTirePos();
-			result.addTireS11(tireinfo, s11_m);
+			double pressure = tireInfoList.get(i).getPressure();
+			result.addTireS11(tireinfo, s11_m, pressure);
 		}
 		dayCounter++;
 		if (isOutlierDay) {

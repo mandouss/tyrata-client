@@ -56,8 +56,8 @@ public class DailyS11 {
 		this.sensorIdAndS11_list = new ArrayList<>();
 	}
 	
-	public void addTireS11(String sensorInfo, double s11) {
-		sensorIdAndS11_list.add(new sensorIdAndS11(sensorInfo, s11));
+	public void addTireS11(String sensorInfo, double s11, double pressure) {
+		sensorIdAndS11_list.add(new sensorIdAndS11(sensorInfo, s11, pressure));
 	}
 	
 	public void print() {
@@ -68,6 +68,7 @@ public class DailyS11 {
 		for (int i = 0; i < sensorIdAndS11_list.size(); i++) {
 			System.out.println("Sensor ID: "+ sensorIdAndS11_list.get(i).getSensorID());
 			System.out.println("S11: " + sensorIdAndS11_list.get(i).getS11());
+			System.out.println("Pressure: " + sensorIdAndS11_list.get(i).getPressure());
 		}
 	}
 
@@ -80,6 +81,7 @@ public class DailyS11 {
 		for (int i = 0; i < sensorIdAndS11_list.size(); i++) {
 			result += "Sensor ID: "+ sensorIdAndS11_list.get(i).getSensorID() + "\n";
 			result += "S11: " + sensorIdAndS11_list.get(i).getS11() + "\n";
+			result += "Pressure: " + sensorIdAndS11_list.get(i).getPressure() + "\n";
 		}
 
 		return result;
