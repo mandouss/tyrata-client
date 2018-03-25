@@ -1,17 +1,22 @@
 package dg.view;
 
+import javafx.collections.ListChangeListener;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -43,6 +48,10 @@ public class TireOverviewController {
 	@FXML private CheckBox enableOutlierBox;
 	@FXML private TextField outlierIntervalField;
 	@FXML private Text statusText;
+	
+	@FXML private ScrollPane commsPane;
+	@FXML private TextFlow commsFlow;
+	@FXML private TextArea commsArea;
 
 	// Reference to the main application.
 	private MainApp mainApp;
@@ -336,39 +345,6 @@ public class TireOverviewController {
 		}
 	}
 
-	/**
-	 * Initializes the controller class. This method is automatically called
-	 * after the fxml file has been loaded.
-	 */
-	@FXML
-	private void initialize() {
-		// Initialize the tire table with the two columns.
-		tireTable.setFocusTraversable(true);
-		
-		tireIDColumn.setCellValueFactory(cellData -> cellData.getValue().getTireIDProperty());
-		initS11Column.setCellValueFactory(cellData -> cellData.getValue().getInitS11Property());
-
-		// Clear tire details.
-		showTireDetails(null);
-		showGenInfo();
-		// Listen for selection changes and show the tire details when changed.
-		tireTable.getSelectionModel().selectedItemProperty().addListener(
-				(observable, oldValue, newValue) -> showTireDetails(newValue));
-	}
-
-
-	/**
-	 * Is called by the main application to give a reference back to itself.
-	 * 
-	 * @param mainApp
-	 */
-	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
-
-		// Add observable list data to the table
-		tireTable.setItems(mainApp.getTireData());
-	}
-	
 	
 	
 	 /*******************************************************************
@@ -426,9 +402,91 @@ public class TireOverviewController {
      *****************    Bluetooth Broadcasting   *********************
      ********************************************************************/
     
+    @FXML
+    public void handleBroadcast() {
+    		String msg = "Starting BroadCasting ... (Not Really)\n";
+    		Text t = new Text();
+        t.setStyle("-fx-fill: #6DCE8B;-fx-font-weight:bold;");
+        t.setText(msg);
+    		commsFlow.getChildren().add(t);
+    		
+//	    	commsArea.appendText(msg);
+    }
     
+    @FXML
+    public void handleBroadcastCancel() {
+    		String msg = "Shutting down BroadCasting ... (Not Really)\n";
+	    	Text t = new Text();
+	    	t.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
+	    	t.setText(msg);
+	    	commsFlow.getChildren().add(t);
+    		
+//	    	commsArea.appendText(msg);
+    }
+
+
+	/**
+	 * Initialize the comms info area
+	 * 
+	 */
+	public void setCommsInfo() {
+		commsPane.setFitToWidth(true);
+		commsPane.setFitToHeight(true);
+//		commsArea.setText("");
+//		commsArea.setWrapText(true);
+//		commsArea.setEditable(false);
+	}
     
+	
+
+
+    /*******************************************************************
+     *****************    initialization & setup   *********************
+     ********************************************************************/
     
-    
+
+	/**
+	 * Initializes the controller class. This method is automatically called
+	 * after the fxml file has been loaded.
+	 */
+	@FXML
+	private void initialize() {
+		// Initialize the tire table with the two columns.
+		tireTable.setFocusTraversable(true);
+		
+		tireIDColumn.setCellValueFactory(cellData -> cellData.getValue().getTireIDProperty());
+		initS11Column.setCellValueFactory(cellData -> cellData.getValue().getInitS11Property());
+
+		// Clear tire details.
+		showTireDetails(null);
+		showGenInfo();
+		// Listen for selection changes and show the tire details when changed.
+		tireTable.getSelectionModel().selectedItemProperty().addListener(
+				(observable, oldValue, newValue) -> showTireDetails(newValue));
+		
+	    commsFlow.getChildren().addListener(
+                (ListChangeListener<Node>) ((change) -> {
+//                    commsFlow.layout();
+//                    commsPane.layout();
+                    commsPane.setVvalue(1.0f);
+                }));
+	    
+		setCommsInfo();
+		
+	}
+
+
+	/**
+	 * Is called by the main application to give a reference back to itself.
+	 * 
+	 * @param mainApp
+	 */
+	public void setMainApp(MainApp mainApp) {
+		this.mainApp = mainApp;
+
+		// Add observable list data to the table
+		tireTable.setItems(mainApp.getTireData());
+	}
+	
     
 }
