@@ -1,4 +1,5 @@
 package dg;
+import dg.model.DGListWrapper;
 import dg.model.DailyS11;
 import dg.model.Tire;
 import dg.model.TireListWrapper;
@@ -43,10 +44,10 @@ public class MainApp extends Application {
 	private ArrayList<DailyS11> s11List = new ArrayList<DailyS11>();
 
 	public MainApp() {
-		tireData.add(new Tire("C-1234","LF",-1));
-		tireData.add(new Tire("C-1302","RF",-2));
-		tireData.add(new Tire("C-4124","LR",-1.2));
-		tireData.add(new Tire("C-9175","RR",-2.14));
+		tireData	.add(new Tire("C-1234","LF",-1,3.5));
+		tireData	.add(new Tire("C-1302","RF",-2,3.5));
+		tireData	.add(new Tire("C-4124","LR",-1.2,3.5));
+		tireData	.add(new Tire("C-9175","RR",-2.14,3.5));
 	}
 
 	/**
@@ -278,6 +279,124 @@ public class MainApp extends Application {
 			alert.showAndWait();
 		}
 	}
+	
+	
+
+	/****************************************************    
+	******************* Save Data Branch ****************
+	*****************************************************/
+	    /**
+	     * Returns the person file preference, i.e. the file that was last opened.
+	     * The preference is read from the OS specific registry. If no such
+	     * preference can be found, null is returned.
+	     * 
+	     * @return
+	     */
+	    public File getDGFilePath() {
+	        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+	        String filePath = prefs.get("filePath", null);
+	        if (filePath != null) {
+	            return new File(filePath);
+	        } else {
+	            return null;
+	        }
+	    }
+
+	    /**
+	     * Sets the file path of the currently loaded file. The path is persisted in
+	     * the OS specific registry.
+	     * 
+	     * @param file the file or null to remove the path
+	     */
+	    public void setDGFilePath(File file) {
+	        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+	        if (file != null) {
+	            prefs.put("filePath", file.getPath());
+
+	            // Update the stage title.
+	            primaryStage.setTitle("TyrataSimulator - " + file.getName());
+	        } else {
+	            prefs.remove("filePath");
+
+	            // Update the stage title.
+	            primaryStage.setTitle("TyrataSimulator");
+	        }
+	    }
+	    
+	    
+	    
+	    
+	    /**
+		 * Loads person data from the specified file. The current person data will
+		 * be replaced.
+		 * 
+		 * @param file
+		 */
+		public void loadDGDataFromFile(File file) {
+		    try {
+		        JAXBContext context = JAXBContext
+		                .newInstance(DGListWrapper.class);
+		        Unmarshaller um = context.createUnmarshaller();
+
+		        // Reading XML from the file and unmarshalling.
+		        DGListWrapper wrapper = (DGListWrapper) um.unmarshal(file);
+
+		        s11List.clear();
+		        s11List.addAll(wrapper.getDailyS11List());
+
+		        // Save the file path to the registry.
+		        setDGFilePath(file);
+
+		    } catch (Exception e) { // catches ANY exception
+		        Alert alert = new Alert(AlertType.ERROR);
+		        alert.setTitle("Error");
+		        alert.setHeaderText("Could not load data");
+		        alert.setContentText("Could not load data from file:\n" + file.getPath());
+
+		        alert.showAndWait();
+		    }
+		}
+		
+	    
+	    
+	    /**
+		 * Saves the current DG data to the specified file.
+		 * 
+		 * @param file
+		 */
+	    public void saveDGDataToFile(File file) {
+		    try {
+		        JAXBContext context = JAXBContext
+		                .newInstance(DGListWrapper.class);
+		        Marshaller m = context.createMarshaller();
+		        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+		        // Wrapping our person data.
+		        DGListWrapper wrapper = new DGListWrapper();
+		        wrapper.setDailyS11List(s11List);
+
+		        // Marshalling and saving XML to the file.
+		        m.marshal(wrapper, file);
+
+		        // Save the file path to the registry.
+		        setDGFilePath(file);
+		    } catch (Exception e) { // catches ANY exception
+		        Alert alert = new Alert(AlertType.ERROR);
+		        alert.setTitle("Error");
+		        alert.setHeaderText("Could not save data");
+		        alert.setContentText("Could not save data to file:\n" + file.getPath());
+
+		        alert.showAndWait();
+		    }
+		}
+
+	  
+	    /****************************************************    
+	    /*************************** Save Data Branch ************/ 
+	    
+	    
+	    
+	    
 
 	public static void main(String[] args) {
 		launch(args);

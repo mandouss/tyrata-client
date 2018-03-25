@@ -1,13 +1,20 @@
 package dg.view;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
@@ -20,18 +27,20 @@ import dg.util.DateUtil;
 
 public class TireOverviewController {
 	@FXML private TableView<Tire> tireTable;
-	@FXML private TableColumn<Tire, String> tirePosColumn;
+	@FXML private TableColumn<Tire, String> tireIDColumn;
 	@FXML private TableColumn<Tire, Number> initS11Column;  //Integer, Double ... Should be Number
-
+	
 	@FXML private Label tireIDLabel;
 	@FXML private Label tirePosLabel;
 	@FXML private Label initS11Label;
 	@FXML private Label startTimeLabel;
+	@FXML private Label pressureLabel;
 	//@FXML private Label timeIntervalLabel;
 
 	@FXML private DatePicker startDatePicker;
 	@FXML private TextField timeSpanField;
 	@FXML private TextField dailyMileageField;
+	@FXML private CheckBox enableOutlierBox;
 	@FXML private TextField outlierIntervalField;
 	@FXML private Text statusText;
 
@@ -62,6 +71,7 @@ public class TireOverviewController {
 			tirePosLabel.setText(tire.getTirePos());
 			initS11Label.setText(Double.toString(tire.getInitS11()));
 			startTimeLabel.setText(DateUtil.format(tire.getStartDate()));
+			pressureLabel.setText(Double.toString(tire.getPressure()));
 			//timeIntervalLabel.setText(Integer.toString(tire.getTimeInterval()));
 
 		} else {
@@ -70,10 +80,62 @@ public class TireOverviewController {
 			tirePosLabel.setText("");
 			initS11Label.setText("");
 			startTimeLabel.setText("");
+			pressureLabel.setText("");
 			//timeIntervalLabel.setText("");
 		}
 	}
 
+	@FXML
+	private void mouseClicked(MouseEvent mouseEvent) {
+		if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+			//TODO: can't clear selection
+//			int selectedIndex = tireTable.getSelectionModel().getSelectedIndex();
+//			tireTable.getSelectionModel().clearAndSelect(selectedIndex);
+//			Node selected = mouseEvent.getPickResult().getIntersectedNode();
+//			System.out.println(selected);
+//			if(selected == null || (selected instanceof TableRow && ((TableRow) selected).isEmpty())) {
+//				tireTable.getSelectionModel().clearSelection();
+//			}
+			if(mouseEvent.getClickCount() == 2){
+				handleEditTire();
+				//System.out.println("Double clicked on "+ tireTable.getSelectionModel().getSelectedIndex());
+			}
+		}
+	}
+
+	@FXML
+	private void keyPressed(KeyEvent keyEvent) {
+		//System.out.println("PRESS Detected " + keyEvent.getCode());
+	    if (keyEvent.getCode() == KeyCode.ENTER) {
+	    		//System.out.println("Enter Pressed!!!");
+	    }
+	}
+	
+	@FXML
+	private void keyReleased(KeyEvent keyEvent) {
+		//System.out.println("Release Detected " + keyEvent.getCode());
+	    if (keyEvent.getCode() == KeyCode.BACK_SPACE || keyEvent.getCode() == KeyCode.DELETE) {
+	    		//System.out.println("Enter Released!!!");
+			int selectedIndex = tireTable.getSelectionModel().getSelectedIndex();
+			if(selectedIndex >= 0) {
+				tireTable.getItems().remove(selectedIndex);
+			}
+	    }
+	}
+
+	/** This function will overwrite keyPressed and keyReleased
+	 * @param keyEvent
+	 */
+	@FXML
+	private void keyTyped(KeyEvent keyEvent) {
+		
+		System.out.println("TYPE Detected " + keyEvent.getCharacter());
+		if (keyEvent.getCharacter()  == "d") {
+			System.out.println("Delete Typed!!!");
+		}
+		
+	}
+	
 	/********************************************************************
 	 *********************    Tire Config Part  *************************
 	 ********************************************************************/
@@ -88,6 +150,7 @@ public class TireOverviewController {
 		if (saveClicked) {
 			mainApp.getTireData().add(newTire);
 		}
+		
 	}
 	/**
 	 * Called when the user clicks on the edit button.
@@ -114,7 +177,7 @@ public class TireOverviewController {
 	@FXML
 	private void handleDeleteTire() {
 		int selectedIndex = tireTable.getSelectionModel().getSelectedIndex();
-		if(selectedIndex > 0) {
+		if(selectedIndex >= 0) {
 			tireTable.getItems().remove(selectedIndex);
 		}
 		else {
@@ -145,13 +208,26 @@ public class TireOverviewController {
 		timeSpanField.setPromptText("(1-3650) Days");
 		dailyMileageField.setText("");
 		dailyMileageField.setPromptText("(1-5000) Miles");
+
+		enableOutlierBox.setSelected(false);
 		outlierIntervalField.setText("-1");
-		outlierIntervalField.setPromptText("Days (-1 to Disable)");
+		outlierIntervalField.setDisable(true);
+		outlierIntervalField.setPromptText("Days");
 		//initS11Field.setFocusTraversable(false);
 		startDatePicker.setValue(LocalDate.now());
 		statusText.setText("");
 	}
-
+	
+	@FXML
+	public void handleOutlierEnable() {
+		if(enableOutlierBox.isSelected()) {
+			outlierIntervalField.setDisable(false);
+		} else {
+			outlierIntervalField.setDisable(true);
+		}
+	}
+	
+	
 	@FXML
 	public void handleDataGenerate() {
 		if(isDataInputValid()) {
@@ -160,10 +236,9 @@ public class TireOverviewController {
 			int dailyMileage = Integer.parseInt(dailyMileageField.getText());
 			List<Tire> tireList = mainApp.getTireData();
 			int outlierInterval = Integer.parseInt(outlierIntervalField.getText());
-			boolean outlierEnabled = true;
-			if(outlierInterval == -1) {
-				outlierEnabled = false;
-			}
+			boolean outlierEnabled = enableOutlierBox.isSelected();
+			// System.out.println("Successfully Generated Data: outlier ("+ outlierEnabled + "): "+ outlierInterval);
+			
 			//dataGen
 			DataGenerator dataGen = new DataGenerator(startDate, timeSpan, dailyMileage, 
 					tireList, outlierEnabled, outlierInterval);
@@ -210,10 +285,10 @@ public class TireOverviewController {
 			try {
 				int timeSpan = Integer.parseInt(timeSpanField.getText());
 				if(timeSpan <= 0 || timeSpan > 3650) {
-					errorMessage += "Invalid Time Span (Between 0 and 3650)\n";
+					errorMessage += "Invalid Time Span (Between 1 and 3650)\n";
 				}
 			} catch (NumberFormatException e) {
-				errorMessage += "Invalid Time Span (Between 0 and 3650)\\n"; 
+				errorMessage += "Invalid Time Span (Between 1 and 3650)\\n"; 
 			}
 		}
 
@@ -223,10 +298,26 @@ public class TireOverviewController {
 			try {
 				int dailyMile = Integer.parseInt(dailyMileageField.getText());
 				if(dailyMile <= 0 || dailyMile > 5000) {
-					errorMessage += "Invalid Daily Mileage (Between 0 and 5000)\n";
+					errorMessage += "Invalid Daily Mileage (Between 1 and 5000)\n";
 				}
 			} catch (NumberFormatException e) {
-				errorMessage += "Invalid Daily Mileage (Between 0 and 5000)\n"; 
+				errorMessage += "Invalid Daily Mileage (Between 1 and 5000)\n"; 
+			}
+		}
+		
+		if (!enableOutlierBox.isSelected()) {
+			
+		}
+		else if(outlierIntervalField.getText() == null || outlierIntervalField.getText().length() == 0) {
+			errorMessage += "Lack Outlier Interval!\n"; 
+		} else {
+			try {
+				int dailyMile = Integer.parseInt(outlierIntervalField.getText());
+				if(dailyMile <= 0 || dailyMile > 5000) {
+					errorMessage += "Invalid Outlier Interval (Between 1 and 5000)\n";
+				}
+			} catch (NumberFormatException e) {
+				errorMessage += "Invalid Outlier Interval (Between 1 and 5000)\n"; 
 			}
 		}
 
@@ -252,7 +343,9 @@ public class TireOverviewController {
 	@FXML
 	private void initialize() {
 		// Initialize the tire table with the two columns.
-		tirePosColumn.setCellValueFactory(cellData -> cellData.getValue().getTirePosProperty());
+		tireTable.setFocusTraversable(true);
+		
+		tireIDColumn.setCellValueFactory(cellData -> cellData.getValue().getTireIDProperty());
 		initS11Column.setCellValueFactory(cellData -> cellData.getValue().getInitS11Property());
 
 		// Clear tire details.
@@ -275,4 +368,67 @@ public class TireOverviewController {
 		// Add observable list data to the table
 		tireTable.setItems(mainApp.getTireData());
 	}
+	
+	
+	
+	 /*******************************************************************
+     *********************    Data Saving   *****************************
+     ********************************************************************/
+     /**
+      
+      /**
+     * Opens a FileChooser to let the user select a file to save to.
+     */
+    
+	@FXML
+	private void DG_handleOpen() {
+		// getS11list clear
+		mainApp.getS11List().clear();
+		FileChooser fileChooser = new FileChooser();
+
+		// Set extension filter
+		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+				"XML files (*.xml)", "*.xml");
+		fileChooser.getExtensionFilters().add(extFilter);
+
+		// Show open file dialog
+		File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
+
+		if (file != null) {
+			mainApp.loadDGDataFromFile(file);
+		}
+	}
+
+    @FXML
+    private void DG_handleSaveAs() {
+        FileChooser fileChooser = new FileChooser();
+
+        // Set extension filter
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+                "XML files (*.xml)", "*.xml");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Show save file dialog
+        File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
+
+        if (file != null) {
+            // Make sure it has the correct extension
+            if (!file.getPath().endsWith(".xml")) {
+                file = new File(file.getPath() + ".xml");
+            }
+            mainApp.saveDGDataToFile(file);
+        }
+    }
+    
+    
+
+    /*******************************************************************
+     *****************    Bluetooth Broadcasting   *********************
+     ********************************************************************/
+    
+    
+    
+    
+    
+    
 }

@@ -8,19 +8,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.TireOverviewController">
+<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.TireOverviewController">
    <children>
       <SplitPane dividerPositions="0.5" layoutX="42.0" layoutY="55.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="256.0">
                <children>
-                  <SplitPane dividerPositions="0.5" layoutX="14.0" layoutY="15.0" orientation="VERTICAL" prefHeight="398.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <SplitPane dividerPositions="0.5378151260504201" layoutX="14.0" layoutY="15.0" orientation="VERTICAL" prefHeight="398.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <TableView fx:id="tireTable" layoutX="41.0" layoutY="49.0" prefHeight="194.0" prefWidth="293.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="tireTable" layoutX="41.0" layoutY="49.0" onKeyReleased="#keyReleased" onMouseClicked="#mouseClicked" prefHeight="194.0" prefWidth="293.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn fx:id="tirePosColumn" prefWidth="75.0" text="Tire Location" />
+                                  <TableColumn fx:id="tireIDColumn" prefWidth="75.0" text="Tire Sensor ID" />
                                   <TableColumn fx:id="initS11Column" prefWidth="75.0" text="Initial S11" />
                                 </columns>
                                  <columnResizePolicy>
@@ -31,7 +31,7 @@
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
-                              <GridPane prefHeight="134.0" prefWidth="280.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="20.0">
+                              <GridPane prefHeight="134.0" prefWidth="280.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -89,7 +89,11 @@
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Not yet available" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label fx:id="pressureLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </Label>
                                  </children>
                               </GridPane>
                               <Label layoutX="8.0" layoutY="1.0" prefHeight="17.0" prefWidth="60.0" text="Tire info" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="1.0" />
@@ -121,7 +125,7 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
                               <Label layoutX="7.0" layoutY="6.0" prefHeight="17.0" prefWidth="96.0" text="Data Generator" />
-                              <GridPane layoutY="23.0" prefHeight="124.0" prefWidth="280.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="28.0">
+                              <GridPane alignment="TOP_RIGHT" layoutY="23.0" prefHeight="147.0" prefWidth="283.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
                                  <children>
                                     <Label text="Start Date">
                                        <GridPane.margin>
@@ -140,13 +144,21 @@
                                     </Label>
                                     <TextField fx:id="timeSpanField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <TextField fx:id="dailyMileageField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" />
+                                    <TextField fx:id="outlierIntervalField" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin></TextField>
+                                    <CheckBox fx:id="enableOutlierBox" alignment="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleOutlierEnable" text="Enable Outlier" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                       <GridPane.margin>
+                                          <Insets />
+                                       </GridPane.margin>
+                                    </CheckBox>
                                     <Label text="Outlier Interval" textAlignment="CENTER" GridPane.rowIndex="3">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" />
-                                    <TextField fx:id="outlierIntervalField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                  </children>
                                  <columnConstraints>
                                     <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -157,12 +169,13 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                               </GridPane>
-                              <HBox layoutX="85.0" layoutY="150.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="160.0">
+                              <HBox layoutX="95.0" layoutY="181.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="20.0">
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#handleDataGenerate" prefHeight="27.0" prefWidth="78.0" text="Generate" />
-                                    <Button mnemonicParsing="false" onAction="#handleDataShow" text="Save">
+                                    <Button mnemonicParsing="false" onAction="#DG_handleSaveAs" text="Save">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
@@ -174,7 +187,7 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <Text fx:id="statusText" fill="#1ca357" layoutX="245.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="20.0" />
+                              <Text fx:id="statusText" fill="#1ca357" layoutX="245.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="20.0" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -184,7 +197,8 @@
                                     <Image url="@../../../file/tyrata%20logo.png" />
                                  </image>
                               </ImageView>
-                              <Button layoutX="87.0" layoutY="70.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Broadcast" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="60.0" />
+                              <Button layoutX="179.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Broadcast" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
+                              <TextArea layoutX="14.0" layoutY="54.0" prefHeight="119.0" prefWidth="289.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="50.0" />
                            </children></AnchorPane>
                     </items>
                   </SplitPane>
