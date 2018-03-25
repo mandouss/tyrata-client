@@ -20,7 +20,7 @@
                            <children>
                               <TableView fx:id="tireTable" layoutX="41.0" layoutY="49.0" prefHeight="194.0" prefWidth="293.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
-                                  <TableColumn fx:id="tirePosColumn" prefWidth="75.0" text="Tire Location" />
+                                  <TableColumn fx:id="tireIDColumn" prefWidth="75.0" text="Tire Sensor ID" />
                                   <TableColumn fx:id="initS11Column" prefWidth="75.0" text="Initial S11" />
                                 </columns>
                                  <columnResizePolicy>
@@ -89,7 +89,11 @@
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Not yet available" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label fx:id="pressureLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                       <padding>
+                                          <Insets left="10.0" />
+                                       </padding>
+                                    </Label>
                                  </children>
                               </GridPane>
                               <Label layoutX="8.0" layoutY="1.0" prefHeight="17.0" prefWidth="60.0" text="Tire info" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="1.0" />

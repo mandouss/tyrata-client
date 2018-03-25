@@ -22,13 +22,14 @@ import dg.util.DateUtil;
 
 public class TireOverviewController {
 	@FXML private TableView<Tire> tireTable;
-	@FXML private TableColumn<Tire, String> tirePosColumn;
+	@FXML private TableColumn<Tire, String> tireIDColumn;
 	@FXML private TableColumn<Tire, Number> initS11Column;  //Integer, Double ... Should be Number
 
 	@FXML private Label tireIDLabel;
 	@FXML private Label tirePosLabel;
 	@FXML private Label initS11Label;
 	@FXML private Label startTimeLabel;
+	@FXML private Label pressureLabel;
 	//@FXML private Label timeIntervalLabel;
 
 	@FXML private DatePicker startDatePicker;
@@ -64,6 +65,7 @@ public class TireOverviewController {
 			tirePosLabel.setText(tire.getTirePos());
 			initS11Label.setText(Double.toString(tire.getInitS11()));
 			startTimeLabel.setText(DateUtil.format(tire.getStartDate()));
+			pressureLabel.setText(Double.toString(tire.getPressure()));
 			//timeIntervalLabel.setText(Integer.toString(tire.getTimeInterval()));
 
 		} else {
@@ -72,6 +74,7 @@ public class TireOverviewController {
 			tirePosLabel.setText("");
 			initS11Label.setText("");
 			startTimeLabel.setText("");
+			pressureLabel.setText("");
 			//timeIntervalLabel.setText("");
 		}
 	}
@@ -254,7 +257,7 @@ public class TireOverviewController {
 	@FXML
 	private void initialize() {
 		// Initialize the tire table with the two columns.
-		tirePosColumn.setCellValueFactory(cellData -> cellData.getValue().getTirePosProperty());
+		tireIDColumn.setCellValueFactory(cellData -> cellData.getValue().getTireIDProperty());
 		initS11Column.setCellValueFactory(cellData -> cellData.getValue().getInitS11Property());
 
 		// Clear tire details.
