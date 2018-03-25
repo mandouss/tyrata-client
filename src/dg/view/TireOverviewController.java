@@ -401,6 +401,7 @@ public class TireOverviewController {
 
     @FXML
     private void DG_handleSaveAs() {
+    	if(mainApp.getS11List().size() != 0) {
         FileChooser fileChooser = new FileChooser();
 
         // Set extension filter
@@ -417,6 +418,11 @@ public class TireOverviewController {
                 file = new File(file.getPath() + ".xml");
             }
             mainApp.saveDGDataToFile(file);
+        }
+    	}
+        else {
+    		statusText.setText("No data generated yet!");
+    		return;
         }
     }
     
