@@ -243,8 +243,10 @@ public class MainApp extends Application {
 			// Reading XML from the file and unmarshalling
 			TireListWrapper wrapper = (TireListWrapper) um.unmarshal(file);
 			tireData.clear();
+			
+			// TODO: add warning message for unsuccessful load
 			tireData.addAll(wrapper.getTires());
-
+			
 			//save the file path to the registry.
 			setTireFilePath(file);
 		}
@@ -338,7 +340,7 @@ public class MainApp extends Application {
 		                .newInstance(DGListWrapper.class);
 		        Unmarshaller um = context.createUnmarshaller();
 
-		        // Reading XML from the file and unmarshalling.
+		        // Read XML from the file and unmarshal.
 		        DGListWrapper wrapper = (DGListWrapper) um.unmarshal(file);
 
 		        s11List.clear();
