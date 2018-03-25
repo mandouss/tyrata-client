@@ -281,12 +281,10 @@ public class MainApp extends Application {
 	}
 	
 	
-	
-	
-	
 
 	/****************************************************    
-	/*************************** Save Data Branch ************
+	******************* Save Data Branch ****************
+	*****************************************************/
 	    /**
 	     * Returns the person file preference, i.e. the file that was last opened.
 	     * The preference is read from the OS specific registry. If no such
