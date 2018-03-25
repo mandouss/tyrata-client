@@ -1,15 +1,10 @@
 package dg.view;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.SelectionModel;
 import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
@@ -94,14 +89,13 @@ public class TireOverviewController {
 	private void mouseClicked(MouseEvent mouseEvent) {
 		if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
 			//TODO: can't clear selection
-			int selectedIndex = tireTable.getSelectionModel().getSelectedIndex();
-			tireTable.getSelectionModel().clearAndSelect(selectedIndex);
-			//tireTable.get
-			Node selected = mouseEvent.getPickResult().getIntersectedNode();
-			//System.out.println(selected);
-			if(selected == null || (selected instanceof TableRow && ((TableRow) selected).isEmpty())) {
-				tireTable.getSelectionModel().clearSelection();
-			}
+//			int selectedIndex = tireTable.getSelectionModel().getSelectedIndex();
+//			tireTable.getSelectionModel().clearAndSelect(selectedIndex);
+//			Node selected = mouseEvent.getPickResult().getIntersectedNode();
+//			System.out.println(selected);
+//			if(selected == null || (selected instanceof TableRow && ((TableRow) selected).isEmpty())) {
+//				tireTable.getSelectionModel().clearSelection();
+//			}
 			if(mouseEvent.getClickCount() == 2){
 				handleEditTire();
 				//System.out.println("Double clicked on "+ tireTable.getSelectionModel().getSelectedIndex());
