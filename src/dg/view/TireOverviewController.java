@@ -1,11 +1,16 @@
 package dg.view;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 
@@ -24,7 +29,7 @@ public class TireOverviewController {
 	@FXML private TableView<Tire> tireTable;
 	@FXML private TableColumn<Tire, String> tireIDColumn;
 	@FXML private TableColumn<Tire, Number> initS11Column;  //Integer, Double ... Should be Number
-
+	
 	@FXML private Label tireIDLabel;
 	@FXML private Label tirePosLabel;
 	@FXML private Label initS11Label;
@@ -35,6 +40,7 @@ public class TireOverviewController {
 	@FXML private DatePicker startDatePicker;
 	@FXML private TextField timeSpanField;
 	@FXML private TextField dailyMileageField;
+	@FXML private CheckBox enableOutlierBox;
 	@FXML private TextField outlierIntervalField;
 	@FXML private Text statusText;
 
@@ -79,6 +85,57 @@ public class TireOverviewController {
 		}
 	}
 
+	@FXML
+	private void mouseClicked(MouseEvent mouseEvent) {
+		if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+			//TODO: can't clear selection
+//			int selectedIndex = tireTable.getSelectionModel().getSelectedIndex();
+//			tireTable.getSelectionModel().clearAndSelect(selectedIndex);
+//			Node selected = mouseEvent.getPickResult().getIntersectedNode();
+//			System.out.println(selected);
+//			if(selected == null || (selected instanceof TableRow && ((TableRow) selected).isEmpty())) {
+//				tireTable.getSelectionModel().clearSelection();
+//			}
+			if(mouseEvent.getClickCount() == 2){
+				handleEditTire();
+				//System.out.println("Double clicked on "+ tireTable.getSelectionModel().getSelectedIndex());
+			}
+		}
+	}
+
+	@FXML
+	private void keyPressed(KeyEvent keyEvent) {
+		//System.out.println("PRESS Detected " + keyEvent.getCode());
+	    if (keyEvent.getCode() == KeyCode.ENTER) {
+	    		//System.out.println("Enter Pressed!!!");
+	    }
+	}
+	
+	@FXML
+	private void keyReleased(KeyEvent keyEvent) {
+		//System.out.println("Release Detected " + keyEvent.getCode());
+	    if (keyEvent.getCode() == KeyCode.BACK_SPACE || keyEvent.getCode() == KeyCode.DELETE) {
+	    		//System.out.println("Enter Released!!!");
+			int selectedIndex = tireTable.getSelectionModel().getSelectedIndex();
+			if(selectedIndex >= 0) {
+				tireTable.getItems().remove(selectedIndex);
+			}
+	    }
+	}
+
+	/** This function will overwrite keyPressed and keyReleased
+	 * @param keyEvent
+	 */
+	@FXML
+	private void keyTyped(KeyEvent keyEvent) {
+		
+		System.out.println("TYPE Detected " + keyEvent.getCharacter());
+		if (keyEvent.getCharacter()  == "d") {
+			System.out.println("Delete Typed!!!");
+		}
+		
+	}
+	
 	/********************************************************************
 	 *********************    Tire Config Part  *************************
 	 ********************************************************************/
@@ -93,6 +150,7 @@ public class TireOverviewController {
 		if (saveClicked) {
 			mainApp.getTireData().add(newTire);
 		}
+		
 	}
 	/**
 	 * Called when the user clicks on the edit button.
@@ -150,13 +208,26 @@ public class TireOverviewController {
 		timeSpanField.setPromptText("(1-3650) Days");
 		dailyMileageField.setText("");
 		dailyMileageField.setPromptText("(1-5000) Miles");
+
+		enableOutlierBox.setSelected(false);
 		outlierIntervalField.setText("-1");
-		outlierIntervalField.setPromptText("Days (-1 to Disable)");
+		outlierIntervalField.setDisable(true);
+		outlierIntervalField.setPromptText("Days");
 		//initS11Field.setFocusTraversable(false);
 		startDatePicker.setValue(LocalDate.now());
 		statusText.setText("");
 	}
-
+	
+	@FXML
+	public void handleOutlierEnable() {
+		if(enableOutlierBox.isSelected()) {
+			outlierIntervalField.setDisable(false);
+		} else {
+			outlierIntervalField.setDisable(true);
+		}
+	}
+	
+	
 	@FXML
 	public void handleDataGenerate() {
 		if(isDataInputValid()) {
@@ -165,10 +236,9 @@ public class TireOverviewController {
 			int dailyMileage = Integer.parseInt(dailyMileageField.getText());
 			List<Tire> tireList = mainApp.getTireData();
 			int outlierInterval = Integer.parseInt(outlierIntervalField.getText());
-			boolean outlierEnabled = true;
-			if(outlierInterval == -1) {
-				outlierEnabled = false;
-			}
+			boolean outlierEnabled = enableOutlierBox.isSelected();
+			// System.out.println("Successfully Generated Data: outlier ("+ outlierEnabled + "): "+ outlierInterval);
+			
 			//dataGen
 			DataGenerator dataGen = new DataGenerator(startDate, timeSpan, dailyMileage, 
 					tireList, outlierEnabled, outlierInterval);
@@ -234,6 +304,22 @@ public class TireOverviewController {
 				errorMessage += "Invalid Daily Mileage (Between 1 and 5000)\n"; 
 			}
 		}
+		
+		if (!enableOutlierBox.isSelected()) {
+			
+		}
+		else if(outlierIntervalField.getText() == null || outlierIntervalField.getText().length() == 0) {
+			errorMessage += "Lack Outlier Interval!\n"; 
+		} else {
+			try {
+				int dailyMile = Integer.parseInt(outlierIntervalField.getText());
+				if(dailyMile <= 0 || dailyMile > 5000) {
+					errorMessage += "Invalid Outlier Interval (Between 1 and 5000)\n";
+				}
+			} catch (NumberFormatException e) {
+				errorMessage += "Invalid Outlier Interval (Between 1 and 5000)\n"; 
+			}
+		}
 
 		if (errorMessage.length() == 0) {
 			return true;
@@ -257,6 +343,8 @@ public class TireOverviewController {
 	@FXML
 	private void initialize() {
 		// Initialize the tire table with the two columns.
+		tireTable.setFocusTraversable(true);
+		
 		tireIDColumn.setCellValueFactory(cellData -> cellData.getValue().getTireIDProperty());
 		initS11Column.setCellValueFactory(cellData -> cellData.getValue().getInitS11Property());
 
@@ -283,11 +371,8 @@ public class TireOverviewController {
 	
 	
 	
-	
-	
-	
 	 /*******************************************************************
-     *********************    Save Data Branch   *************************
+     *********************    Data Saving   *****************************
      ********************************************************************/
      /**
       
@@ -334,9 +419,11 @@ public class TireOverviewController {
             mainApp.saveDGDataToFile(file);
         }
     }
+    
+    
 
     /*******************************************************************
-     *********************    Save Data Branch   *************************
+     *****************    Bluetooth Broadcasting   *********************
      ********************************************************************/
     
     
