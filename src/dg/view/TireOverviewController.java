@@ -48,7 +48,7 @@ public class TireOverviewController {
 	@FXML private CheckBox enableOutlierBox;
 	@FXML private TextField outlierIntervalField;
 	@FXML private Text statusText;
-
+	
 	@FXML private ScrollPane commsPane;
 	@FXML private TextFlow commsFlow;
 	@FXML private TextArea commsArea;
@@ -348,14 +348,6 @@ public class TireOverviewController {
 			return false;
 		}
 	}
-
-
-
-	/*******************************************************************
-	 *********************    Data Saving   *****************************
-	 ********************************************************************/
-	/**
-
       /**
 	 * Opens a FileChooser to let the user select a file to save to.
 	 */
@@ -408,31 +400,31 @@ public class TireOverviewController {
 
 
 
-	/*******************************************************************
-	 *****************    Bluetooth Broadcasting   *********************
-	 ********************************************************************/
-
-	@FXML
-	public void handleBroadcast() {
-		String msg = "Starting BroadCasting ... (Not Really)\n";
-		Text t = new Text();
-		t.setStyle("-fx-fill: #6DCE8B;-fx-font-weight:bold;");
-		t.setText(msg);
-		commsFlow.getChildren().add(t);
-
-		//	    	commsArea.appendText(msg);
-	}
-
-	@FXML
-	public void handleBroadcastCancel() {
-		String msg = "Shutting down BroadCasting ... (Not Really)\n";
-		Text t = new Text();
-		t.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
-		t.setText(msg);
-		commsFlow.getChildren().add(t);
-
-		//	    	commsArea.appendText(msg);
-	}
+    /*******************************************************************
+     *****************    Bluetooth Broadcasting   *********************
+     ********************************************************************/
+    
+    @FXML
+    public void handleBroadcast() {
+    		String msg = "Starting BroadCasting ... (Not Really)\n";
+    		Text t = new Text();
+        t.setStyle("-fx-fill: #6DCE8B;-fx-font-weight:bold;");
+        t.setText(msg);
+    		commsFlow.getChildren().add(t);
+    		
+//	    	commsArea.appendText(msg);
+    }
+    
+    @FXML
+    public void handleBroadcastCancel() {
+    		String msg = "Shutting down BroadCasting ... (Not Really)\n";
+	    	Text t = new Text();
+	    	t.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
+	    	t.setText(msg);
+	    	commsFlow.getChildren().add(t);
+    		
+//	    	commsArea.appendText(msg);
+    }
 
 
 	/**
@@ -442,18 +434,18 @@ public class TireOverviewController {
 	public void setCommsInfo() {
 		commsPane.setFitToWidth(true);
 		commsPane.setFitToHeight(true);
-		//		commsArea.setText("");
-		//		commsArea.setWrapText(true);
-		//		commsArea.setEditable(false);
+//		commsArea.setText("");
+//		commsArea.setWrapText(true);
+//		commsArea.setEditable(false);
 	}
+    
+	
 
 
-
-
-	/*******************************************************************
-	 *****************    initialization & setup   *********************
-	 ********************************************************************/
-
+    /*******************************************************************
+     *****************    initialization & setup   *********************
+     ********************************************************************/
+    
 
 	/**
 	 * Initializes the controller class. This method is automatically called
@@ -463,7 +455,7 @@ public class TireOverviewController {
 	private void initialize() {
 		// Initialize the tire table with the two columns.
 		tireTable.setFocusTraversable(true);
-
+		
 		tireIDColumn.setCellValueFactory(cellData -> cellData.getValue().getTireIDProperty());
 		initS11Column.setCellValueFactory(cellData -> cellData.getValue().getInitS11Property());
 
@@ -473,16 +465,16 @@ public class TireOverviewController {
 		// Listen for selection changes and show the tire details when changed.
 		tireTable.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> showTireDetails(newValue));
-
-		commsFlow.getChildren().addListener(
-				(ListChangeListener<Node>) ((change) -> {
-					//                    commsFlow.layout();
-					//                    commsPane.layout();
-					commsPane.setVvalue(1.0f);
-				}));
-
+		
+	    commsFlow.getChildren().addListener(
+                (ListChangeListener<Node>) ((change) -> {
+//                    commsFlow.layout();
+//                    commsPane.layout();
+                    commsPane.setVvalue(1.0f);
+                }));
+	    
 		setCommsInfo();
-
+		
 	}
 
 
@@ -497,6 +489,5 @@ public class TireOverviewController {
 		// Add observable list data to the table
 		tireTable.setItems(mainApp.getTireData());
 	}
-
-
+	
 }
