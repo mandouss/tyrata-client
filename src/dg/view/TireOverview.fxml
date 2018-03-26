@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="480.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.TireOverviewController">
+<AnchorPane prefHeight="540.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.TireOverviewController">
    <children>
       <SplitPane dividerPositions="0.5" layoutX="42.0" layoutY="55.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -125,7 +125,7 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                            <children>
                               <Label layoutX="7.0" layoutY="6.0" prefHeight="17.0" prefWidth="96.0" text="Data Generator" />
-                              <GridPane alignment="TOP_RIGHT" layoutY="23.0" prefHeight="147.0" prefWidth="283.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
+                              <GridPane alignment="TOP_RIGHT" layoutY="23.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
                                  <children>
                                     <Label text="Start Date">
                                        <GridPane.margin>
@@ -172,7 +172,7 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                               </GridPane>
-                              <HBox layoutX="95.0" layoutY="181.0" AnchorPane.bottomAnchor="30.0" AnchorPane.rightAnchor="20.0">
+                              <HBox layoutX="95.0" layoutY="181.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0">
                                  <children>
                                     <Button mnemonicParsing="false" onAction="#handleDataGenerate" prefHeight="27.0" prefWidth="78.0" text="Generate" />
                                     <Button mnemonicParsing="false" onAction="#DG_handleSaveAs" text="Save">
@@ -187,7 +187,7 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <Text fx:id="statusText" fill="#1ca357" layoutX="245.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.bottomAnchor="3.0" AnchorPane.rightAnchor="20.0" />
+                              <Text fx:id="statusText" fill="#c8595c" layoutX="245.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="RIGHT" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="20.0" />
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
