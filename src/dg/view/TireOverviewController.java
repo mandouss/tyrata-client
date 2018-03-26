@@ -34,7 +34,7 @@ public class TireOverviewController {
 	@FXML private TableView<Tire> tireTable;
 	@FXML private TableColumn<Tire, String> tireIDColumn;
 	@FXML private TableColumn<Tire, Number> initS11Column;  //Integer, Double ... Should be Number
-	
+
 	@FXML private Label tireIDLabel;
 	@FXML private Label tirePosLabel;
 	@FXML private Label initS11Label;
@@ -48,7 +48,7 @@ public class TireOverviewController {
 	@FXML private CheckBox enableOutlierBox;
 	@FXML private TextField outlierIntervalField;
 	@FXML private Text statusText;
-	
+
 	@FXML private ScrollPane commsPane;
 	@FXML private TextFlow commsFlow;
 	@FXML private TextArea commsArea;
@@ -98,13 +98,13 @@ public class TireOverviewController {
 	private void mouseClicked(MouseEvent mouseEvent) {
 		if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
 			//TODO: can't clear selection
-//			int selectedIndex = tireTable.getSelectionModel().getSelectedIndex();
-//			tireTable.getSelectionModel().clearAndSelect(selectedIndex);
-//			Node selected = mouseEvent.getPickResult().getIntersectedNode();
-//			System.out.println(selected);
-//			if(selected == null || (selected instanceof TableRow && ((TableRow) selected).isEmpty())) {
-//				tireTable.getSelectionModel().clearSelection();
-//			}
+			//			int selectedIndex = tireTable.getSelectionModel().getSelectedIndex();
+			//			tireTable.getSelectionModel().clearAndSelect(selectedIndex);
+			//			Node selected = mouseEvent.getPickResult().getIntersectedNode();
+			//			System.out.println(selected);
+			//			if(selected == null || (selected instanceof TableRow && ((TableRow) selected).isEmpty())) {
+			//				tireTable.getSelectionModel().clearSelection();
+			//			}
 			if(mouseEvent.getClickCount() == 2){
 				handleEditTire();
 				//System.out.println("Double clicked on "+ tireTable.getSelectionModel().getSelectedIndex());
@@ -115,21 +115,21 @@ public class TireOverviewController {
 	@FXML
 	private void keyPressed(KeyEvent keyEvent) {
 		//System.out.println("PRESS Detected " + keyEvent.getCode());
-	    if (keyEvent.getCode() == KeyCode.ENTER) {
-	    		//System.out.println("Enter Pressed!!!");
-	    }
+		if (keyEvent.getCode() == KeyCode.ENTER) {
+			//System.out.println("Enter Pressed!!!");
+		}
 	}
-	
+
 	@FXML
 	private void keyReleased(KeyEvent keyEvent) {
 		//System.out.println("Release Detected " + keyEvent.getCode());
-	    if (keyEvent.getCode() == KeyCode.BACK_SPACE || keyEvent.getCode() == KeyCode.DELETE) {
-	    		//System.out.println("Enter Released!!!");
+		if (keyEvent.getCode() == KeyCode.BACK_SPACE || keyEvent.getCode() == KeyCode.DELETE) {
+			//System.out.println("Enter Released!!!");
 			int selectedIndex = tireTable.getSelectionModel().getSelectedIndex();
 			if(selectedIndex >= 0) {
 				tireTable.getItems().remove(selectedIndex);
 			}
-	    }
+		}
 	}
 
 	/** This function will overwrite keyPressed and keyReleased
@@ -137,14 +137,14 @@ public class TireOverviewController {
 	 */
 	@FXML
 	private void keyTyped(KeyEvent keyEvent) {
-		
+
 		System.out.println("TYPE Detected " + keyEvent.getCharacter());
 		if (keyEvent.getCharacter()  == "d") {
 			System.out.println("Delete Typed!!!");
 		}
-		
+
 	}
-	
+
 	/********************************************************************
 	 *********************    Tire Config Part  *************************
 	 ********************************************************************/
@@ -159,7 +159,7 @@ public class TireOverviewController {
 		if (saveClicked) {
 			mainApp.getTireData().add(newTire);
 		}
-		
+
 	}
 	/**
 	 * Called when the user clicks on the edit button.
@@ -225,8 +225,9 @@ public class TireOverviewController {
 		//initS11Field.setFocusTraversable(false);
 		startDatePicker.setValue(LocalDate.now());
 		statusText.setText("");
+//		statusText.setTextAlignment();
 	}
-	
+
 	@FXML
 	public void handleOutlierEnable() {
 		if(enableOutlierBox.isSelected()) {
@@ -235,8 +236,8 @@ public class TireOverviewController {
 			outlierIntervalField.setDisable(true);
 		}
 	}
-	
-	
+
+
 	@FXML
 	public void handleDataGenerate() {
 		if(isDataInputValid()) {
@@ -247,13 +248,14 @@ public class TireOverviewController {
 			int outlierInterval = Integer.parseInt(outlierIntervalField.getText());
 			boolean outlierEnabled = enableOutlierBox.isSelected();
 			// System.out.println("Successfully Generated Data: outlier ("+ outlierEnabled + "): "+ outlierInterval);
-			
+
 			//dataGen
 			DataGenerator dataGen = new DataGenerator(startDate, timeSpan, dailyMileage, 
 					tireList, outlierEnabled, outlierInterval);
 			//day_list
 			ArrayList<DailyS11> newS11List = dataGen.generateSeries();
 			newS11List.forEach((dailyS11) -> dailyS11.print());
+			statusText.setStyle("-fx-text-fill: #6DCE8B;");
 			statusText.setText("Data Generated");
 			mainApp.getS11List().clear();
 			mainApp.getS11List().addAll(newS11List);
@@ -297,7 +299,7 @@ public class TireOverviewController {
 					errorMessage += "Invalid Time Span (Between 1 and 3650)\n";
 				}
 			} catch (NumberFormatException e) {
-				errorMessage += "Invalid Time Span (Between 1 and 3650)\\n"; 
+				errorMessage += "Invalid Time Span (Between 1 and 3650)\n"; 
 			}
 		}
 
@@ -313,9 +315,9 @@ public class TireOverviewController {
 				errorMessage += "Invalid Daily Mileage (Between 1 and 5000)\n"; 
 			}
 		}
-		
+
 		if (!enableOutlierBox.isSelected()) {
-			
+
 		}
 		else if(outlierIntervalField.getText() == null || outlierIntervalField.getText().length() == 0) {
 			errorMessage += "Lack Outlier Interval!\n"; 
@@ -330,7 +332,7 @@ public class TireOverviewController {
 			}
 		}
 
-		if (errorMessage.length() == 0) {
+		if (errorMessage == null || errorMessage.length() == 0) {
 			return true;
 		} else {
 			// Show the error message.
@@ -339,23 +341,25 @@ public class TireOverviewController {
 			//	                .masthead("Please correct invalid fields")
 			//	                .message(errorMessage)
 			//	                .showError();
+			errorMessage = errorMessage.substring(0, errorMessage.length() - 1);
+			statusText.setStyle("-fx-text-fill: #C8595C;");
 			statusText.setText(errorMessage);
 			//TODO: Change color
 			return false;
 		}
 	}
 
-	
-	
-	 /*******************************************************************
-     *********************    Data Saving   *****************************
-     ********************************************************************/
-     /**
-      
+
+
+	/*******************************************************************
+	 *********************    Data Saving   *****************************
+	 ********************************************************************/
+	/**
+
       /**
-     * Opens a FileChooser to let the user select a file to save to.
-     */
-    
+	 * Opens a FileChooser to let the user select a file to save to.
+	 */
+
 	@FXML
 	private void DG_handleOpen() {
 		// getS11list clear
@@ -375,60 +379,60 @@ public class TireOverviewController {
 		}
 	}
 
-    @FXML
-    private void DG_handleSaveAs() {
-    	if(mainApp.getS11List().size() != 0) {
-        FileChooser fileChooser = new FileChooser();
+	@FXML
+	private void DG_handleSaveAs() {
+		if(mainApp.getS11List().size() != 0) {
+			FileChooser fileChooser = new FileChooser();
 
-        // Set extension filter
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-                "XML files (*.xml)", "*.xml");
-        fileChooser.getExtensionFilters().add(extFilter);
+			// Set extension filter
+			FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+					"XML files (*.xml)", "*.xml");
+			fileChooser.getExtensionFilters().add(extFilter);
 
-        // Show save file dialog
-        File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
+			// Show save file dialog
+			File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
 
-        if (file != null) {
-            // Make sure it has the correct extension
-            if (!file.getPath().endsWith(".xml")) {
-                file = new File(file.getPath() + ".xml");
-            }
-            mainApp.saveDGDataToFile(file);
-        }
-    	}
-        else {
-    		statusText.setText("No data generated yet!");
-    		return;
-        }
-    }
-    
-    
+			if (file != null) {
+				// Make sure it has the correct extension
+				if (!file.getPath().endsWith(".xml")) {
+					file = new File(file.getPath() + ".xml");
+				}
+				mainApp.saveDGDataToFile(file);
+			}
+		}
+		else {
+			statusText.setText("No data generated yet!");
+			return;
+		}
+	}
 
-    /*******************************************************************
-     *****************    Bluetooth Broadcasting   *********************
-     ********************************************************************/
-    
-    @FXML
-    public void handleBroadcast() {
-    		String msg = "Starting BroadCasting ... (Not Really)\n";
-    		Text t = new Text();
-        t.setStyle("-fx-fill: #6DCE8B;-fx-font-weight:bold;");
-        t.setText(msg);
-    		commsFlow.getChildren().add(t);
-    		
-//	    	commsArea.appendText(msg);
-    }
-    
-    @FXML
-    public void handleBroadcastCancel() {
-    		String msg = "Shutting down BroadCasting ... (Not Really)\n";
-	    	Text t = new Text();
-	    	t.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
-	    	t.setText(msg);
-	    	commsFlow.getChildren().add(t);
-    		
-//	    	commsArea.appendText(msg);
-    }
+
+
+	/*******************************************************************
+	 *****************    Bluetooth Broadcasting   *********************
+	 ********************************************************************/
+
+	@FXML
+	public void handleBroadcast() {
+		String msg = "Starting BroadCasting ... (Not Really)\n";
+		Text t = new Text();
+		t.setStyle("-fx-fill: #6DCE8B;-fx-font-weight:bold;");
+		t.setText(msg);
+		commsFlow.getChildren().add(t);
+
+		//	    	commsArea.appendText(msg);
+	}
+
+	@FXML
+	public void handleBroadcastCancel() {
+		String msg = "Shutting down BroadCasting ... (Not Really)\n";
+		Text t = new Text();
+		t.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
+		t.setText(msg);
+		commsFlow.getChildren().add(t);
+
+		//	    	commsArea.appendText(msg);
+	}
 
 
 	/**
@@ -438,18 +442,18 @@ public class TireOverviewController {
 	public void setCommsInfo() {
 		commsPane.setFitToWidth(true);
 		commsPane.setFitToHeight(true);
-//		commsArea.setText("");
-//		commsArea.setWrapText(true);
-//		commsArea.setEditable(false);
+		//		commsArea.setText("");
+		//		commsArea.setWrapText(true);
+		//		commsArea.setEditable(false);
 	}
-    
-	
 
 
-    /*******************************************************************
-     *****************    initialization & setup   *********************
-     ********************************************************************/
-    
+
+
+	/*******************************************************************
+	 *****************    initialization & setup   *********************
+	 ********************************************************************/
+
 
 	/**
 	 * Initializes the controller class. This method is automatically called
@@ -459,7 +463,7 @@ public class TireOverviewController {
 	private void initialize() {
 		// Initialize the tire table with the two columns.
 		tireTable.setFocusTraversable(true);
-		
+
 		tireIDColumn.setCellValueFactory(cellData -> cellData.getValue().getTireIDProperty());
 		initS11Column.setCellValueFactory(cellData -> cellData.getValue().getInitS11Property());
 
@@ -469,16 +473,16 @@ public class TireOverviewController {
 		// Listen for selection changes and show the tire details when changed.
 		tireTable.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> showTireDetails(newValue));
-		
-	    commsFlow.getChildren().addListener(
-                (ListChangeListener<Node>) ((change) -> {
-//                    commsFlow.layout();
-//                    commsPane.layout();
-                    commsPane.setVvalue(1.0f);
-                }));
-	    
+
+		commsFlow.getChildren().addListener(
+				(ListChangeListener<Node>) ((change) -> {
+					//                    commsFlow.layout();
+					//                    commsPane.layout();
+					commsPane.setVvalue(1.0f);
+				}));
+
 		setCommsInfo();
-		
+
 	}
 
 
@@ -493,6 +497,6 @@ public class TireOverviewController {
 		// Add observable list data to the table
 		tireTable.setItems(mainApp.getTireData());
 	}
-	
-    
+
+
 }
