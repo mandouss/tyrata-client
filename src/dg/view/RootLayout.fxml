@@ -15,7 +15,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="TireConfig">
             <items>
-              <MenuItem mnemonicParsing="false" text="Generate Tires" />
+              <MenuItem mnemonicParsing="false" onAction="#handleGenerateTires" text="Generate Tires" />
                   <SeparatorMenuItem mnemonicParsing="false" />
                   <MenuItem mnemonicParsing="false" onAction="#handleSave" text="Save" />
                   <MenuItem mnemonicParsing="false" onAction="#handleSaveAs" text="Save As" />

@@ -1,5 +1,6 @@
 package dg.view;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -10,8 +11,10 @@ import javafx.scene.layout.Priority;
 import javafx.stage.FileChooser;
 
 import java.io.File;
+import java.util.List;
 
 import dg.MainApp;
+import dg.model.Tire;
 
 /**
  * The controller for the root layout. The root layout provides the 
@@ -34,8 +37,19 @@ public class RootLayoutController {
 	}
 
 	/**
-	 * Creates an empty Tire list.
+	 * Creates a Tire list if it is empty.
 	 */
+	@FXML
+	private void handleGenerateTires() {
+		if(mainApp.getTireData().isEmpty()) {
+			mainApp.getTireData().add(new Tire("C-1234","LF",-1,3.5));
+			mainApp.getTireData().add(new Tire("C-1302","RF",-2,3.5));
+			mainApp.getTireData().add(new Tire("C-4124","LR",-1.2,3.5));
+			mainApp.getTireData().add(new Tire("C-9175","RR",-2.14,3.5));
+		}
+	}
+	
+	
 	/*@FXML
 	private void handleNew() {
 		mainApp.getTireData().clear();
