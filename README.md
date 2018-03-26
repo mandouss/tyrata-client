@@ -55,7 +55,7 @@ If you wish to import or save the configuration, go to `menu bar` - `TireConfig`
 
 `Show` - Show the data in UI
 
-## Broadcasting via Bluetooth
+## Data Broadcast via Bluetooth
 
 We successfully implemented Bluetooth connection seperately, and tested with Android app. 
 Code can be found in dg.bluetooth package. UI interface for connection is also implemented. 
@@ -85,7 +85,7 @@ Haohong Zhao
 
 
 ---------------
-**HISTORY**
+> HISTORY
 
 # Sprint 1 TyrataSimulator 1.0.0
 
