@@ -68,7 +68,8 @@
 }
 
 .scroll-pane {
-   -fx-box-border: transparent;
+	-fx-background-color: transparent;
+    -fx-box-border: transparent;
 }
 /*
  * 
@@ -93,7 +94,7 @@
  ******************************************************************************/
 .button-raised {
 	-fx-text-fill: -fx-text-button-colored;
-	-fx-background-color: -swatch-300;
+	-fx-background-color: derive(-swatch-300, 50%);
 	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.30), 6.0, 0.3, 0,
 		1);
 }
@@ -150,6 +151,9 @@
  * Text, Text field & Text area                                                *
  *                                                                             *
  ******************************************************************************/
+.text-flow {
+	-fx-background-color: transparent;
+}
 
 .text-area, .text-field {
 	-fx-background-color: transparent;
@@ -160,7 +164,6 @@
 	-fx-text-fill: -swatch-dark-grey;
 	-fx-highlight-fill: -fx-focus-color; 
 	
-	-fx-padding: 0 1em 0 0;
 }
 
 .text-area:focused, .text-field:focused {
@@ -183,8 +186,6 @@
 	-fx-fill: -fx-text-base-color;
 }
 
-
-
 .check-box:selected>.box>.mark {
 	-fx-background-color: -swatch-200;
 }
@@ -206,7 +207,6 @@
   	-fx-background-color: transparent;
 	-fx-border-color: -swatch-grey;
 	-fx-border-width: 0 0 2 0;
-	-fx-padding: 0 1em 0 0;
 }
 
 
@@ -236,7 +236,7 @@
 }
 
 .date-picker-popup>.month-year-pane {
-	-fx-background-color: -swatch-300;
+	-fx-background-color: -swatch-200;
 }
 
 .date-picker-popup>*>.spinner>.button>.left-arrow, .date-picker-popup>*>.spinner>.button>.right-arrow
@@ -313,9 +313,16 @@
 	-fx-border-style: null;
 	-fx-border-color: -swatch-light-grey;
 	-fx-border-width: 0 0 2 0;
-	-fx-background-color: -fx-accent;
+	-fx-background-color: -fx-focus-color;
+	
 }
 
+.table-view .column-header .label {
+	-fx-text-fill: white;	
+	-fx-font-weight: bolder;
+}
+	
+	
 .table-view .column-header .label, .table-view .filler .label,
 	.table-view .column-drag-header .label	{
 	-fx-alignment: CENTER_LEFT;
@@ -329,7 +336,7 @@
 	-fx-cell-size: 35px;
 }
 .table-row-cell:selected{
-	-fx-background-color: -fx-focus-color;
+	-fx-background-color: -fx-accent;
 }
 
 .table-cell {
