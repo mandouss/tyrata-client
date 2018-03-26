@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="210.0" prefWidth="250.0" styleClass="ti_bg" stylesheets="@../../../file/stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.TireEditDialogController">
+<AnchorPane prefHeight="210.0" prefWidth="250.0" styleClass="bg" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.TireEditDialogController">
    <children>
       <GridPane layoutX="-26.0" layoutY="14.0" prefHeight="150.0" prefWidth="229.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
         <columnConstraints>
@@ -22,11 +22,11 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="TireID" />
-            <Label styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="TirePos" GridPane.rowIndex="1" />
-            <Label styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="S11_i" GridPane.rowIndex="2" />
-            <Label styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="Tire Pressure" GridPane.rowIndex="3" />
-            <Label styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="Create Date" GridPane.rowIndex="4" />
+            <Label styleClass="textstyle" stylesheets="@stylesheet.css" text="TireID" />
+            <Label styleClass="textstyle" stylesheets="@stylesheet.css" text="TirePos" GridPane.rowIndex="1" />
+            <Label styleClass="textstyle" stylesheets="@stylesheet.css" text="S11_i" GridPane.rowIndex="2" />
+            <Label styleClass="textstyle" stylesheets="@stylesheet.css" text="Tire Pressure" GridPane.rowIndex="3" />
+            <Label styleClass="textstyle" stylesheets="@stylesheet.css" text="Create Date" GridPane.rowIndex="4" />
             <TextField fx:id="tireIDField" GridPane.columnIndex="1" />
             <TextField fx:id="tirePosField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="initS11Field" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -36,8 +36,8 @@
       </GridPane>
       <HBox layoutX="80.0" layoutY="155.0" spacing="10.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <children>
-            <Button layoutX="80.0" layoutY="155.0" mnemonicParsing="false" onAction="#handleSave" styleClass="green" stylesheets="@../../../file/stylesheet.css" text="Save" />
-            <Button mnemonicParsing="false" onAction="#handleCancel" styleClass="blue" stylesheets="@../../../file/stylesheet.css" text="Cancel" />
+            <Button layoutX="80.0" layoutY="155.0" mnemonicParsing="false" onAction="#handleSave" styleClass="button-raised" stylesheets="@stylesheet.css" text="Save" />
+            <Button mnemonicParsing="false" onAction="#handleCancel" styleClass="button-raised" stylesheets="@stylesheet.css" text="Cancel" />
          </children>
       </HBox>
       <Text fx:id="warningText" fill="#a41b1b" layoutX="188.0" layoutY="168.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Warning Text!" AnchorPane.rightAnchor="10.0">

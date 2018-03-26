@@ -255,7 +255,7 @@ public class TireOverviewController {
 			//day_list
 			ArrayList<DailyS11> newS11List = dataGen.generateSeries();
 			newS11List.forEach((dailyS11) -> dailyS11.print());
-			statusText.setStyle("-fx-text-fill: #6DCE8B;");
+			statusText.setStyle("-fx-fill: #359E4B;");
 			statusText.setText("Data Generated");
 			mainApp.getS11List().clear();
 			mainApp.getS11List().addAll(newS11List);
@@ -342,7 +342,7 @@ public class TireOverviewController {
 			//	                .message(errorMessage)
 			//	                .showError();
 			errorMessage = errorMessage.substring(0, errorMessage.length() - 1);
-			statusText.setStyle("-fx-text-fill: #C8595C;");
+			statusText.setStyle("-fx-text-fill: #C8595C; -fx-font-size: 12px");
 			statusText.setText(errorMessage);
 			//TODO: Change color
 			return false;
@@ -408,7 +408,7 @@ public class TireOverviewController {
     public void handleBroadcast() {
     		String msg = "Starting BroadCasting ... (Not Really)\n";
     		Text t = new Text();
-        t.setStyle("-fx-fill: #6DCE8B;-fx-font-weight:bold;");
+        t.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
         t.setText(msg);
     		commsFlow.getChildren().add(t);
     		
