@@ -82,7 +82,11 @@ public class MainApp extends Application {
 			// Show the scene containing the root layout.
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
-
+			
+			// Initialize window size
+			primaryStage.setWidth(800);  
+			primaryStage.setHeight(600);
+			
 			//Give the controller access to the main app
 			RootLayoutController controller = loader.getController();
 			controller.setMainApp(this);

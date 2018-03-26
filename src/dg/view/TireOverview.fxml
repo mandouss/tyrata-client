@@ -29,9 +29,9 @@
                               </TableView>
                            </children>
                         </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="ti_bg" stylesheets="@../../../file/stylesheet.css">
                            <children>
-                              <GridPane prefHeight="134.0" prefWidth="280.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0">
+                              <GridPane prefHeight="134.0" prefWidth="280.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -44,68 +44,68 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label text="Tire Sensor ID">
+                                    <Label styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="Tire Sensor ID">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="Tire Location" GridPane.rowIndex="1">
+                                    <Label styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="Tire Location" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="S11_i" GridPane.rowIndex="2">
+                                    <Label styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="S11_i" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="Install Date" GridPane.rowIndex="3">
+                                    <Label styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="Installation Date" GridPane.rowIndex="3">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="Tire Pressure" GridPane.rowIndex="4">
+                                    <Label styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="Tire Pressure" GridPane.rowIndex="4">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label fx:id="tireIDLabel" text="Label" GridPane.columnIndex="1">
+                                    <Label fx:id="tireIDLabel" styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="Label" GridPane.columnIndex="1">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label fx:id="tirePosLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <Label fx:id="tirePosLabel" styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <padding>
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="initS11Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <Label fx:id="initS11Label" styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <padding>
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="startTimeLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <Label fx:id="startTimeLabel" styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <padding>
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="pressureLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                    <Label fx:id="pressureLabel" styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <padding>
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
                                  </children>
                               </GridPane>
-                              <Label layoutX="8.0" layoutY="1.0" prefHeight="17.0" prefWidth="60.0" text="Tire info" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="1.0" />
+                              <Label layoutX="8.0" layoutY="1.0" prefHeight="21.0" prefWidth="144.0" styleClass="header" stylesheets="@../../../file/stylesheet.css" text="Tire Information" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="1.0" />
                               <HBox layoutX="31.0" layoutY="153.0" prefHeight="27.0" prefWidth="167.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="40.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#handleNewTire" text="New" />
-                                    <Button mnemonicParsing="false" onAction="#handleEditTire" text="Edit">
+                                    <Button mnemonicParsing="false" onAction="#handleNewTire" styleClass="green" stylesheets="@../../../file/stylesheet.css" text="New" />
+                                    <Button mnemonicParsing="false" onAction="#handleEditTire" styleClass="yellow" stylesheets="@../../../file/stylesheet.css" text="Edit">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#handleDeleteTire" text="Delete">
+                                    <Button mnemonicParsing="false" onAction="#handleDeleteTire" styleClass="red" stylesheets="@../../../file/stylesheet.css" text="Delete">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
@@ -122,22 +122,22 @@
                <children>
                   <SplitPane dividerPositions="0.5378787878787878" layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="398.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="table_bg" stylesheets="@../../../file/stylesheet.css">
                            <children>
-                              <Label layoutX="7.0" layoutY="6.0" prefHeight="17.0" prefWidth="96.0" text="Data Generator" />
+                              <Label layoutX="7.0" layoutY="6.0" prefHeight="21.0" prefWidth="137.0" styleClass="header" stylesheets="@../../../file/stylesheet.css" text="Data Generator" />
                               <GridPane alignment="TOP_RIGHT" layoutY="23.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
                                  <children>
-                                    <Label text="Start Date">
+                                    <Label styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="Start Date">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="Time Span" GridPane.rowIndex="1">
+                                    <Label styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="Time Span" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="Daily Mileage" GridPane.rowIndex="2">
+                                    <Label styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="Daily Mileage" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
@@ -149,12 +149,12 @@
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin></TextField>
-                                    <CheckBox fx:id="enableOutlierBox" alignment="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleOutlierEnable" text="Enable Outlier" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                    <CheckBox fx:id="enableOutlierBox" alignment="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleOutlierEnable" styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="Enable Outlier" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
                                     </CheckBox>
-                                    <Label text="Outlier Interval" textAlignment="CENTER" GridPane.rowIndex="3">
+                                    <Label styleClass="textstyle" stylesheets="@../../../file/stylesheet.css" text="Outlier Interval" textAlignment="CENTER" GridPane.rowIndex="3">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
@@ -174,13 +174,13 @@
                               </GridPane>
                               <HBox layoutX="95.0" layoutY="181.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#handleDataGenerate" prefHeight="27.0" prefWidth="78.0" text="Generate" />
-                                    <Button mnemonicParsing="false" onAction="#DG_handleSaveAs" text="Save">
+                                    <Button mnemonicParsing="false" onAction="#handleDataGenerate" prefHeight="27.0" prefWidth="78.0" styleClass="blue" stylesheets="@../../../file/stylesheet.css" text="Generate" />
+                                    <Button mnemonicParsing="false" onAction="#DG_handleSaveAs" styleClass="blue" stylesheets="@../../../file/stylesheet.css" text="Save">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#handleDataShow" text="Show">
+                                    <Button mnemonicParsing="false" onAction="#handleDataShow" styleClass="blue" stylesheets="@../../../file/stylesheet.css" text="Show">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
@@ -190,7 +190,7 @@
                               <Text fx:id="statusText" fill="#c8595c" layoutX="245.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="RIGHT" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="20.0" />
                            </children>
                         </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="ti_bg" stylesheets="@../../../file/stylesheet.css">
                            <children>
                               <ImageView fitHeight="34.0" fitWidth="142.0" layoutX="137.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
                                  <image>
@@ -199,8 +199,8 @@
                               </ImageView>
                               <HBox layoutX="14.0" layoutY="10.0" spacing="5.0" AnchorPane.rightAnchor="20.0">
                                  <children>
-                                    <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBroadcast" prefHeight="30.0" prefWidth="96.0" text="Broadcast" />
-                                    <Button layoutX="179.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBroadcastCancel" prefHeight="30.0" prefWidth="72.0" text="Cancel" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
+                                    <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBroadcast" prefHeight="30.0" prefWidth="96.0" styleClass="blue" stylesheets="@../../../file/stylesheet.css" text="Broadcast" />
+                                    <Button layoutX="179.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBroadcastCancel" prefHeight="30.0" prefWidth="72.0" styleClass="blue" stylesheets="@../../../file/stylesheet.css" text="Cancel" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
                                  </children>
                               </HBox>
                               <ScrollPane fx:id="commsPane" layoutY="111.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="50.0">
