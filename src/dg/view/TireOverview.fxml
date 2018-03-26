@@ -197,8 +197,17 @@
                                     <Image url="@../../../file/tyrata%20logo.png" />
                                  </image>
                               </ImageView>
-                              <Button layoutX="179.0" layoutY="14.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" text="Broadcast" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
-                              <TextArea layoutX="14.0" layoutY="54.0" prefHeight="119.0" prefWidth="289.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="50.0" />
+                              <HBox layoutX="14.0" layoutY="10.0" spacing="5.0" AnchorPane.rightAnchor="20.0">
+                                 <children>
+                                    <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBroadcast" prefHeight="30.0" prefWidth="96.0" text="Broadcast" />
+                                    <Button layoutX="179.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBroadcastCancel" prefHeight="30.0" prefWidth="72.0" text="Cancel" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
+                                 </children>
+                              </HBox>
+                              <ScrollPane fx:id="commsPane" layoutY="111.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="50.0">
+                                 <content>
+                                    <TextFlow fx:id="commsFlow" prefHeight="126.0" prefWidth="251.0" />
+                                 </content>
+                              </ScrollPane>
                            </children></AnchorPane>
                     </items>
                   </SplitPane>
