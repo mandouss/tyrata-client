@@ -9,7 +9,7 @@
 <?import javafx.scene.control.SeparatorMenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane minHeight="540.0" minWidth="0.0" prefHeight="550.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.RootLayoutController">
+<BorderPane minHeight="540.0" minWidth="0.0" prefHeight="550.0" prefWidth="720.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.RootLayoutController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>

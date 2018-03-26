@@ -8,15 +8,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="540.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.TireOverviewController">
+<AnchorPane prefHeight="540.0" prefWidth="720.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.TireOverviewController">
    <children>
-      <SplitPane dividerPositions="0.5" layoutX="42.0" layoutY="55.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <SplitPane dividerPositions="0.45" layoutX="42.0" layoutY="55.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="398.0" prefWidth="256.0">
                <children>
                   <SplitPane dividerPositions="0.5378151260504201" layoutX="14.0" layoutY="15.0" orientation="VERTICAL" prefHeight="398.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bg" stylesheets="@stylesheet.css">
                            <children>
                               <TableView fx:id="tireTable" layoutX="41.0" layoutY="49.0" onKeyReleased="#keyReleased" onMouseClicked="#mouseClicked" prefHeight="194.0" prefWidth="293.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
@@ -29,9 +29,9 @@
                               </TableView>
                            </children>
                         </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bg" stylesheets="@stylesheet.css">
                            <children>
-                              <GridPane prefHeight="134.0" prefWidth="280.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="30.0">
+                              <GridPane prefHeight="134.0" prefWidth="280.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="36.0">
                                 <columnConstraints>
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -44,68 +44,68 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Label text="Tire Sensor ID">
+                                    <Label styleClass="textstyle" stylesheets="@stylesheet.css" text="Tire Sensor ID">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="Tire Location" GridPane.rowIndex="1">
+                                    <Label styleClass="textstyle" stylesheets="@stylesheet.css" text="Tire Location" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="S11_i" GridPane.rowIndex="2">
+                                    <Label styleClass="textstyle" stylesheets="@stylesheet.css" text="S11_i" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="Install Date" GridPane.rowIndex="3">
+                                    <Label styleClass="textstyle" stylesheets="@stylesheet.css" text="Installation Date" GridPane.rowIndex="3">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="Tire Pressure" GridPane.rowIndex="4">
+                                    <Label styleClass="textstyle" stylesheets="@stylesheet.css" text="Tire Pressure" GridPane.rowIndex="4">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label fx:id="tireIDLabel" text="Label" GridPane.columnIndex="1">
+                                    <Label fx:id="tireIDLabel" styleClass="textstyle" stylesheets="@stylesheet.css" text="Label" GridPane.columnIndex="1">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label fx:id="tirePosLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <Label fx:id="tirePosLabel" styleClass="textstyle" stylesheets="@stylesheet.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <padding>
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="initS11Label" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <Label fx:id="initS11Label" styleClass="textstyle" stylesheets="@stylesheet.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <padding>
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="startTimeLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <Label fx:id="startTimeLabel" styleClass="textstyle" stylesheets="@stylesheet.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <padding>
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
-                                    <Label fx:id="pressureLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                    <Label fx:id="pressureLabel" styleClass="textstyle" stylesheets="@stylesheet.css" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <padding>
                                           <Insets left="10.0" />
                                        </padding>
                                     </Label>
                                  </children>
                               </GridPane>
-                              <Label layoutX="8.0" layoutY="1.0" prefHeight="17.0" prefWidth="60.0" text="Tire info" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="1.0" />
-                              <HBox layoutX="31.0" layoutY="153.0" prefHeight="27.0" prefWidth="167.0" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="40.0">
+                              <Label layoutX="8.0" layoutY="1.0" prefHeight="21.0" prefWidth="144.0" styleClass="header" stylesheets="@stylesheet.css" text="Tire Information" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                              <HBox layoutX="30.0" layoutY="200.0" spacing="8.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="36.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#handleNewTire" text="New" />
-                                    <Button mnemonicParsing="false" onAction="#handleEditTire" text="Edit">
+                                    <Button layoutX="36.0" layoutY="205.0" mnemonicParsing="false" onAction="#handleNewTire" prefHeight="28.0" styleClass="button-raised" stylesheets="@stylesheet.css" text="New" textFill="WHITE" />
+                                    <Button layoutX="92.0" layoutY="205.0" mnemonicParsing="false" onAction="#handleEditTire" prefHeight="28.0" styleClass="button-raised" stylesheets="@stylesheet.css" text="Edit" textFill="WHITE">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#handleDeleteTire" text="Delete">
+                                    <Button layoutX="144.0" layoutY="205.0" mnemonicParsing="false" onAction="#handleDeleteTire" prefHeight="28.0" styleClass="button-raised" stylesheets="@stylesheet.css" text="Delete" textFill="WHITE">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
@@ -122,22 +122,22 @@
                <children>
                   <SplitPane dividerPositions="0.5378787878787878" layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="398.0" prefWidth="295.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bg" stylesheets="@stylesheet.css">
                            <children>
-                              <Label layoutX="7.0" layoutY="6.0" prefHeight="17.0" prefWidth="96.0" text="Data Generator" />
-                              <GridPane alignment="TOP_RIGHT" layoutY="23.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
+                              <Label layoutX="7.0" layoutY="6.0" prefHeight="21.0" prefWidth="137.0" styleClass="header" stylesheets="@stylesheet.css" text="Data Generator" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
+                              <GridPane alignment="TOP_RIGHT" layoutY="23.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="36.0">
                                  <children>
-                                    <Label text="Start Date">
+                                    <Label styleClass="textstyle" stylesheets="@stylesheet.css" text="Start Date">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="Time Span" GridPane.rowIndex="1">
+                                    <Label styleClass="textstyle" stylesheets="@stylesheet.css" text="Time Span" GridPane.rowIndex="1">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
-                                    <Label text="Daily Mileage" GridPane.rowIndex="2">
+                                    <Label styleClass="textstyle" stylesheets="@stylesheet.css" text="Daily Mileage" GridPane.rowIndex="2">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
@@ -145,24 +145,29 @@
                                     <TextField fx:id="timeSpanField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <TextField fx:id="dailyMileageField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <DatePicker fx:id="startDatePicker" GridPane.columnIndex="1" />
-                                    <TextField fx:id="outlierIntervalField" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                                    <TextField fx:id="outlierIntervalField" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin></TextField>
-                                    <CheckBox fx:id="enableOutlierBox" alignment="CENTER" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" onAction="#handleOutlierEnable" text="Enable Outlier" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
+                                    <CheckBox fx:id="enableOutlierBox" alignment="CENTER" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#handleOutlierEnable" styleClass="textstyle" stylesheets="@stylesheet.css" textAlignment="RIGHT" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.rowIndex="3">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
                                     </CheckBox>
-                                    <Label text="Outlier Interval" textAlignment="CENTER" GridPane.rowIndex="3">
+                                    <Label styleClass="textstyle" stylesheets="@stylesheet.css" text="Outlier Interval" textAlignment="CENTER" GridPane.rowIndex="4">
+                                       <GridPane.margin>
+                                          <Insets left="10.0" />
+                                       </GridPane.margin>
+                                    </Label>
+                                    <Label styleClass="textstyle" stylesheets="@stylesheet.css" text="Outlier Enabled" textAlignment="CENTER" GridPane.rowIndex="3">
                                        <GridPane.margin>
                                           <Insets left="10.0" />
                                        </GridPane.margin>
                                     </Label>
                                  </children>
                                  <columnConstraints>
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="176.0" minWidth="10.0" prefWidth="146.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="216.0" />
                                  </columnConstraints>
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -172,42 +177,43 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                               </GridPane>
-                              <HBox layoutX="95.0" layoutY="181.0" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="20.0">
+                              <HBox layoutX="95.0" layoutY="181.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="16.0">
                                  <children>
-                                    <Button mnemonicParsing="false" onAction="#handleDataGenerate" prefHeight="27.0" prefWidth="78.0" text="Generate" />
-                                    <Button mnemonicParsing="false" onAction="#DG_handleSaveAs" text="Save">
+                                    <Button mnemonicParsing="false" onAction="#handleDataGenerate" prefHeight="26.0" styleClass="button-raised" stylesheets="@stylesheet.css" text="Generate" textFill="WHITE" />
+                                    <Button mnemonicParsing="false" onAction="#DG_handleSaveAs" prefHeight="26.0" styleClass="button-raised" stylesheets="@stylesheet.css" text="Save" textFill="WHITE">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button mnemonicParsing="false" onAction="#handleDataShow" text="Show">
+                                    <Button mnemonicParsing="false" onAction="#handleDataShow" prefHeight="26.0" styleClass="button-raised" stylesheets="@stylesheet.css" text="Show" textFill="WHITE">
                                        <HBox.margin>
                                           <Insets left="10.0" />
                                        </HBox.margin>
                                     </Button>
                                  </children>
                               </HBox>
-                              <Text fx:id="statusText" fill="#c8595c" layoutX="245.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="RIGHT" AnchorPane.bottomAnchor="40.0" AnchorPane.rightAnchor="20.0" />
+                              <Text fx:id="statusText" fill="#c8595c" layoutX="245.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="18.0" />
                            </children>
                         </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bg" stylesheets="@stylesheet.css">
                            <children>
                               <ImageView fitHeight="34.0" fitWidth="142.0" layoutX="137.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
                                  <image>
                                     <Image url="@../../../file/tyrata%20logo.png" />
                                  </image>
                               </ImageView>
-                              <HBox layoutX="14.0" layoutY="10.0" spacing="5.0" AnchorPane.rightAnchor="20.0">
+                              <HBox layoutX="14.0" layoutY="10.0" spacing="8.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="16.0">
                                  <children>
-                                    <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBroadcast" prefHeight="30.0" prefWidth="96.0" text="Broadcast" />
-                                    <Button layoutX="179.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBroadcastCancel" prefHeight="30.0" prefWidth="72.0" text="Cancel" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
+                                    <Button layoutX="14.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleBroadcast" prefHeight="26.0" styleClass="button-raised" stylesheets="@stylesheet.css" text="Broadcast" textFill="WHITE" />
+                                    <Button layoutX="179.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleBroadcastCancel" prefHeight="26.0" styleClass="button-raised" stylesheets="@stylesheet.css" text="Cancel" textFill="WHITE" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="10.0" />
                                  </children>
                               </HBox>
-                              <ScrollPane fx:id="commsPane" layoutY="111.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="50.0">
+                              <ScrollPane fx:id="commsPane" layoutY="111.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="48.0" AnchorPane.leftAnchor="16.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="42.0">
                                  <content>
                                     <TextFlow fx:id="commsFlow" prefHeight="126.0" prefWidth="251.0" />
                                  </content>
                               </ScrollPane>
+                              <Label layoutX="45.0" layoutY="14.0" styleClass="header" stylesheets="@stylesheet.css" text="Bluetooth Comms" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="10.0" />
                            </children></AnchorPane>
                     </items>
                   </SplitPane>

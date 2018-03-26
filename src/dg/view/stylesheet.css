@@ -1,0 +1,340 @@
+/*******************************************************************************
+ *                                                                             *
+ * Root					 				                       				   *
+ *                                                                             *
+ ******************************************************************************/
+.root > * {
+	/* Swatch Colors - http://colorhunt.co/c/108676/ */
+	-swatch-100: #ECECEB;
+	-swatch-200: #F9A828;
+	-swatch-300: #07617D;
+	-swatch-400: #2E383F;
+	/*default text */
+	-fx-text-base-color: rgb(100.0, 100.0, 100.0);
+	-fx-text-button-normal: -swatch-400;
+	-fx-text-button-colored: #FFFFFF;
+	-fx-text-button-text: rgb(100.0, 100.0, 100.0);
+	-fx-text-title-color: rgb(45.0, 45.0, 45.0);
+	-fx-text-subtitle-color: rgb(65.0, 65.0, 65.0);
+	-fx-text-control-title-color: rgb(130.0, 130.0, 130.0);
+	-fx-text-fill: -fx-text-base-color;
+	/*default font */
+	-fx-font-family: 'Roboto Medium';
+	-fx-font-size: 14.0px;
+	-fx-disabled-opacity: 0.6;
+	/*default colors */
+	-swatch-grey: rgb(180.0, 180.0, 180.0);
+	-swatch-dark-grey: rgb(65.0, 65.0, 65.0);
+	-swatch-light-grey: rgb(230.0, 230.0, 230.0);
+	-swatch-toolbar: rgb(245.0, 245.0, 245.0);
+	-swatch-toolbar-selected: rgb(215.0, 215.0, 215.0);
+	/* 
+     Modena colors
+     */
+	-fx-dark-text-color: white; /* Text color when selected*/
+	-fx-mid-text-color: -fx-text-base-color;
+	-fx-light-text-color: -swatch-light-grey;
+	-fx-body-color: white;
+	/* A bright blue for the focus indicator of objects. Typically used as the
+     * first color in -fx-background-color for the "focused" pseudo-class. Also
+     * typically used with insets of -1.4 to provide a glowing effect.
+     */
+	-fx-focus-color: derive(-swatch-300, 80%);
+	-fx-faint-focus-color: derive(-swatch-200, 70%);
+	/* A bright blue for highlighting/accenting objects.  For example: selected
+     * text; selected items in menus, lists, trees, and tables; progress bars */
+	-fx-accent: derive(-swatch-200, 50%);
+	-fx-dark-text-color: white;
+}
+
+
+.header {
+	-fx-text-fill: -swatch-400;
+	-fx-font-family: "Helvetica";
+	-fx-font-size: 18;
+	-fx-font-weight: bold;
+}
+
+
+.textstyle {
+	-fx-font-family: "Helvetica";
+	-fx-font-size: 14;
+	/*-fx-font-weight: 600;*/
+}
+
+.bg {
+	-fx-background-color: 
+        #FFFFFF;
+}
+
+.scroll-pane {
+   -fx-box-border: transparent;
+}
+/*
+ * 
+   -fx-background-color: -swatch-toolbar;
+   -fx-box-border: -fx-faint-focus-color;
+   -fx-border-width: 1;
+   -fx-padding: 0;   
+   -fx-background-insets: 0, 0 0 0 0;
+   -fx-shape: " ";
+    */
+
+.split-pane {
+	-fx-padding: 0;  
+    -fx-box-border: white;
+    -fx-border-width: 4 4 4 4;
+}
+ 
+/*******************************************************************************
+ *                                                                             *
+ * Button & ToggleButton                                                       *
+ *                                                                             *
+ ******************************************************************************/
+.button-raised {
+	-fx-text-fill: -fx-text-button-colored;
+	-fx-background-color: -swatch-300;
+	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.30), 6.0, 0.3, 0,
+		1);
+}
+
+.button-raised:hover {
+	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.30), 12.0, 0.45, 0,
+		1);
+}
+
+.button-raised:pressed {
+	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.30), 3.0, 0.3, 0,
+		1);
+}
+
+.button-raised .button .text {
+	-fx-font-weight: Bold;
+}
+
+.button:default {
+	-fx-text-fill: -fx-text-button-colored;
+	-fx-background-color: -fx-focus-color;
+}
+
+
+/*******************************************************************************
+ *                                                                             *
+ *        		Menu bar		                       			  				   *
+ *                                                                             *
+ ******************************************************************************/
+
+
+.menu-bar { /* top */
+	-fx-background-color: -swatch-toolbar;
+	-fx-border-width: 0 0 2 0;
+	-fx-border-color: -swatch-grey;
+	-fx-min-height: 30;
+}
+
+.menu-button:hover {
+	-fx-background-color: -fx-accent;
+}
+
+.menu-item:show-mnemonics > .mnemonic-underline {
+    -fx-stroke: -fx-text-fill;
+}
+
+.menu-bar .label {
+	-fx-text-fill: -fx-text-base-color;
+}
+
+
+/*******************************************************************************
+ *                                                                             *
+ * Text, Text field & Text area                                                *
+ *                                                                             *
+ ******************************************************************************/
+
+.text-area, .text-field {
+	-fx-background-color: transparent;
+	-fx-background-radius: 2.0;
+	-fx-border-color: -swatch-grey;
+	-fx-border-width: 0 0 2 0;
+	-fx-prompt-text-fill: -swatch-grey;
+	-fx-text-fill: -swatch-dark-grey;
+	-fx-highlight-fill: -fx-focus-color; 
+	
+	-fx-padding: 0 1em 0 0;
+}
+
+.text-area:focused, .text-field:focused {
+	-fx-border-color: derive(-swatch-200, 20%);
+}
+
+.text-area:disabled, .text-area:disabled {
+	-fx-text-fill: rgb(245.0, 245.0, 245.0);
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * CheckBox                                                                    *
+ *                                                                             *
+ ******************************************************************************/
+.check-box {
+}
+
+.check-box .text {
+	-fx-fill: -fx-text-base-color;
+}
+
+
+
+.check-box:selected>.box>.mark {
+	-fx-background-color: -swatch-200;
+}
+
+.check-box:indeterminate>.box>.mark {
+	-fx-background-color: -swatch-200;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Date picker						                                           *
+ *                                                                             *
+ ******************************************************************************/
+.date-picker .arrow-button {
+	-fx-background-color: transparent;
+}
+
+.date-picker {
+  	-fx-background-color: transparent;
+	-fx-border-color: -swatch-grey;
+	-fx-border-width: 0 0 2 0;
+	-fx-padding: 0 1em 0 0;
+}
+
+
+.date-picker:focused {
+	-fx-border-color: derive(-swatch-200, 20%);
+}
+
+.date-picker .arrow-button .arrow {
+	-fx-background-insets: -4;
+	-fx-background-color: derive(-swatch-200, 20%);
+}
+
+
+.date-picker .date-picker-display-node {
+	-fx-border-width: 0;
+}
+
+
+
+/*******************************************************************************
+ *                                                                             *
+ * Date Picker			                                                       *
+ *                                                                             *
+ ******************************************************************************/
+.date-picker-popup .button {
+	-fx-background-color: -swatch-light-grey;
+}
+
+.date-picker-popup>.month-year-pane {
+	-fx-background-color: -swatch-300;
+}
+
+.date-picker-popup>*>.spinner>.button>.left-arrow, .date-picker-popup>*>.spinner>.button>.right-arrow
+	{
+	-fx-background-color: white;
+}
+
+.date-picker-popup>*>.spinner {
+	-fx-border-width: 0;
+	-fx-fill: -swatch-200;
+}
+
+.date-picker-popup>*>.spinner>.label {
+	-fx-text-fill: white;
+	-fx-font-weight: bold;
+}
+
+.date-picker-popup>*>.day-name-cell, .date-picker-popup>*>.week-number-cell
+	{
+	-fx-font-weight: normal;
+	-fx-text-fill: -swatch-dark-grey;
+	-fx-font-size: 1em;
+}
+
+
+/*******************************************************************************
+ *                                                                             *
+ * Scroll Bar			                                                       *
+ *                                                                             *
+ ******************************************************************************/
+.scroll-bar:vertical>.track-background, .scroll-bar:horizontal>.track-background
+	{
+	-fx-background-color: rgb(240.0, 240.0, 240.0);
+	-fx-background-insets: 0.0;
+}
+
+.scroll-bar:vertical>.thumb, .scroll-bar:horizontal>.thumb {
+	-fx-background-color: rgb(200.0, 200.0, 200.0);
+	-fx-background-insets: 0.0;
+	-fx-background-radius: 4.0;
+}
+
+.scroll-bar>.increment-button, .scroll-bar>.decrement-button,
+	.scroll-bar:hover>.increment-button, .scroll-bar:hover>.decrement-button
+	{
+	-fx-background-color: transparent;
+}
+
+.scroll-bar>.increment-button>.increment-arrow, .scroll-bar>.decrement-button>.decrement-arrow
+	{
+	-fx-background-color: -swatch-grey;
+}
+
+.scroll-bar>.track-background {
+	-fx-background-color: transparent;
+}
+
+/*******************************************************************************
+ *                                                                             *
+ * Tables								                       				   *
+ *                                                                             *
+ ******************************************************************************/
+.table-view{
+	/* Constants used throughout the tableview. */
+	-fx-background-color: transparent;
+	-fx-padding: 5;
+}
+
+/* The column header row is made up of a number of column-header, one for each
+   TableColumn, and a 'filler' area that extends from the right-most column
+   to the edge of the tableview, or up to the 'column control' button. */
+.table-view .filler, .table-view .column-header {
+	-fx-size: 40;
+	-fx-border-style: null;
+	-fx-border-color: -swatch-light-grey;
+	-fx-border-width: 0 0 2 0;
+	-fx-background-color: -fx-accent;
+}
+
+.table-view .column-header .label, .table-view .filler .label,
+	.table-view .column-drag-header .label	{
+	-fx-alignment: CENTER_LEFT;
+}
+
+.table-view .column-header-background  {
+	-fx-background-color: transparent;
+}
+
+.table-row-cell {
+	-fx-cell-size: 35px;
+}
+.table-row-cell:selected{
+	-fx-background-color: -fx-focus-color;
+}
+
+.table-cell {
+	-fx-border-color: transparent; /* Vertical Lines*/
+	-fx-border-width: 1;
+	-fx-alignment: CENTER_LEFT;
+}
+
