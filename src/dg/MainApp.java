@@ -259,7 +259,7 @@ public class MainApp extends Application {
 			alert.setTitle("Error");
 			alert.setHeaderText("Could not load data");
 			alert.setContentText("Could not load data from file:\n" + file.getPath());
-
+			alert.showAndWait();
 		}
 	}
 
@@ -281,7 +281,6 @@ public class MainApp extends Application {
 			alert.setTitle("Error");
 			alert.setHeaderText("Could not save data");
 			alert.setContentText("Could not save data to file:\n" + file.getPath());
-
 			alert.showAndWait();
 		}
 	}
@@ -346,10 +345,8 @@ public class MainApp extends Application {
 
 		        // Read XML from the file and unmarshal.
 		        DGListWrapper wrapper = (DGListWrapper) um.unmarshal(file);
-
 		        s11List.clear();
 		        s11List.addAll(wrapper.getDailyS11List());
-
 		        // Save the file path to the registry.
 		        setDGFilePath(file);
 
@@ -358,7 +355,6 @@ public class MainApp extends Application {
 		        alert.setTitle("Error");
 		        alert.setHeaderText("Could not load data");
 		        alert.setContentText("Could not load data from file:\n" + file.getPath());
-
 		        alert.showAndWait();
 		    }
 		}

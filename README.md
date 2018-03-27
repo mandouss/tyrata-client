@@ -11,6 +11,11 @@ TyrataSimulator is a pc program that generates simulated Tyrata sensors output a
 2. Build the project and Run 
 
 
+**Environment Requirement**
+
+- Java SE 8 [1.8.0_162]
+- Windows 10 (for Bluetooth to run)
+
 ## Tire Configuration
 
 Upon launching, the program gives 4 default tires listed in a table. 
@@ -70,6 +75,7 @@ Integration into the main app will be completed in sprint 3.
 
 - [JavaFX 8](http://www.oracle.com/technetwork/java/javase/overview/javafx-overview-2158620.html) - GUI library for JAVA
 - [Scene Builder 2.0](http://www.oracle.com/technetwork/java/javase/downloads/javafxscenebuilder-1x-archive-2199384.html) A Visual Layout Tool for JavaFX Applications
+
 
 ## Authors
 
