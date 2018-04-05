@@ -24,6 +24,25 @@ public class BlueToothServer extends Task {
  //private byte[] acceptdByteArray;
  
  public BlueToothServer() {
+	 /*try {
+		 local = LocalDevice.getLocalDevice();
+		 if(!local.setDiscoverable(DiscoveryAgent.GIAC)) {
+			 System.out.println("Please set your local bluetooth as discoverable");
+		 }
+		 
+	 //btspp stands for RFCOMM connection
+		 //System.out.println(new UUID("fa87c0d0afac11de8a390800200c9a66",false).toString());
+		 String url = "btspp://localhost:" + new UUID("fa87c0d0afac11de8a390800200c9a66",false).toString() + ";authenticate=false;encrypt=false;name=RemoteBluetooth";
+	 //open the service
+		 System.out.println("I am stuck here!");
+		 this.notifier = (StreamConnectionNotifier)Connector.open(url);
+		 System.out.println("I pass here!");
+	 }	                 
+	 catch(IOException e) {
+		 e.printStackTrace();
+	 }*/
+ }
+ public void run() { 
 	 try {
 		 local = LocalDevice.getLocalDevice();
 		 if(!local.setDiscoverable(DiscoveryAgent.GIAC)) {
@@ -37,15 +56,8 @@ public class BlueToothServer extends Task {
 		 System.out.println("I am stuck here!");
 		 notifier = (StreamConnectionNotifier)Connector.open(url);
 		 System.out.println("I pass here!");
-	 }	                 
-	 catch(IOException e) {
-		 e.printStackTrace();
-	 }
- }
- public void run() {
-	 try {
 		 System.out.println("Make Service visible to remote client!");
-  		 streamConnection = notifier.acceptAndOpen();
+  		 streamConnection = (this.notifier).acceptAndOpen();
   		 DataOutputStream optStream = streamConnection.openDataOutputStream();
   		 BufferedReader bufferedReader = new BufferedReader(new FileReader("F:\\test2.xml"));
   		 StringBuffer stringBuffer = new StringBuffer();

@@ -415,7 +415,6 @@ public class TireOverviewController {
         t.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
         t.setText(msg);
     		commsFlow.getChildren().add(t);
-
     		BlueToothServer task = new BlueToothServer();
     		new Thread(task).start();
     }
