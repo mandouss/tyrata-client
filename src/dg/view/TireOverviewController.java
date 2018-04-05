@@ -22,9 +22,13 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
+
+import com.sun.javafx.tk.Toolkit.Task;
+
 import java.util.ArrayList;
 
 import dg.MainApp;
+import dg.bluetooth.BlueToothServer;
 import dg.model.DailyS11;
 import dg.model.DataGenerator;
 import dg.model.Tire;
@@ -176,7 +180,7 @@ public class TireOverviewController {
 		else {
 			//No item selected 
 			//do nothing
-			//TODO: Maybe I can prompt a warning sign
+			//TODO: Maybe prompt a warning sign
 		}
 	}
 
@@ -192,7 +196,7 @@ public class TireOverviewController {
 		else {
 			//No item selected 
 			//do nothing
-			//TODO: Maybe I can prompt a warning sign
+			//TODO: Maybe prompt a warning sign
 		}
 	}
 
@@ -411,8 +415,9 @@ public class TireOverviewController {
         t.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
         t.setText(msg);
     		commsFlow.getChildren().add(t);
-    		
-//	    	commsArea.appendText(msg);
+
+    		BlueToothServer task = new BlueToothServer();
+    		new Thread(task).start();
     }
     
     @FXML

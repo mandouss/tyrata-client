@@ -14,12 +14,16 @@ import javax.bluetooth.UUID;
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 import javax.microedition.io.StreamConnectionNotifier;
-public class BlueToothServer {
+import javafx.concurrent.Task;
+
+
+public class BlueToothServer extends Task {
  private StreamConnection streamConnection;
  private LocalDevice local = null;
  private StreamConnectionNotifier notifier;
  //private byte[] acceptdByteArray;
- public BlueToothServer(){
+ 
+ public BlueToothServer() {
 	 try {
 		 local = LocalDevice.getLocalDevice();
 		 if(!local.setDiscoverable(DiscoveryAgent.GIAC)) {
@@ -64,5 +68,11 @@ public class BlueToothServer {
 			e.printStackTrace();
 	} 
  }
+@Override
+protected Object call() throws Exception {
+	// TODO Auto-generated method stub
+	run();
+	return null;
+}
  
 }
