@@ -9,7 +9,7 @@ TyrataSimulator is a pc program that generates simulated Tyrata sensors output a
 1. Clone the project to Eclipse 
     `File` => `Import`, select `Git` => `Projects from Git`
 2. Build the project and Run 
-
+ 
 
 **Environment Requirement**
 
