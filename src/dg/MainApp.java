@@ -97,10 +97,10 @@ public class MainApp extends Application {
 
 		//Try to load last opened person file
 
-		File file = getTireFilePath();
+		/*File file = getTireFilePath();
 		if(file != null) {
 			loadTireDataFromFile(file);
-		}
+		}*/
 	}
 
 	/**
@@ -290,22 +290,7 @@ public class MainApp extends Application {
 	/****************************************************    
 	******************* Save Data Branch ****************
 	*****************************************************/
-	    /**
-	     * Returns the person file preference, i.e. the file that was last opened.
-	     * The preference is read from the OS specific registry. If no such
-	     * preference can be found, null is returned.
-	     * 
-	     * @return
-	     */
-	    public File getDGFilePath() {
-	        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-	        String filePath = prefs.get("filePath", null);
-	        if (filePath != null) {
-	            return new File(filePath);
-	        } else {
-	            return null;
-	        }
-	    }
+	    
 
 	    /**
 	     * Sets the file path of the currently loaded file. The path is persisted in
@@ -313,7 +298,7 @@ public class MainApp extends Application {
 	     * 
 	     * @param file the file or null to remove the path
 	     */
-	    public void setDGFilePath(File file) {
+	   /* public void setDGFilePath(File file) {
 	        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
 	        if (file != null) {
 	            prefs.put("filePath", file.getPath());
@@ -326,7 +311,7 @@ public class MainApp extends Application {
 	            // Update the stage title.
 	            primaryStage.setTitle("TyrataSimulator");
 	        }
-	    }
+	    }*/
 	    
 	    
 	    
@@ -337,7 +322,7 @@ public class MainApp extends Application {
 		 * 
 		 * @param file
 		 */
-		public void loadDGDataFromFile(File file) {
+		/*public void loadDGDataFromFile(File file) {
 		    try {
 		        JAXBContext context = JAXBContext
 		                .newInstance(DGListWrapper.class);
@@ -348,7 +333,7 @@ public class MainApp extends Application {
 		        s11List.clear();
 		        s11List.addAll(wrapper.getDailyS11List());
 		        // Save the file path to the registry.
-		        setDGFilePath(file);
+		        //setDGFilePath(file);
 
 		    } catch (Exception e) { // catches ANY exception
 		        Alert alert = new Alert(AlertType.ERROR);
@@ -358,7 +343,7 @@ public class MainApp extends Application {
 		        alert.showAndWait();
 		    }
 		}
-		
+		*/
 	    
 	    
 	    /**
@@ -381,7 +366,7 @@ public class MainApp extends Application {
 		        m.marshal(wrapper, file);
 
 		        // Save the file path to the registry.
-		        setDGFilePath(file);
+		        //ƒsetDGFilePath(file);
 		    } catch (Exception e) { // catches ANY exception
 		        Alert alert = new Alert(AlertType.ERROR);
 		        alert.setTitle("Error");

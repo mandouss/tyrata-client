@@ -8,10 +8,12 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import dg.util.LocalDateAdapter;
+
 @XmlRootElement(name = "dailyS11")
 
 public class DailyS11 {
-	@XmlJavaTypeAdapter(value = LocalDateAdapter.class)
+	
 	private LocalDate timestamp;
 	private int mileage;
 	private ArrayList<sensorIdAndS11> sensorIdAndS11_list;
@@ -28,7 +30,7 @@ public class DailyS11 {
 	public void setTimeStamp(LocalDate timestamp) {
 		this.timestamp = timestamp;
 	}
-	
+	@XmlJavaTypeAdapter(LocalDateAdapter.class)
 	public LocalDate getTimeStamp() {
 		return timestamp;
 	}
