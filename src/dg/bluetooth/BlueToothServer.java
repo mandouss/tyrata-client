@@ -16,16 +16,32 @@ import javax.bluetooth.UUID;
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 import javax.microedition.io.StreamConnectionNotifier;
+
+import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.fxml.FXML;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
-
-public class BlueToothServer extends Task {
+public class BlueToothServer extends Task<Void> {
  private StreamConnection streamConnection;
  private LocalDevice local = null;
  private StreamConnectionNotifier notifier;
+ private String FilePath;
+ @FXML private TextFlow commsFlow; 
  //private byte[] acceptdByteArray;
  
- public BlueToothServer() {}
+ public BlueToothServer(String path, TextFlow comms) {
+	 FilePath = path;
+	 commsFlow = comms;
+ }
+ 
+ @Override 
+ protected void failed() {
+	super.failed();
+	//updateMessage("Failed!");
+ }
+ 
  public void run() { 
 	 try {
 		 local = LocalDevice.getLocalDevice();
@@ -41,11 +57,20 @@ public class BlueToothServer extends Task {
 		 notifier = (StreamConnectionNotifier)Connector.open(url);
 		 System.out.println("I pass here!");
 		 System.out.println("Make Service visible to remote client!");
-  		 streamConnection = (this.notifier).acceptAndOpen();
-  		 
+		 Platform.runLater(new Runnable() {
+             @Override public void run() {
+            	 String msg = "Waiting for Android Mobile to connect...\n";
+         		Text t = new Text();
+                t.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
+                t.setText(msg);
+                 commsFlow.getChildren().add(t);
+             }
+		 });
+		 
+  		 streamConnection = (this.notifier).acceptAndOpen(); 
   		 DataOutputStream optStream = streamConnection.openDataOutputStream();
   		 DataInputStream inStream = streamConnection.openDataInputStream();
-  		 BufferedReader bufferedReader = new BufferedReader(new FileReader("F:\\test2.xml"));
+  		 BufferedReader bufferedReader = new BufferedReader(new FileReader(FilePath));
   		 StringBuffer stringBuffer = new StringBuffer();
   		 String line = null;
   		 while(((line = bufferedReader.readLine())!=null)) {
@@ -63,6 +88,9 @@ public class BlueToothServer extends Task {
   			 byte[] send_byte_array = stringBuffer.toString().getBytes();
   			 int off = 0;
   			 while(off < send_byte_array.length) {
+  				 if(isCancelled()) {
+  					 return;
+  				 }
   				 int len = 512;
   				 if (off+len > send_byte_array.length) len = send_byte_array.length - off;
   				 optStream.write(send_byte_array, off, len);
@@ -75,6 +103,9 @@ public class BlueToothServer extends Task {
   			 int timer = 0;
   			 while(timer < 10000) { //polling will end if the time elapses 10000 miliseconds
   				 byte [] read_byte_array = new byte [1];
+  				 if(isCancelled()) {
+  					 return;
+  				 }
   				 if(inStream.available() > 0) {
   					 inStream.read(read_byte_array, 0, 1);
   					 String check = new String(read_byte_array);
@@ -89,16 +120,28 @@ public class BlueToothServer extends Task {
   			 }
   		 }	
 	 }
-	 catch (IOException  e) {
-		 e.printStackTrace();
-	 } 
+	 catch (IOException e ) {
+		 //e.printStackTrace();
+		  Platform.runLater(new Runnable(){
+            @Override public void run() {
+            	String msg = "Please set your local bluetooth as discoverable\n";
+            	Text txt = new Text();
+            	txt.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
+            	txt.setText(msg);
+            	commsFlow.getChildren().add(txt);
+            }
+		  });
+	 }
 	 catch (InterruptedException e) {
 		// TODO Auto-generated catch block
+		 if(isCancelled()) {
+			 return;
+		 }
 			e.printStackTrace();
 	 } 
  }
  @Override
-	protected Object call() throws Exception {
+	protected Void call() throws Exception {
 	// TODO Auto-generated method stub
 		run();
 		return null;
