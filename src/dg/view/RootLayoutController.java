@@ -1,20 +1,18 @@
 package dg.view;
 
-import javafx.collections.ObservableList;
-import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Priority;
-import javafx.stage.FileChooser;
-
 import java.io.File;
-import java.util.List;
+import java.util.Random;
 
 import dg.MainApp;
 import dg.model.Tire;
+import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.stage.FileChooser;
 
 /**
  * The controller for the root layout. The root layout provides the 
@@ -41,15 +39,21 @@ public class RootLayoutController {
 	 */
 	@FXML
 	private void handleGenerateTires() {
-		if(mainApp.getTireData().isEmpty()) {
-			mainApp.getTireData().add(new Tire("C-1234","LF",-1,3.5));
-			mainApp.getTireData().add(new Tire("C-1302","RF",-2,3.5));
-			mainApp.getTireData().add(new Tire("C-4124","LR",-1.2,3.5));
-			mainApp.getTireData().add(new Tire("C-9175","RR",-2.14,3.5));
+		int numOfTires = mainApp.showTireAmountDialog();
+		if (numOfTires != 0) {
+			if(!mainApp.getTireData().isEmpty()) {
+				mainApp.getTireData().clear();
+				for(int i=0; i<numOfTires; i++) {
+					Random rand = new Random();
+					double newTireS11 = rand.nextDouble()*1.5 - 2.5;
+					String newTireID = "C-" + Integer.toString(rand.nextInt(9999)+1000);
+					mainApp.getTireData().add(new Tire(newTireID,"LF",newTireS11,3.5));
+				}
+			}
 		}
 	}
-	
-	
+
+
 	/*@FXML
 	private void handleNew() {
 		mainApp.getTireData().clear();
@@ -124,7 +128,7 @@ public class RootLayoutController {
 
 		String copyrightInfo = versionInfo + "(c) Copyright TyrataSimulator contributors and others 2018.  All rights reserved. Tyrata logo is trademark of the Tyrata Inc., https://www.tyrata.com/.";
 		Label label = new Label("Copyright Info");
-		
+
 		TextArea textArea = new TextArea(copyrightInfo);
 		textArea.setEditable(false);
 		textArea.setWrapText(true);
@@ -138,10 +142,10 @@ public class RootLayoutController {
 		verContent.setMaxWidth(Double.MAX_VALUE);
 		verContent.add(label, 0, 0);
 		verContent.add(textArea, 0, 1);
-		
+
 		alert.getDialogPane().setExpandableContent(verContent);
 		//alert.getDialogPane().setContent(verContent);
-		
+
 		alert.showAndWait();
 	}
 

@@ -1,13 +1,4 @@
 package dg;
-import dg.model.DGListWrapper;
-import dg.model.DailyS11;
-import dg.model.Tire;
-import dg.model.TireListWrapper;
-import dg.view.GeneratedDataViewController;
-import dg.view.RootLayoutController;
-import dg.view.TireEditDialogController;
-import dg.view.TireOverviewController;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,10 +8,18 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
+import dg.model.DGListWrapper;
+import dg.model.DailyS11;
+import dg.model.Tire;
+import dg.model.TireListWrapper;
+import dg.view.GeneratedDataViewController;
+import dg.view.RootLayoutController;
+import dg.view.TireAmountDialogController;
+import dg.view.TireEditDialogController;
+import dg.view.TireOverviewController;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -124,6 +123,36 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
+	
+	public int showTireAmountDialog() {
+		try {
+			// Load the fxml file and create a new stage for the popup dialog.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource("view/TireAmountDialog.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
+
+			// Create the dialog Stage.
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Select Number of Tires");
+//			dialogStage.initModality(Modality.WINDOW_MODAL);
+//			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+
+			// Set the tire into the controller.
+			TireAmountDialogController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
+
+
+			// Show the dialog and wait until the user closes it
+			dialogStage.showAndWait();
+
+			return controller.numoftires();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
 
 	/**
 	 * Opens a dialog to edit details for the specified tire. If the user clicks OK,
@@ -141,7 +170,7 @@ public class MainApp extends Application {
 
 			// Create the dialog Stage.
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Edit Person");
+			dialogStage.setTitle("Edit Tire");
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(primaryStage);
 			Scene scene = new Scene(page);
