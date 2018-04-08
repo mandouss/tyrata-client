@@ -1,3 +1,5 @@
+#### Track our progress on Trello: https://trello.com/tyrataclient
+
 # Sprint 2 TyrataSimulator 1.1.0
 
 TyrataSimulator is a pc program that generates simulated Tyrata sensors output and transmits the data through Bluetooth.
