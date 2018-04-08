@@ -356,7 +356,7 @@ public class TireOverviewController {
 	 * Opens a FileChooser to let the user select a file to save to.
 	 */
 
-	@FXML
+/*	@FXML
 	private void DG_handleOpen() {
 		// getS11list clear
 		mainApp.getS11List().clear();
@@ -373,7 +373,7 @@ public class TireOverviewController {
 		if (file != null) {
 			mainApp.loadDGDataFromFile(file);
 		}
-	}
+	}*/
 
 	@FXML
 	private void DG_handleSaveAs() {
