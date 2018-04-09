@@ -426,64 +426,77 @@ public class TireOverviewController {
     				"XML files (*.xml)", "*.xml");
     		fileChooser.getExtensionFilters().add(extFilter);
     		// Show open file dialog
-    		File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
-    		if (file != null) {
-    			String path = file.getAbsolutePath();
-    			service = new BlueToothService();
-    			service.set_file_path(path);
-    			service.set_comms_Flow(commsFlow);
-    			String msg = "Creating Bluetooth Connection to Android Mobile!\n";
-		    	Text txt = new Text();
-		        txt.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
-		        txt.setText(msg);
-		        commsFlow.getChildren().add(txt);
-    			service.setOnSucceeded(new EventHandler<WorkerStateEvent>(){    				  
-    				@Override
-    		        public void handle(WorkerStateEvent t) {
-    					String msg = "Bluetooth Transmition succeeded!\n";
-    			    	Text txt = new Text();
-    			        txt.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
-    			        txt.setText(msg);
-    			    		commsFlow.getChildren().add(txt);
+    		if(service == null || (!service.isRunning())) {
+    			service = null;
+    			File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
+    			if (file != null) {
+    				String path = file.getAbsolutePath();
+    				service = new BlueToothService();
+    				service.set_file_path(path);
+    				service.set_comms_Flow(commsFlow);
+    				service.set_notifier();
+    				String msg = "Creating Bluetooth Connection to Android Mobile!\n";
+    				Text txt = new Text();
+    				txt.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
+    				txt.setText(msg);
+    				commsFlow.getChildren().add(txt);
+    				service.setOnSucceeded(new EventHandler<WorkerStateEvent>(){    				  
+    					@Override
+    					public void handle(WorkerStateEvent t) {
+    						String msg = "Bluetooth Transmition succeeded!\n";
+    						Text txt = new Text();
+    						txt.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
+    						txt.setText(msg);
+    						commsFlow.getChildren().add(txt);
     		            }
-    			});
-    			/*
-    			service.setOnFailed(new EventHandler<WorkerStateEvent>(){
-    				@Override
-    				public void handle(WorkerStateEvent t) {
-    					String msg = "Bluetooth Connection Failed!\n";
-    					Text txt = new Text();
-    					txt.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
-     			        txt.setText(msg);
-     			    	commsFlow.getChildren().add(txt);
-    				}
-    			});
-    			*/
-    			service.setOnCancelled(new EventHandler<WorkerStateEvent>(){
-    				@Override
-    				public void handle(WorkerStateEvent t) {
-    					String msg = "Bluetooth Connection has been cancelled!\n";
-    					Text txt = new Text();
-    					txt.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
-     			        txt.setText(msg);
-     			    	commsFlow.getChildren().add(txt);
-    				}
-    			});
-    			service.start();
+    				});
+    				service.setOnFailed(new EventHandler<WorkerStateEvent>(){
+    					@Override
+    					public void handle(WorkerStateEvent t) {
+    						String msg = "Bluetooth Connection Failed!\n";
+    						Text txt = new Text();
+    						txt.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
+    						txt.setText(msg);
+    						commsFlow.getChildren().add(txt);
+    					}
+    				});
+    				
+    				service.setOnCancelled(new EventHandler<WorkerStateEvent>(){
+    					@Override
+    					public void handle(WorkerStateEvent t) {
+    						String msg = "Bluetooth Connection has been cancelled!\n";
+    						Text txt = new Text();
+    						txt.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
+    						txt.setText(msg);
+    						commsFlow.getChildren().add(txt);
+    					}
+    				});
+    				service.start();
+    			}
+    			else {
+    				String msg = "File doesn't exist!\n";
+    		    	Text t = new Text();
+    		    	t.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
+    		    	t.setText(msg);
+    		    	commsFlow.getChildren().add(t);
+    			}
     		}
     }
     @FXML
     public void handleBroadcastCancel() {
-    		if(service != null){
-    		String msg = "Shutting down BroadCasting ...\n";
-	    	Text t = new Text();
-	    	t.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
-	    	t.setText(msg);
-	    	commsFlow.getChildren().add(t);
-    		service.cancel();
-    		service = null;
-//	    	commsArea.appendText(msg);
-    		}
+    	    if(service != null && service.isRunning()) {
+    	    	String msg = "Shutting down BroadCasting ...\n";
+    	    	Text t = new Text();
+    	    	t.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
+    	    	t.setText(msg);
+    	    	commsFlow.getChildren().add(t);
+    	    	service.stop();
+    	    	service.cancel();
+    	    	System.out.println(service.getState().toString());
+    	    	service = null;
+//	    		commsArea.appendText(msg);
+    	  }
+    		
     }
 
 

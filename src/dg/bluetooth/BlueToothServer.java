@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import javax.bluetooth.BluetoothStateException;
 import javax.bluetooth.DiscoveryAgent;
 import javax.bluetooth.LocalDevice;
 import javax.bluetooth.RemoteDevice;
@@ -16,6 +17,8 @@ import javax.bluetooth.UUID;
 import javax.microedition.io.Connector;
 import javax.microedition.io.StreamConnection;
 import javax.microedition.io.StreamConnectionNotifier;
+
+import com.intel.bluetooth.BlueCoveImpl;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -31,9 +34,10 @@ public class BlueToothServer extends Task<Void> {
  @FXML private TextFlow commsFlow; 
  //private byte[] acceptdByteArray;
  
- public BlueToothServer(String path, TextFlow comms) {
+ public BlueToothServer(String path, TextFlow comms, StreamConnectionNotifier to_set) {
 	 FilePath = path;
 	 commsFlow = comms;
+	 notifier = to_set;
  }
  
  @Override 
@@ -44,18 +48,12 @@ public class BlueToothServer extends Task<Void> {
  
  public void run() { 
 	 try {
-		 local = LocalDevice.getLocalDevice();
-		 if(!local.setDiscoverable(DiscoveryAgent.GIAC)) {
-			 System.out.println("Please set your local bluetooth as discoverable");
-		 }
-		 
+			 local = LocalDevice.getLocalDevice();
+			 if(!local.setDiscoverable(DiscoveryAgent.GIAC)) {
+				 System.out.println("Please set your local bluetooth as discoverable");
+			 }
 	 //btspp stands for RFCOMM connection
 		 //System.out.println(new UUID("fa87c0d0afac11de8a390800200c9a66",false).toString());
-		 String url = "btspp://localhost:" + new UUID("fa87c0d0afac11de8a390800200c9a66",false).toString() + ";authenticate=false;encrypt=false;name=RemoteBluetooth";
-	 //open the service
-		 System.out.println("I am stuck here!");
-		 notifier = (StreamConnectionNotifier)Connector.open(url);
-		 System.out.println("I pass here!");
 		 System.out.println("Make Service visible to remote client!");
 		 Platform.runLater(new Runnable() {
              @Override public void run() {
@@ -66,7 +64,6 @@ public class BlueToothServer extends Task<Void> {
                  commsFlow.getChildren().add(t);
              }
 		 });
-		 
   		 streamConnection = (this.notifier).acceptAndOpen(); 
   		 DataOutputStream optStream = streamConnection.openDataOutputStream();
   		 DataInputStream inStream = streamConnection.openDataInputStream();
@@ -95,7 +92,7 @@ public class BlueToothServer extends Task<Void> {
   				 if (off+len > send_byte_array.length) len = send_byte_array.length - off;
   				 optStream.write(send_byte_array, off, len);
   				 off += len;
-  				 TimeUnit.MILLISECONDS.sleep(50);
+  					 TimeUnit.MILLISECONDS.sleep(50);
   			 }
   			 byte EOF = 0;
   			 optStream.write(EOF);
@@ -115,13 +112,37 @@ public class BlueToothServer extends Task<Void> {
   					 break; //I will break anyway, because it will either succeed or fail
   				 }
   				 //if not available, I still don't know the result. So I sleep for several miliseconds and poll again
-  				 TimeUnit.MILLISECONDS.sleep(500); 
-  				 timer += 500;
+  					 TimeUnit.MILLISECONDS.sleep(500);
+  				     timer += 500;
   			 }
-  		 }	
+  		 }
+  		BlueCoveImpl.shutdown();
 	 }
-	 catch (IOException e ) {
-		 //e.printStackTrace();
+	 catch(InterruptedException e) {
+		 Platform.runLater(new Runnable(){
+	            @Override public void run() {
+	            	String msg = "Fatal Error! Bluetooth connection is terminated!\n";
+	            	Text txt = new Text();
+	            	txt.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
+	            	txt.setText(msg);
+	            	commsFlow.getChildren().add(txt);
+	            }
+	  });
+	 }
+	 catch (java.io.InterruptedIOException e) {
+		 Platform.runLater(new Runnable(){
+	            @Override public void run() {
+	            	String msg = "Cancelled scheduled bluetooth connection\n";
+	            	Text txt = new Text();
+	            	txt.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
+	            	txt.setText(msg);
+	            	commsFlow.getChildren().add(txt);
+	            }
+	 });
+		 System.out.println("Exception!!!!");
+	 }
+	 catch (IOException e) {
+		 e.printStackTrace();
 		  Platform.runLater(new Runnable(){
             @Override public void run() {
             	String msg = "Please set your local bluetooth as discoverable\n";
@@ -132,13 +153,18 @@ public class BlueToothServer extends Task<Void> {
             }
 		  });
 	 }
-	 catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		 if(isCancelled()) {
-			 return;
-		 }
-			e.printStackTrace();
-	 } 
+	 catch (java.lang.NullPointerException e) {
+		/* Platform.runLater(new Runnable(){
+	            @Override public void run() {
+	            	String msg = "Cancelled schedulled bluetooth\n";
+	            	Text txt = new Text();
+	            	txt.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
+	            	txt.setText(msg);
+	            	commsFlow.getChildren().add(txt);
+	            }
+		 });
+		 */
+	 }
  }
  @Override
 	protected Void call() throws Exception {
