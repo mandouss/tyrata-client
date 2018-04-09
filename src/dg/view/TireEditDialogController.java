@@ -4,6 +4,8 @@ package dg.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -102,6 +104,16 @@ public class TireEditDialogController {
 	@FXML
 	private void handleCancel() {
 		dialogStage.close();
+	}
+
+	
+
+	@FXML
+	private void keyReleased(KeyEvent keyEvent) {
+		//System.out.println("Release Detected " + keyEvent.getCode());
+		if (keyEvent.getCode() == KeyCode.ENTER) {
+			handleSave();
+		}
 	}
 
 	/**

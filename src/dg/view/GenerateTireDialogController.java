@@ -3,10 +3,12 @@ package dg.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class TireAmountDialogController {
+public class GenerateTireDialogController {
 	@FXML 
 	private TextField numberOfTiresField;
 	@FXML
@@ -19,6 +21,7 @@ public class TireAmountDialogController {
 	@FXML
 	private void initialize() {
 		warningText.setText("");
+		numberOfTiresField.setPromptText("4 ~ 18");
 	}
 
 	/**
@@ -58,6 +61,14 @@ public class TireAmountDialogController {
 			return 0;
 		}
 	}
+
+	@FXML
+	private void keyReleased(KeyEvent keyEvent) {
+		//System.out.println("Release Detected " + keyEvent.getCode());
+		if (keyEvent.getCode() == KeyCode.ENTER) {
+			handleSave();
+		}
+	}
 		
 	private boolean isInputValid() {
 		String errorMessage = "";
@@ -71,7 +82,7 @@ public class TireAmountDialogController {
 				int numOfTires = Integer.parseInt(numberOfTiresField.getText());
 				
 				if(numOfTires <= 2 || numOfTires > 18 || numOfTires % 2 == 1) {
-					errorMessage += "Invalid number of tires \n(Between 4 and 18, excluding odd numbers)\n";
+					errorMessage += "Invalid number of tires \n(Even Num between 4 and 18)\n";
 				}
 			} catch (NumberFormatException e) {
 				errorMessage += "Invalid input!\n"; 

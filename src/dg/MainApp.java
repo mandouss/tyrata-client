@@ -14,7 +14,7 @@ import dg.model.Tire;
 import dg.model.TireListWrapper;
 import dg.view.GeneratedDataViewController;
 import dg.view.RootLayoutController;
-import dg.view.TireAmountDialogController;
+import dg.view.GenerateTireDialogController;
 import dg.view.TireEditDialogController;
 import dg.view.TireOverviewController;
 import javafx.application.Application;
@@ -43,10 +43,10 @@ public class MainApp extends Application {
 	private ArrayList<DailyS11> s11List = new ArrayList<DailyS11>();
 
 	public MainApp() {
-		tireData	.add(new Tire("C-1234","LF",-1,3.5));
-		tireData	.add(new Tire("C-1302","RF",-2,3.5));
-		tireData	.add(new Tire("C-4124","LR",-1.2,3.5));
-		tireData	.add(new Tire("C-9175","RR",-2.14,3.5));
+		tireData	.add(new Tire("T-1234","LF",-1.3332,3.5));
+		tireData	.add(new Tire("T-1302","RF",-2.4309,3.5));
+		tireData	.add(new Tire("T-4124","LR",-1.0223,3.5));
+		tireData	.add(new Tire("T-9175","RR",-2.222,3.5));
 	}
 
 	/**
@@ -124,11 +124,11 @@ public class MainApp extends Application {
 		}
 	}
 	
-	public int showTireAmountDialog() {
+	public int showGenerateTireDialog() {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/TireAmountDialog.fxml"));
+			loader.setLocation(MainApp.class.getResource("view/GenerateTireDialog.fxml"));
 			AnchorPane page = (AnchorPane) loader.load();
 
 			// Create the dialog Stage.
@@ -140,7 +140,7 @@ public class MainApp extends Application {
 			dialogStage.setScene(scene);
 
 			// Set the tire into the controller.
-			TireAmountDialogController controller = loader.getController();
+			GenerateTireDialogController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
 
 
