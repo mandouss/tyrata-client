@@ -148,7 +148,7 @@ public class RootLayoutController {
 		alert.setTitle("TyrataSimulator");
 		//alert.setHeaderText("About");
 		alert.setHeaderText(null);
-		String versionInfo = "Version: 1.0.0 \nAuthor: ECE651 Tyrata Client Team\n";
+		String versionInfo = "Version: 1.1.0 \nAuthor: ECE651 Tyrata Client Team\n";
 		alert.setContentText(versionInfo);
 
 		String copyrightInfo = versionInfo + "(c) Copyright TyrataSimulator contributors and others 2018.  All rights reserved. Tyrata logo is trademark of the Tyrata Inc., https://www.tyrata.com/.";
