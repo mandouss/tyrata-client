@@ -49,9 +49,10 @@ public class BlueToothServer extends Task<Void> {
  public void run() { 
 	 try {
 			 local = LocalDevice.getLocalDevice();
-			 if(!local.setDiscoverable(DiscoveryAgent.GIAC)) {
-				 System.out.println("Please set your local bluetooth as discoverable");
+			 if(local.getDiscoverable() != DiscoveryAgent.GIAC){
+				 local.setDiscoverable(DiscoveryAgent.GIAC);
 			 }
+				 //System.out.println("Please set your local bluetooth as discoverable");
 	 //btspp stands for RFCOMM connection
 		 //System.out.println(new UUID("fa87c0d0afac11de8a390800200c9a66",false).toString());
 		 System.out.println("Make Service visible to remote client!");
@@ -116,7 +117,7 @@ public class BlueToothServer extends Task<Void> {
   				     timer += 500;
   			 }
   		 }
-  		BlueCoveImpl.shutdown();
+  		//BlueCoveImpl.shutdown();
 	 }
 	 catch(InterruptedException e) {
 		 Platform.runLater(new Runnable(){
@@ -129,7 +130,11 @@ public class BlueToothServer extends Task<Void> {
 	            }
 	  });
 	 }
+	 
 	 catch (java.io.InterruptedIOException e) {
+		 
+			 System.out.println(local.getDiscoverable() == DiscoveryAgent.GIAC);
+			 //local.setDiscoverable(DiscoveryAgent.NOT_DISCOVERABLE); 
 		 Platform.runLater(new Runnable(){
 	            @Override public void run() {
 	            	String msg = "Cancelled scheduled bluetooth connection\n";
@@ -138,6 +143,7 @@ public class BlueToothServer extends Task<Void> {
 	            	txt.setText(msg);
 	            	commsFlow.getChildren().add(txt);
 	            }
+	            
 	 });
 		 System.out.println("Exception!!!!");
 	 }
@@ -165,7 +171,7 @@ public class BlueToothServer extends Task<Void> {
 		 });
 		 */
 	 }
- }
+}
  @Override
 	protected Void call() throws Exception {
 	// TODO Auto-generated method stub
