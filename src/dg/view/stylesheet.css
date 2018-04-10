@@ -48,6 +48,7 @@
 }
 
 
+
 .header {
 	-fx-text-fill: -swatch-400;
 	-fx-font-family: "Helvetica";
@@ -155,22 +156,25 @@
 	-fx-background-color: transparent;
 }
 
-.text-area, .text-field {
+.text-area, .text-field, .dialog-pane .text-area {
 	-fx-background-color: transparent;
 	-fx-background-radius: 2.0;
-	-fx-border-color: -swatch-grey;
-	-fx-border-width: 0 0 2 0;
 	-fx-prompt-text-fill: -swatch-grey;
 	-fx-text-fill: -swatch-dark-grey;
-	-fx-highlight-fill: -fx-focus-color; 
 	
 }
 
-.text-area:focused, .text-field:focused {
+.text-field {
+	-fx-border-color: -swatch-grey;
+	-fx-border-width: 0 0 2 0;
+	-fx-highlight-fill: -fx-focus-color; 
+}
+
+.text-field:focused {
 	-fx-border-color: derive(-swatch-200, 20%);
 }
 
-.text-area:disabled, .text-area:disabled {
+.text-area:disabled, .text-area:disabled, .dialog-pane .text-area:disabled, .dialog-pane .text-area:disabled  {
 	-fx-text-fill: rgb(245.0, 245.0, 245.0);
 }
 

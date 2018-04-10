@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="260.0" prefWidth="260.0" styleClass="bg" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.TireEditDialogController">
+<AnchorPane onKeyReleased="#keyReleased" prefHeight="260.0" prefWidth="260.0" styleClass="bg" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.TireEditDialogController">
    <children>
       <GridPane layoutX="-26.0" layoutY="14.0" prefHeight="150.0" prefWidth="229.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
         <columnConstraints>
