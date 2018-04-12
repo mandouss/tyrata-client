@@ -27,6 +27,12 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
+                              <HBox layoutY="269.0" spacing="10.0" AnchorPane.leftAnchor="120.0">
+                                 <children>
+                                    <Label text="# Tires:" AnchorPane.bottomAnchor="0.0" />
+                                    <Text layoutX="120.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="no" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" />
+                                 </children>
+                              </HBox>
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bg" stylesheets="@stylesheet.css">

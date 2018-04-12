@@ -227,7 +227,6 @@ public class TireOverviewController {
 		dailyMileageField.setPromptText("(1-5000) Miles");
 
 		enableOutlierBox.setSelected(false);
-		outlierIntervalField.setText("-1");
 		outlierIntervalField.setDisable(true);
 		outlierIntervalField.setPromptText("Days");
 		//initS11Field.setFocusTraversable(false);
