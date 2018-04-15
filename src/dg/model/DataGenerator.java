@@ -25,6 +25,7 @@ public class DataGenerator {
 	private BooleanProperty outlierEnabled;
 	private IntegerProperty outlierInterval;
 	private int dayCounter;
+	private int randomOutlierInterval;
 	
 	public DataGenerator(ObjectProperty<LocalDate> startDate, IntegerProperty timeSpan, IntegerProperty dailyMileage,
 			List<Tire> tireInfoList,BooleanProperty outlierEnabled, IntegerProperty outlierInterval) {
@@ -38,6 +39,7 @@ public class DataGenerator {
 		this.outlierInterval = outlierInterval;
 		this.outlierEnabled = outlierEnabled;
 		this.dayCounter = 0;
+		generateRandomOutlierInterval();
 	}
 
     public DataGenerator(LocalDate startDate, int timeSpan, int dailyMileage,
@@ -52,6 +54,7 @@ public class DataGenerator {
         this.outlierEnabled = new SimpleBooleanProperty(outlierEnabled);
         this.outlierInterval = new SimpleIntegerProperty(outlierInterval);
         this.dayCounter = 0;
+        generateRandomOutlierInterval();
     }
 
 	public ObjectProperty<LocalDate> getStartDate() {
@@ -61,12 +64,25 @@ public class DataGenerator {
 	public void setStartDate(ObjectProperty<LocalDate> startDate) {
 		this.startDate = startDate;
 	}
-
+	
+	private void generateRandomOutlierInterval() {
+		Random rand = new Random();
+		int max = (int)Math.ceil(1.3 * outlierInterval.get());
+		int min = (int)Math.ceil(0.7 * outlierInterval.get());
+		
+		randomOutlierInterval = rand.nextInt((max-min) + 1) + min;
+		if(randomOutlierInterval <= 0) {
+			randomOutlierInterval = 1;
+		}
+		
+	}
+	
 	private DailyS11 computeNextS11() {
 		
 		DailyS11 result = new DailyS11(currentDate, currentMileage);
 		boolean isOutlierDay = false;
-		if (dayCounter == outlierInterval.get() && outlierEnabled.get() == true) {
+		
+		if (dayCounter == randomOutlierInterval && outlierEnabled.get() == true) {
 			isOutlierDay = true;
 		}
 		for (int i = 0; i < tireInfoList.size(); i++) {
@@ -88,6 +104,7 @@ public class DataGenerator {
 		dayCounter++;
 		if (isOutlierDay) {
 			dayCounter = 0;
+			generateRandomOutlierInterval();
 		}
 		currentDate = currentDate.plusDays(1);
 		currentMileage += dailyMileage.get();
