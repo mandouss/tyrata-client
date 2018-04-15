@@ -149,7 +149,7 @@ public class TireEditDialogController {
 		if (pressureField.getText() == null || pressureField.getText().length() == 0) {
 			errorMessage += "Lack Pressure!\n"; 
 		} else {
-			// try to parse the time interval into an int.
+			// try to parse the time interval into a double.
 			try {
 				Double.parseDouble(pressureField.getText());
 			} catch (NumberFormatException e) {
