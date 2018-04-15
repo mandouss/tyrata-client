@@ -25,12 +25,9 @@ import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.sun.javafx.tk.Toolkit.Task;
-
 import java.util.ArrayList;
 
 import dg.MainApp;
-import dg.bluetooth.BlueToothServer;
 import dg.bluetooth.BlueToothService;
 import dg.model.DailyS11;
 import dg.model.DataGenerator;
@@ -41,7 +38,9 @@ public class TireOverviewController {
 	@FXML private TableView<Tire> tireTable;
 	@FXML private TableColumn<Tire, String> tireIDColumn;
 	@FXML private TableColumn<Tire, Number> initS11Column;  //Integer, Double ... Should be Number
-
+	@FXML private Text tireCountText;
+	@FXML private Label addTireLabel;
+	
 	@FXML private Label tireIDLabel;
 	@FXML private Label tirePosLabel;
 	@FXML private Label initS11Label;
@@ -101,16 +100,28 @@ public class TireOverviewController {
 			//timeIntervalLabel.setText("");
 		}
 	}
+	
+	
+	private void setTireCount() {
+//		System.out.println(tireTable.getItems().size());
+		int count = tireTable.getItems().size();
+		tireCountText.setText(String.valueOf(count));
+		if(count == 0) { 
+			addTireLabel.setVisible(true);
+		} else {
+			addTireLabel.setVisible(false);
+		}
+	}
 
 	@FXML
 	private void mouseClicked(MouseEvent mouseEvent) {
 		if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-			//TODO: can't clear selection
+			//TODO: can't cancel selection
 			//			int selectedIndex = tireTable.getSelectionModel().getSelectedIndex();
 			//			tireTable.getSelectionModel().clearAndSelect(selectedIndex);
 			//			Node selected = mouseEvent.getPickResult().getIntersectedNode();
 			//			System.out.println(selected);
-			//			if(selected == null || (selected instanceof TableRow && ((TableRow) selected).isEmpty())) {
+			//			if(selected == null || (selected instance of TableRow && ((TableRow) selected).isEmpty())) {
 			//				tireTable.getSelectionModel().clearSelection();
 			//			}
 			if(mouseEvent.getClickCount() == 2){
@@ -150,7 +161,6 @@ public class TireOverviewController {
 		if (keyEvent.getCharacter()  == "d") {
 			System.out.println("Delete Typed!!!");
 		}
-
 	}
 
 	/********************************************************************
@@ -167,7 +177,6 @@ public class TireOverviewController {
 		if (saveClicked) {
 			mainApp.getTireData().add(newTire);
 		}
-
 	}
 	/**
 	 * Called when the user clicks on the edit button.
@@ -182,9 +191,7 @@ public class TireOverviewController {
 			}
 		}
 		else {
-			//No item selected 
-			//do nothing
-			//TODO: Maybe prompt a warning sign
+			//No item selected, do nothing
 		}
 	}
 
@@ -198,16 +205,9 @@ public class TireOverviewController {
 			tireTable.getItems().remove(selectedIndex);
 		}
 		else {
-			//No item selected 
-			//do nothing
-			//TODO: Maybe prompt a warning sign
+			//No item selected, do nothing
 		}
 	}
-
-	//    @FXML
-	//    private void handleDeleteAllTire() {
-	//        tireTable.getItems().removeAll();
-	//    }
 
 
 	/********************************************************************
@@ -227,7 +227,6 @@ public class TireOverviewController {
 		dailyMileageField.setPromptText("(1-5000) Miles");
 
 		enableOutlierBox.setSelected(false);
-		outlierIntervalField.setText("-1");
 		outlierIntervalField.setDisable(true);
 		outlierIntervalField.setPromptText("Days");
 		//initS11Field.setFocusTraversable(false);
@@ -253,8 +252,11 @@ public class TireOverviewController {
 			int timeSpan = Integer.parseInt(timeSpanField.getText());
 			int dailyMileage = Integer.parseInt(dailyMileageField.getText());
 			List<Tire> tireList = mainApp.getTireData();
-			int outlierInterval = Integer.parseInt(outlierIntervalField.getText());
 			boolean outlierEnabled = enableOutlierBox.isSelected();
+			int outlierInterval = -1;
+			if (outlierEnabled) {
+				outlierInterval = Integer.parseInt(outlierIntervalField.getText());
+			}
 			// System.out.println("Successfully Generated Data: outlier ("+ outlierEnabled + "): "+ outlierInterval);
 
 			//dataGen
@@ -325,9 +327,8 @@ public class TireOverviewController {
 		}
 
 		if (!enableOutlierBox.isSelected()) {
-
-		}
-		else if(outlierIntervalField.getText() == null || outlierIntervalField.getText().length() == 0) {
+			// does not check for outlierIntervalField 
+		} else if(outlierIntervalField.getText() == null || outlierIntervalField.getText().length() == 0) {
 			errorMessage += "Lack Outlier Interval!\n"; 
 		} else {
 			try {
@@ -339,7 +340,9 @@ public class TireOverviewController {
 				errorMessage += "Invalid Outlier Interval (Between 1 and 5000)\n"; 
 			}
 		}
-
+		if(tireTable.getItems().size()==0) {
+			errorMessage = "Tire Table is empty, please add tires to the table first!";
+		}
 		if (errorMessage == null || errorMessage.length() == 0) {
 			return true;
 		} else {
@@ -528,23 +531,29 @@ public class TireOverviewController {
 	private void initialize() {
 		// Initialize the tire table with the two columns.
 		tireTable.setFocusTraversable(true);
-		
+		addTireLabel.setVisible(false);
 		tireIDColumn.setCellValueFactory(cellData -> cellData.getValue().getTireIDProperty());
 		initS11Column.setCellValueFactory(cellData -> cellData.getValue().getInitS11Property());
 
 		// Clear tire details.
 		showTireDetails(null);
 		showGenInfo();
+		
 		// Listen for selection changes and show the tire details when changed.
 		tireTable.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> showTireDetails(newValue));
-		
-	    commsFlow.getChildren().addListener(
-                (ListChangeListener<Node>) ((change) -> {
-//                    commsFlow.layout();
-//                    commsPane.layout();
-                    commsPane.setVvalue(1.0f);
-                }));
+
+//		tireTable.getItems().addListener(
+//				(ListChangeListener<Tire>) ((change) -> {
+//					System.out.println("Changed!!");
+//				}));
+
+		commsFlow.getChildren().addListener(
+				(ListChangeListener<Node>) ((change) -> {
+					//                    commsFlow.layout();
+					//                    commsPane.layout();
+					commsPane.setVvalue(1.0f);
+				}));
 	    
 		setCommsInfo();
 		
@@ -561,6 +570,12 @@ public class TireOverviewController {
 
 		// Add observable list data to the table
 		tireTable.setItems(mainApp.getTireData());
+		// Listen for changes in tire number and display on Screen
+		tireCountText.setText(String.valueOf(tireTable.getItems().size()));
+		mainApp.getTireData().addListener(
+				(ListChangeListener<Tire>) ((change) -> {
+					setTireCount();
+				}));
 	}
 	
 }

@@ -40,6 +40,7 @@ public class MainApp extends Application {
 	 * We need to save ObservableList<Tire>, this is the data we want.
 	 */
 	private ObservableList<Tire> tireData = FXCollections.observableArrayList();
+	
 	private ArrayList<DailyS11> s11List = new ArrayList<DailyS11>();
 
 	public MainApp() {
