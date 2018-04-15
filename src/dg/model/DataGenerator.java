@@ -25,6 +25,7 @@ public class DataGenerator {
 	private BooleanProperty outlierEnabled;
 	private IntegerProperty outlierInterval;
 	private int dayCounter;
+	private int randomOutlierInterval;
 	
 	public DataGenerator(ObjectProperty<LocalDate> startDate, IntegerProperty timeSpan, IntegerProperty dailyMileage,
 			List<Tire> tireInfoList,BooleanProperty outlierEnabled, IntegerProperty outlierInterval) {
@@ -38,6 +39,7 @@ public class DataGenerator {
 		this.outlierInterval = outlierInterval;
 		this.outlierEnabled = outlierEnabled;
 		this.dayCounter = 0;
+		generateRandomOutlierInterval();
 	}
 
     public DataGenerator(LocalDate startDate, int timeSpan, int dailyMileage,
@@ -52,6 +54,7 @@ public class DataGenerator {
         this.outlierEnabled = new SimpleBooleanProperty(outlierEnabled);
         this.outlierInterval = new SimpleIntegerProperty(outlierInterval);
         this.dayCounter = 0;
+        generateRandomOutlierInterval();
     }
 
 	public ObjectProperty<LocalDate> getStartDate() {
@@ -61,12 +64,25 @@ public class DataGenerator {
 	public void setStartDate(ObjectProperty<LocalDate> startDate) {
 		this.startDate = startDate;
 	}
-
+	
+	private void generateRandomOutlierInterval() {
+		Random rand = new Random();
+		int max = (int)Math.ceil(1.3 * outlierInterval.get());
+		int min = (int)Math.ceil(0.7 * outlierInterval.get());
+		
+		randomOutlierInterval = rand.nextInt((max-min) + 1) + min;
+		if(randomOutlierInterval <= 0) {
+			randomOutlierInterval = 1;
+		}
+		
+	}
+	
 	private DailyS11 computeNextS11() {
 		
 		DailyS11 result = new DailyS11(currentDate, currentMileage);
 		boolean isOutlierDay = false;
-		if (dayCounter == outlierInterval.get() && outlierEnabled.get() == true) {
+		
+		if (dayCounter == randomOutlierInterval && outlierEnabled.get() == true) {
 			isOutlierDay = true;
 		}
 		for (int i = 0; i < tireInfoList.size(); i++) {
@@ -88,6 +104,7 @@ public class DataGenerator {
 		dayCounter++;
 		if (isOutlierDay) {
 			dayCounter = 0;
+			generateRandomOutlierInterval();
 		}
 		currentDate = currentDate.plusDays(1);
 		currentMileage += dailyMileage.get();
@@ -98,23 +115,28 @@ public class DataGenerator {
 	private double rollNormal() {
 		Random randomno = new Random();
 		double x = randomno.nextGaussian() * 0.1 + 1;
-		while (!ifNormal(x)) {
+		while (isOutlier(x)) {
+			// Guarantee is normal value
 			x = randomno.nextGaussian() * 0.1 + 1;
 		}
 		return x;
 	}
 	private double rollOutlier() {
 		Random randomno = new Random();
-		double x = randomno.nextGaussian() * 100 + 1;
-		while (!ifOutlier(x)) {
-			x = randomno.nextGaussian() * 100 + 1;
+		double x = randomno.nextGaussian() * 10 + 1;
+		while (isNormal(x)) {
+			// Guarantee is outlier value
+			x = randomno.nextGaussian() * 10 + 1;
 		}
 		return x;
 	}
-	private boolean ifNormal(double x) {
-		return !ifOutlier(x);
+	
+	private boolean isNormal(double x) {
+		return !isOutlier(x);
 	}
-	private boolean ifOutlier(double x) {
+	
+	// Normal mean=1 std=0.1, consider [0,2] normal range 
+	private boolean isOutlier(double x) {
 		double ucl = 2;
 		double lcl = 0;
 		if (x > ucl || x < lcl) {
@@ -138,16 +160,6 @@ public class DataGenerator {
         return result;
     }
     
-    
-    // will be implemented by OTHERS
-//    public String convertToString() {
-//        String result = "";
-//        for (int i = 0; i < timeSpan.get(); i++) {
-//            result += computeNextS11().convertToString();
-//        }
-//
-//        return result;
-//    }
 	
     public static void main(String[] args) {
         //tireInfo_list
