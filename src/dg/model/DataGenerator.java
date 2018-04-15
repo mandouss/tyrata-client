@@ -115,23 +115,28 @@ public class DataGenerator {
 	private double rollNormal() {
 		Random randomno = new Random();
 		double x = randomno.nextGaussian() * 0.1 + 1;
-		while (!ifNormal(x)) {
+		while (isOutlier(x)) {
+			// Guarantee is normal value
 			x = randomno.nextGaussian() * 0.1 + 1;
 		}
 		return x;
 	}
 	private double rollOutlier() {
 		Random randomno = new Random();
-		double x = randomno.nextGaussian() * 100 + 1;
-		while (!ifOutlier(x)) {
-			x = randomno.nextGaussian() * 100 + 1;
+		double x = randomno.nextGaussian() * 10 + 1;
+		while (isNormal(x)) {
+			// Guarantee is outlier value
+			x = randomno.nextGaussian() * 10 + 1;
 		}
 		return x;
 	}
-	private boolean ifNormal(double x) {
-		return !ifOutlier(x);
+	
+	private boolean isNormal(double x) {
+		return !isOutlier(x);
 	}
-	private boolean ifOutlier(double x) {
+	
+	// Normal mean=1 std=0.1, consider [0,2] normal range 
+	private boolean isOutlier(double x) {
 		double ucl = 2;
 		double lcl = 0;
 		if (x > ucl || x < lcl) {
@@ -155,16 +160,6 @@ public class DataGenerator {
         return result;
     }
     
-    
-    // will be implemented by OTHERS
-//    public String convertToString() {
-//        String result = "";
-//        for (int i = 0; i < timeSpan.get(); i++) {
-//            result += computeNextS11().convertToString();
-//        }
-//
-//        return result;
-//    }
 	
     public static void main(String[] args) {
         //tireInfo_list
