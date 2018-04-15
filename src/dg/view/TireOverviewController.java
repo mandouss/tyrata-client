@@ -25,12 +25,10 @@ import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
 
-import com.sun.javafx.tk.Toolkit.Task;
 
 import java.util.ArrayList;
 
 import dg.MainApp;
-import dg.bluetooth.BlueToothServer;
 import dg.bluetooth.BlueToothService;
 import dg.model.DailyS11;
 import dg.model.DataGenerator;
@@ -41,7 +39,8 @@ public class TireOverviewController {
 	@FXML private TableView<Tire> tireTable;
 	@FXML private TableColumn<Tire, String> tireIDColumn;
 	@FXML private TableColumn<Tire, Number> initS11Column;  //Integer, Double ... Should be Number
-
+	@FXML private Text tireCountText;
+	
 	@FXML private Label tireIDLabel;
 	@FXML private Label tirePosLabel;
 	@FXML private Label initS11Label;
@@ -101,16 +100,20 @@ public class TireOverviewController {
 			//timeIntervalLabel.setText("");
 		}
 	}
+	
+	private void setTireCount(Integer count) {
+		tireCountText.setText(count.toString());
+	}
 
 	@FXML
 	private void mouseClicked(MouseEvent mouseEvent) {
 		if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-			//TODO: can't clear selection
+			//TODO: can't cancel selection
 			//			int selectedIndex = tireTable.getSelectionModel().getSelectedIndex();
 			//			tireTable.getSelectionModel().clearAndSelect(selectedIndex);
 			//			Node selected = mouseEvent.getPickResult().getIntersectedNode();
 			//			System.out.println(selected);
-			//			if(selected == null || (selected instanceof TableRow && ((TableRow) selected).isEmpty())) {
+			//			if(selected == null || (selected instance of TableRow && ((TableRow) selected).isEmpty())) {
 			//				tireTable.getSelectionModel().clearSelection();
 			//			}
 			if(mouseEvent.getClickCount() == 2){
@@ -537,6 +540,9 @@ public class TireOverviewController {
 		// Listen for selection changes and show the tire details when changed.
 		tireTable.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> showTireDetails(newValue));
+		
+//		tireTable.getItems().addListener(
+//				(observable, oldValue, newValue) -> setTireCount(newValue));
 		
 	    commsFlow.getChildren().addListener(
                 (ListChangeListener<Node>) ((change) -> {
