@@ -65,7 +65,18 @@ public class BlueToothServer extends Task<Void> {
                  commsFlow.getChildren().add(t);
              }
 		 });
-  		 streamConnection = (this.notifier).acceptAndOpen(); 
+  		 streamConnection = (this.notifier).acceptAndOpen();
+  		Platform.runLater(new Runnable() {
+            @Override public void run() {
+           	 String msg = "Connection established! Start Transmitting data...\n";
+        		Text t = new Text();
+               t.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
+               t.setText(msg);
+                commsFlow.getChildren().add(t);
+            }
+		 });
+  		 
+  		 
   		 DataOutputStream optStream = streamConnection.openDataOutputStream();
   		 DataInputStream inStream = streamConnection.openDataInputStream();
   		 BufferedReader bufferedReader = new BufferedReader(new FileReader(FilePath));
@@ -77,28 +88,28 @@ public class BlueToothServer extends Task<Void> {
   		 bufferedReader.close();
   		 System.out.println("Writing file to the other device....");
   		 //optStream.write(stringBuffer.toString().getBytes());
-  		 boolean has_succeeded = false;
   		 /*
   		  * The following while loop is to make sure that the data transmitted is not corrupted on its way to Android Mobile. If that is true
   		  * the server side will retransmit the data 
   		  */
-  		 while (!has_succeeded) {
-  			 byte[] send_byte_array = stringBuffer.toString().getBytes();
-  			 int off = 0;
-  			 while(off < send_byte_array.length) {
-  				 if(isCancelled()) {
-  					 return;
-  				 }
-  				 int len = 512;
-  				 if (off+len > send_byte_array.length) len = send_byte_array.length - off;
-  				 optStream.write(send_byte_array, off, len);
-  				 off += len;
-  					 TimeUnit.MILLISECONDS.sleep(50);
+  		 System.out.println("Enter the outermost while loop");
+  		 byte[] send_byte_array = stringBuffer.toString().getBytes();
+  		 int off = 0;
+  		 while(off < send_byte_array.length) {
+  			 if(isCancelled()) {
+  				return;
   			 }
+  			 int len = 512;
+  			 if (off+len > send_byte_array.length) len = send_byte_array.length - off;
+  			 optStream.write(send_byte_array, off, len);
+  			 off += len;
+  			 	TimeUnit.MILLISECONDS.sleep(50);
+  			 }	
   			 byte EOF = 0;
   			 optStream.write(EOF);
   			 System.out.println("Writing completed....");	 
   			 int timer = 0;
+  			 boolean has_succeeded = false;
   			 while(timer < 10000) { //polling will end if the time elapses 10000 miliseconds
   				 byte [] read_byte_array = new byte [1];
   				 if(isCancelled()) {
@@ -107,17 +118,37 @@ public class BlueToothServer extends Task<Void> {
   				 if(inStream.available() > 0) {
   					 inStream.read(read_byte_array, 0, 1);
   					 String check = new String(read_byte_array);
-  					 if (check.contentEquals("T")) {
-  	  					has_succeeded = true; //If I received T, the client side received all the data correctly. I will close connection
+  					 System.out.println("Check receive byte: " + check);
+  					 if (check.contentEquals("S")) {
+  	  					 has_succeeded = true; //If I received S, the client side received all the data correctly. I will close connection
+  						 Platform.runLater(new Runnable() {
+  				             @Override public void run() {
+  				            	 String msg = "Data Transmission succeeded!\n";
+  				         		Text t = new Text();
+  				                t.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
+  				                t.setText(msg);
+  				                 commsFlow.getChildren().add(t);
+  				             }
+  						 });
   					 }
   					 break; //I will break anyway, because it will either succeed or fail
   				 }
-  				 //if not available, I still don't know the result. So I sleep for several miliseconds and poll again
+  				 System.out.println("Data is not available");
+  				 //if not available, I still don't know the result. So I sleep for several milliseconds and poll again
   					 TimeUnit.MILLISECONDS.sleep(500);
   				     timer += 500;
   			 }
-  		 }
-  		//BlueCoveImpl.shutdown();
+  			 if(!has_succeeded) {
+  				Platform.runLater(new Runnable(){
+  		            @Override public void run() {
+  		            	String msg = "Data Transmission failed, please try again!\n";
+  		            	Text txt = new Text();
+  		            	txt.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
+  		            	txt.setText(msg);
+  		            	commsFlow.getChildren().add(txt);
+  		            }
+  		  });
+  			 }
 	 }
 	 catch(InterruptedException e) {
 		 Platform.runLater(new Runnable(){
@@ -132,12 +163,11 @@ public class BlueToothServer extends Task<Void> {
 	 }
 	 
 	 catch (java.io.InterruptedIOException e) {
-		 
-			 System.out.println(local.getDiscoverable() == DiscoveryAgent.GIAC);
-			 //local.setDiscoverable(DiscoveryAgent.NOT_DISCOVERABLE); 
+		 System.out.println(local.getDiscoverable() == DiscoveryAgent.GIAC);
+		 /*
 		 Platform.runLater(new Runnable(){
 	            @Override public void run() {
-	            	String msg = "Cancelled scheduled bluetooth connection\n";
+	            	String msg = "Cancel scheduled bluetooth connection\n";
 	            	Text txt = new Text();
 	            	txt.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
 	            	txt.setText(msg);
@@ -145,6 +175,7 @@ public class BlueToothServer extends Task<Void> {
 	            }
 	            
 	 });
+	 */
 		 System.out.println("Exception!!!!");
 	 }
 	 catch (IOException e) {
@@ -159,18 +190,7 @@ public class BlueToothServer extends Task<Void> {
             }
 		  });
 	 }
-	 catch (java.lang.NullPointerException e) {
-		/* Platform.runLater(new Runnable(){
-	            @Override public void run() {
-	            	String msg = "Cancelled schedulled bluetooth\n";
-	            	Text txt = new Text();
-	            	txt.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
-	            	txt.setText(msg);
-	            	commsFlow.getChildren().add(txt);
-	            }
-		 });
-		 */
-	 }
+	 catch (java.lang.NullPointerException e) {}
 }
  @Override
 	protected Void call() throws Exception {
