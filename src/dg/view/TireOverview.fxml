@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="540.0" prefWidth="720.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.TireOverviewController">
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="720.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.TireOverviewController">
    <children>
       <SplitPane dividerPositions="0.45" layoutX="42.0" layoutY="55.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -18,7 +18,7 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bg" stylesheets="@stylesheet.css">
                            <children>
-                              <TableView fx:id="tireTable" layoutX="41.0" layoutY="49.0" onKeyReleased="#keyReleased" onMouseClicked="#mouseClicked" prefHeight="194.0" prefWidth="293.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="tireTable" layoutX="41.0" layoutY="49.0" onKeyReleased="#keyReleased" onMouseClicked="#mouseClicked" prefHeight="194.0" prefWidth="293.0" AnchorPane.bottomAnchor="16.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
                                   <TableColumn fx:id="tireIDColumn" prefWidth="75.0" text="Tire Sensor ID" />
                                   <TableColumn fx:id="initS11Column" prefWidth="75.0" text="Initial S11" />
@@ -27,10 +27,10 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
-                              <HBox layoutY="269.0" spacing="10.0" AnchorPane.leftAnchor="120.0">
+                              <HBox layoutY="269.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0">
                                  <children>
                                     <Label text="# Tires:" AnchorPane.bottomAnchor="0.0" />
-                                    <Text layoutX="120.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="no" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" />
+                                    <Text fx:id="tireCountText" layoutX="120.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" />
                                  </children>
                               </HBox>
                            </children>

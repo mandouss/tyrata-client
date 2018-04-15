@@ -1,6 +1,7 @@
 package dg.view;
 
 import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -24,7 +25,6 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
-
 
 import java.util.ArrayList;
 
@@ -101,8 +101,10 @@ public class TireOverviewController {
 		}
 	}
 	
-	private void setTireCount(Integer count) {
-		tireCountText.setText(count.toString());
+	
+	private void setTireCount() {
+//		System.out.println(tireTable.getItems().size());
+		tireCountText.setText(String.valueOf(tireTable.getItems().size()));
 	}
 
 	@FXML
@@ -153,7 +155,6 @@ public class TireOverviewController {
 		if (keyEvent.getCharacter()  == "d") {
 			System.out.println("Delete Typed!!!");
 		}
-
 	}
 
 	/********************************************************************
@@ -170,7 +171,6 @@ public class TireOverviewController {
 		if (saveClicked) {
 			mainApp.getTireData().add(newTire);
 		}
-
 	}
 	/**
 	 * Called when the user clicks on the edit button.
@@ -185,9 +185,7 @@ public class TireOverviewController {
 			}
 		}
 		else {
-			//No item selected 
-			//do nothing
-			//TODO: Maybe prompt a warning sign
+			//No item selected, do nothing
 		}
 	}
 
@@ -201,16 +199,9 @@ public class TireOverviewController {
 			tireTable.getItems().remove(selectedIndex);
 		}
 		else {
-			//No item selected 
-			//do nothing
-			//TODO: Maybe prompt a warning sign
+			//No item selected, do nothing
 		}
 	}
-
-	//    @FXML
-	//    private void handleDeleteAllTire() {
-	//        tireTable.getItems().removeAll();
-	//    }
 
 
 	/********************************************************************
@@ -536,20 +527,23 @@ public class TireOverviewController {
 
 		// Clear tire details.
 		showTireDetails(null);
+//		System.out.println("At initialize():"+tireTable.getItems().size());
 		showGenInfo();
 		// Listen for selection changes and show the tire details when changed.
 		tireTable.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> showTireDetails(newValue));
-		
+
 //		tireTable.getItems().addListener(
-//				(observable, oldValue, newValue) -> setTireCount(newValue));
-		
-	    commsFlow.getChildren().addListener(
-                (ListChangeListener<Node>) ((change) -> {
-//                    commsFlow.layout();
-//                    commsPane.layout();
-                    commsPane.setVvalue(1.0f);
-                }));
+//				(ListChangeListener<Tire>) ((change) -> {
+//					System.out.println("Changed!!");
+//				}));
+
+		commsFlow.getChildren().addListener(
+				(ListChangeListener<Node>) ((change) -> {
+					//                    commsFlow.layout();
+					//                    commsPane.layout();
+					commsPane.setVvalue(1.0f);
+				}));
 	    
 		setCommsInfo();
 		
@@ -566,6 +560,12 @@ public class TireOverviewController {
 
 		// Add observable list data to the table
 		tireTable.setItems(mainApp.getTireData());
+		// Listen for changes in tire number and display on Screen
+		tireCountText.setText(String.valueOf(tireTable.getItems().size()));
+		mainApp.getTireData().addListener(
+				(ListChangeListener<Tire>) ((change) -> {
+					setTireCount();
+				}));
 	}
 	
 }
