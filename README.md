@@ -1,3 +1,5 @@
+#### Track our progress on Trello: https://trello.com/tyrataclient
+
 # Sprint 2 TyrataSimulator 1.1.0
 
 TyrataSimulator is a pc program that generates simulated Tyrata sensors output and transmits the data through Bluetooth.
@@ -9,11 +11,46 @@ TyrataSimulator is a pc program that generates simulated Tyrata sensors output a
 1. Clone the project to Eclipse 
     `File` => `Import`, select `Git` => `Projects from Git`
 2. Build the project and Run 
+ 
+
+**Environment Requirement**
+
+- Java SE 8 [1.8.0_162]
+- Windows 10 (for Bluetooth to run)
+- [JavaFX 8](http://www.oracle.com/technetwork/java/javase/overview/javafx-overview-2158620.html) - GUI library for JAVA
 
 
 ## Tire Configuration
 
-Upon launching, the program gives 4 default tires listed in a table. 
+Upon launching, the program gives 4 default tires listed in a table.
+
+**Key Board Control**
+
+DELETE / BACKSPACE - Delete selected tire
+
+
+#### Tire Configuration on Menu Bar
+
+If you wish to import or save the configuration, go to `menu bar` - `TireConfig` 
+
+`Generate Tires` - Generate tires with customized number of tires
+
+![screen shot](./file/Screen_Shot2.png)
+
+> Sensor ID Format : `T-0000` Randomly generated 4 digit number
+
+> Init S11 Range: Between [-2.5, -1], with precision of 4 decimal places
+
+> Tire Location: Set to UNKOWN
+
+`Clear All Tires` - Clear all tires in the list
+
+`Save` - Save the file to opened file path (path shown on the title)
+
+`Save As` - Save the configuration as a new .xml file
+
+`Import` - Import tire configuration from file system
+
 
 #### Edit Tires
 
@@ -32,18 +69,12 @@ You can also do this using buttons on bottom-left screen:
 
 `Delete` - Delete selected tire
 
+![screen shot](./file/Screen_Shot3.png)
 
-#### Tire Configuration Reuse
+**Key Board Control**
 
-If you wish to import or save the configuration, go to `menu bar` - `TireConfig` 
+ENTER - Confirm
 
-`Generate Tires` - yet to come
-
-`Save` - Save the file to opened file path (path shown on the title)
-
-`Save As` - Save the configuration as a new .xml file
-
-`Import` - Import tire configuration from file system
 
 ## Data Generator 
 
@@ -68,6 +99,7 @@ Integration into the main app will be completed in sprint 3.
 
 ## Built with
 
+- Java SE 8 [1.8.0_162]
 - [JavaFX 8](http://www.oracle.com/technetwork/java/javase/overview/javafx-overview-2158620.html) - GUI library for JAVA
 - [Scene Builder 2.0](http://www.oracle.com/technetwork/java/javase/downloads/javafxscenebuilder-1x-archive-2199384.html) A Visual Layout Tool for JavaFX Applications
 

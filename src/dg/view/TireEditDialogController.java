@@ -4,6 +4,8 @@ package dg.view;
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -104,6 +106,16 @@ public class TireEditDialogController {
 		dialogStage.close();
 	}
 
+	
+
+	@FXML
+	private void keyReleased(KeyEvent keyEvent) {
+		//System.out.println("Release Detected " + keyEvent.getCode());
+		if (keyEvent.getCode() == KeyCode.ENTER) {
+			handleSave();
+		}
+	}
+
 	/**
 	 * Validates the user input in the text fields.
 	 * 
@@ -124,7 +136,14 @@ public class TireEditDialogController {
 		if (initS11Field.getText() == null || initS11Field.getText().length() == 0) {
 			errorMessage += "Lack S11!\n"; 
 		} else {
-			//TODO: Handle S11 Range
+			try {
+				Double s11 = Double.parseDouble(initS11Field.getText());
+				if( s11 < -2.5  || s11 > -1 ) {
+					errorMessage += "Invalid S11_i (-2.5, -1)\n";
+				}
+			} catch (NumberFormatException e) {
+				errorMessage += "Invalid S11_i (-2.5, -1)\n"; 
+			}
 		}
 
 		if (pressureField.getText() == null || pressureField.getText().length() == 0) {
@@ -134,18 +153,11 @@ public class TireEditDialogController {
 			try {
 				Double.parseDouble(pressureField.getText());
 			} catch (NumberFormatException e) {
-				errorMessage += "Invalid tire pressure (must be an double)!\n"; 
+				errorMessage += "Invalid tire pressure!\n"; 
 			}
 		}
-		/*
-		if (startTimeField.getText() == null || startTimeField.getText().length() == 0) {
-			errorMessage += "Lack start Time!\n";
-		} else {
-			if (!DateUtil.validDate(startTimeField.getText())) {
-				errorMessage += "No valid start Time. Use the format yyyy-mm-dd!\n";
-			}
-		}
-		 */
+		
+		
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
@@ -155,6 +167,7 @@ public class TireEditDialogController {
 			//	                .masthead("Please correct invalid fields")
 			//	                .message(errorMessage)
 			//	                .showError();
+			errorMessage = errorMessage.substring(0, errorMessage.length() - 1);
 			warningText.setText(errorMessage);
 			return false;
 		}

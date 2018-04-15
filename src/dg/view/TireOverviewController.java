@@ -1,6 +1,8 @@
 package dg.view;
 
 import javafx.collections.ListChangeListener;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
@@ -22,9 +24,14 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.List;
+
+import com.sun.javafx.tk.Toolkit.Task;
+
 import java.util.ArrayList;
 
 import dg.MainApp;
+import dg.bluetooth.BlueToothServer;
+import dg.bluetooth.BlueToothService;
 import dg.model.DailyS11;
 import dg.model.DataGenerator;
 import dg.model.Tire;
@@ -55,6 +62,7 @@ public class TireOverviewController {
 
 	// Reference to the main application.
 	private MainApp mainApp;
+	private BlueToothService service = null;
 
 	/**
 	 * The constructor.
@@ -176,7 +184,7 @@ public class TireOverviewController {
 		else {
 			//No item selected 
 			//do nothing
-			//TODO: Maybe I can prompt a warning sign
+			//TODO: Maybe prompt a warning sign
 		}
 	}
 
@@ -192,7 +200,7 @@ public class TireOverviewController {
 		else {
 			//No item selected 
 			//do nothing
-			//TODO: Maybe I can prompt a warning sign
+			//TODO: Maybe prompt a warning sign
 		}
 	}
 
@@ -352,7 +360,7 @@ public class TireOverviewController {
 	 * Opens a FileChooser to let the user select a file to save to.
 	 */
 
-	@FXML
+/*	@FXML
 	private void DG_handleOpen() {
 		// getS11list clear
 		mainApp.getS11List().clear();
@@ -369,7 +377,7 @@ public class TireOverviewController {
 		if (file != null) {
 			mainApp.loadDGDataFromFile(file);
 		}
-	}
+	}*/
 
 	@FXML
 	private void DG_handleSaveAs() {
@@ -406,24 +414,89 @@ public class TireOverviewController {
     
     @FXML
     public void handleBroadcast() {
-    		String msg = "Starting BroadCasting ... (Not Really)\n";
+    		/*String msg = "Starting BroadCasting ... (Not Really)\n";
     		Text t = new Text();
         t.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
         t.setText(msg);
     		commsFlow.getChildren().add(t);
-    		
-//	    	commsArea.appendText(msg);
+    		*/
+    		FileChooser fileChooser = new FileChooser();
+    		//Set extension filter
+    		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
+    				"XML files (*.xml)", "*.xml");
+    		fileChooser.getExtensionFilters().add(extFilter);
+    		// Show open file dialog
+    		if(service == null || (!service.isRunning())) {
+    			service = null;
+    			File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
+    			if (file != null) {
+    				String path = file.getAbsolutePath();
+    				service = new BlueToothService();
+    				service.set_file_path(path);
+    				service.set_comms_Flow(commsFlow);
+    				service.set_notifier();
+    				String msg = "Creating Bluetooth Connection to Android Mobile!\n";
+    				Text txt = new Text();
+    				txt.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
+    				txt.setText(msg);
+    				commsFlow.getChildren().add(txt);
+    				service.setOnSucceeded(new EventHandler<WorkerStateEvent>(){    				  
+    					@Override
+    					public void handle(WorkerStateEvent t) {
+    						String msg = "Bluetooth Transmition succeeded!\n";
+    						Text txt = new Text();
+    						txt.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
+    						txt.setText(msg);
+    						commsFlow.getChildren().add(txt);
+    		            }
+    				});
+    				service.setOnFailed(new EventHandler<WorkerStateEvent>(){
+    					@Override
+    					public void handle(WorkerStateEvent t) {
+    						String msg = "Bluetooth Connection Failed!\n";
+    						Text txt = new Text();
+    						txt.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
+    						txt.setText(msg);
+    						commsFlow.getChildren().add(txt);
+    					}
+    				});
+    				
+    				service.setOnCancelled(new EventHandler<WorkerStateEvent>(){
+    					@Override
+    					public void handle(WorkerStateEvent t) {
+    						String msg = "Bluetooth Connection has been cancelled!\n";
+    						Text txt = new Text();
+    						txt.setStyle("-fx-fill: #359E4B;-fx-font-weight:bold;");
+    						txt.setText(msg);
+    						commsFlow.getChildren().add(txt);
+    					}
+    				});
+    				service.start();
+    			}
+    			else {
+    				String msg = "File doesn't exist!\n";
+    		    	Text t = new Text();
+    		    	t.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
+    		    	t.setText(msg);
+    		    	commsFlow.getChildren().add(t);
+    			}
+    		}
     }
-    
     @FXML
     public void handleBroadcastCancel() {
-    		String msg = "Shutting down BroadCasting ... (Not Really)\n";
-	    	Text t = new Text();
-	    	t.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
-	    	t.setText(msg);
-	    	commsFlow.getChildren().add(t);
+    	    if(service != null && service.isRunning()) {
+    	    	String msg = "Shutting down BroadCasting ...\n";
+    	    	Text t = new Text();
+    	    	t.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
+    	    	t.setText(msg);
+    	    	commsFlow.getChildren().add(t);
+    	    	service.stop();
+    	    	service.cancel();
+    	    	System.out.println(service.getState().toString());
+    	    	service = null;
+//	    		commsArea.appendText(msg);
+    	  }
     		
-//	    	commsArea.appendText(msg);
     }
 
 
