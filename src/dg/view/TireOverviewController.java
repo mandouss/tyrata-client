@@ -1,7 +1,6 @@
 package dg.view;
 
 import javafx.collections.ListChangeListener;
-import javafx.collections.ObservableList;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -40,6 +39,7 @@ public class TireOverviewController {
 	@FXML private TableColumn<Tire, String> tireIDColumn;
 	@FXML private TableColumn<Tire, Number> initS11Column;  //Integer, Double ... Should be Number
 	@FXML private Text tireCountText;
+	@FXML private Label addTireLabel;
 	
 	@FXML private Label tireIDLabel;
 	@FXML private Label tirePosLabel;
@@ -104,7 +104,13 @@ public class TireOverviewController {
 	
 	private void setTireCount() {
 //		System.out.println(tireTable.getItems().size());
-		tireCountText.setText(String.valueOf(tireTable.getItems().size()));
+		int count = tireTable.getItems().size();
+		tireCountText.setText(String.valueOf(count));
+		if(count == 0) { 
+			addTireLabel.setVisible(true);
+		} else {
+			addTireLabel.setVisible(false);
+		}
 	}
 
 	@FXML
@@ -246,8 +252,11 @@ public class TireOverviewController {
 			int timeSpan = Integer.parseInt(timeSpanField.getText());
 			int dailyMileage = Integer.parseInt(dailyMileageField.getText());
 			List<Tire> tireList = mainApp.getTireData();
-			int outlierInterval = Integer.parseInt(outlierIntervalField.getText());
 			boolean outlierEnabled = enableOutlierBox.isSelected();
+			int outlierInterval = -1;
+			if (outlierEnabled) {
+				outlierInterval = Integer.parseInt(outlierIntervalField.getText());
+			}
 			// System.out.println("Successfully Generated Data: outlier ("+ outlierEnabled + "): "+ outlierInterval);
 
 			//dataGen
@@ -318,9 +327,8 @@ public class TireOverviewController {
 		}
 
 		if (!enableOutlierBox.isSelected()) {
-
-		}
-		else if(outlierIntervalField.getText() == null || outlierIntervalField.getText().length() == 0) {
+			// does not check for outlierIntervalField 
+		} else if(outlierIntervalField.getText() == null || outlierIntervalField.getText().length() == 0) {
 			errorMessage += "Lack Outlier Interval!\n"; 
 		} else {
 			try {
@@ -332,7 +340,9 @@ public class TireOverviewController {
 				errorMessage += "Invalid Outlier Interval (Between 1 and 5000)\n"; 
 			}
 		}
-
+		if(tireTable.getItems().size()==0) {
+			errorMessage = "Tire Table is empty, please add tires to the table first!";
+		}
 		if (errorMessage == null || errorMessage.length() == 0) {
 			return true;
 		} else {
@@ -521,14 +531,14 @@ public class TireOverviewController {
 	private void initialize() {
 		// Initialize the tire table with the two columns.
 		tireTable.setFocusTraversable(true);
-		
+		addTireLabel.setVisible(false);
 		tireIDColumn.setCellValueFactory(cellData -> cellData.getValue().getTireIDProperty());
 		initS11Column.setCellValueFactory(cellData -> cellData.getValue().getInitS11Property());
 
 		// Clear tire details.
 		showTireDetails(null);
-//		System.out.println("At initialize():"+tireTable.getItems().size());
 		showGenInfo();
+		
 		// Listen for selection changes and show the tire details when changed.
 		tireTable.getSelectionModel().selectedItemProperty().addListener(
 				(observable, oldValue, newValue) -> showTireDetails(newValue));

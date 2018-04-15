@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
@@ -8,7 +9,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="720.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.TireOverviewController">
+<AnchorPane minHeight="540.0" minWidth="720.0" prefHeight="540.0" prefWidth="720.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="dg.view.TireOverviewController">
    <children>
       <SplitPane dividerPositions="0.45" layoutX="42.0" layoutY="55.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -33,6 +34,11 @@
                                     <Text fx:id="tireCountText" layoutX="120.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" />
                                  </children>
                               </HBox>
+                              <Label fx:id="addTireLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="286.0" prefWidth="320.0" text="Please add tires to the Table first ! " textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bg" stylesheets="@stylesheet.css">
@@ -198,7 +204,10 @@
                                     </Button>
                                  </children>
                               </HBox>
-                              <Text fx:id="statusText" fill="#c8595c" layoutX="245.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="24.0" />
+                              <Text fx:id="statusText" fill="#c8595c" layoutX="245.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="24.0">
+                                 <font>
+                                    <Font name="Helvetica Light" size="13.0" />
+                                 </font></Text>
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bg" stylesheets="@stylesheet.css">

@@ -9,35 +9,33 @@ import dg.util.DailyS11ToStringUtil;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 
 public class DataGenerator {
 
-	private IntegerProperty timeSpan;
-	private IntegerProperty dailyMileage;
+	private int timeSpan;
+	private int dailyMileage;
 	private int currentMileage;
 	private List<Tire> tireInfoList;
-	private ObjectProperty<LocalDate> startDate;
+	private LocalDate startDate;
 	private LocalDate currentDate;
-	private BooleanProperty outlierEnabled;
-	private IntegerProperty outlierInterval;
+	private boolean outlierEnabled;
+	private int outlierInterval;
 	private int dayCounter;
 	private int randomOutlierInterval;
 	
 	public DataGenerator(ObjectProperty<LocalDate> startDate, IntegerProperty timeSpan, IntegerProperty dailyMileage,
 			List<Tire> tireInfoList,BooleanProperty outlierEnabled, IntegerProperty outlierInterval) {
 		super();
-		this.timeSpan = timeSpan;
-		this.dailyMileage = dailyMileage;
+		this.timeSpan = timeSpan.get();
+		this.dailyMileage = dailyMileage.get();
 		this.tireInfoList = tireInfoList;
-		this.startDate = startDate;
+		this.startDate = startDate.get();
 		this.currentDate = startDate.get();
 		this.currentMileage = 0;
-		this.outlierInterval = outlierInterval;
-		this.outlierEnabled = outlierEnabled;
+		this.outlierInterval = outlierInterval.get();
+		this.outlierEnabled = outlierEnabled.get();
 		this.dayCounter = 0;
 		generateRandomOutlierInterval();
 	}
@@ -45,36 +43,37 @@ public class DataGenerator {
     public DataGenerator(LocalDate startDate, int timeSpan, int dailyMileage,
                          List<Tire> tireInfoList, boolean outlierEnabled, int outlierInterval) {
         super();
-        this.timeSpan = new SimpleIntegerProperty(timeSpan);
-        this.dailyMileage = new SimpleIntegerProperty(dailyMileage);
+        this.timeSpan = timeSpan;
+        this.dailyMileage = dailyMileage;
         this.tireInfoList = tireInfoList;
-        this.startDate = new SimpleObjectProperty<>(startDate);
+        this.startDate = startDate;
         this.currentDate = startDate;
         this.currentMileage = 0;
-        this.outlierEnabled = new SimpleBooleanProperty(outlierEnabled);
-        this.outlierInterval = new SimpleIntegerProperty(outlierInterval);
+        this.outlierEnabled = outlierEnabled;
+        this.outlierInterval = outlierInterval;
         this.dayCounter = 0;
         generateRandomOutlierInterval();
     }
 
 	public ObjectProperty<LocalDate> getStartDate() {
-		return startDate;
+		return new SimpleObjectProperty<LocalDate>(startDate);
 	}
 
 	public void setStartDate(ObjectProperty<LocalDate> startDate) {
-		this.startDate = startDate;
+		this.startDate = startDate.get();
 	}
 	
 	private void generateRandomOutlierInterval() {
-		Random rand = new Random();
-		int max = (int)Math.ceil(1.3 * outlierInterval.get());
-		int min = (int)Math.ceil(0.7 * outlierInterval.get());
-		
-		randomOutlierInterval = rand.nextInt((max-min) + 1) + min;
-		if(randomOutlierInterval <= 0) {
-			randomOutlierInterval = 1;
+		if(outlierEnabled) {
+			Random rand = new Random();
+			int max = (int)Math.ceil(1.3 * outlierInterval);
+			int min = (int)Math.ceil(0.7 * outlierInterval);
+
+			randomOutlierInterval = rand.nextInt((max-min) + 1) + min;
+			if(randomOutlierInterval <= 0) {
+				randomOutlierInterval = 1;
+			}
 		}
-		
 	}
 	
 	private DailyS11 computeNextS11() {
@@ -82,7 +81,7 @@ public class DataGenerator {
 		DailyS11 result = new DailyS11(currentDate, currentMileage);
 		boolean isOutlierDay = false;
 		
-		if (dayCounter == randomOutlierInterval && outlierEnabled.get() == true) {
+		if (dayCounter == randomOutlierInterval && outlierEnabled == true) {
 			isOutlierDay = true;
 		}
 		for (int i = 0; i < tireInfoList.size(); i++) {
@@ -107,7 +106,7 @@ public class DataGenerator {
 			generateRandomOutlierInterval();
 		}
 		currentDate = currentDate.plusDays(1);
-		currentMileage += dailyMileage.get();
+		currentMileage += dailyMileage;
 		
 		return result;
 	}
@@ -146,7 +145,7 @@ public class DataGenerator {
 	}
 	public ArrayList<DailyS11> generateSeries() {
 		ArrayList<DailyS11> result = new ArrayList<>();
-		for (int i = 0; i < timeSpan.get(); i++) {
+		for (int i = 0; i < timeSpan; i++) {
 			result.add(computeNextS11());
 		}
 		return result;
