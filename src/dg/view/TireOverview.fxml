@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.image.*?>
@@ -28,17 +29,22 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
-                              <HBox layoutY="269.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0">
+                              <HBox layoutY="269.0" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0">
                                  <children>
                                     <Label text="# Tires:" AnchorPane.bottomAnchor="0.0" />
                                     <Text fx:id="tireCountText" layoutX="120.0" layoutY="291.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="120.0" />
                                  </children>
                               </HBox>
-                              <Label fx:id="addTireLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="286.0" prefWidth="320.0" text="Please add tires to the Table first ! " textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <Label fx:id="addTireLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="286.0" prefWidth="320.0" text="Please add tires to the Table first ! " textAlignment="CENTER" textFill="#c45947" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <font>
-                                    <Font size="14.0" />
+                                    <Font name="Helvetica Bold" size="16.0" />
                                  </font>
                               </Label>
+                              <ImageView fx:id="instructionImage" fitHeight="94.0" fitWidth="150.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="5.0">
+                                 <image>
+                                    <Image url="@../../../file/Instruction.png" />
+                                 </image>
+                              </ImageView>
                            </children>
                         </AnchorPane>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0" styleClass="bg" stylesheets="@stylesheet.css">
