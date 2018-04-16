@@ -51,8 +51,9 @@ public class RootLayoutController {
 				Random rand = new Random();
 				//Double newTireS11 = rand.nextDouble()*1.5 - 2.5;
 				Double newTireS11 = (rand.nextInt(15000) - 25000)/10000.0;  // 4-digit precision
-				String newTireID = "T-" + String.format("%04d", rand.nextInt(9999)); //4-digit id
-				mainApp.getTireData().add(new Tire(newTireID,"UNKOWN",newTireS11,3.5));
+				//String newTireID = "T-" + String.format("%04d", rand.nextInt(9999)); //4-digit id
+				String newTireID = "T-" + String.format("%04d", i+1); //4-digit id
+				mainApp.getTireData().add(new Tire(newTireID,"UNKOWN",newTireS11,35));
 			}
 		}
 	}

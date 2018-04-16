@@ -25,7 +25,7 @@ public class Tire {
 	
 	public Tire() {
 		// initialize s11_i to be -2. initialize pressure to be 3.5
-		this(null,null,-2,3.5);
+		this(null,null,-2,35);
 	}
 	public Tire(String tireID, String tirePosition, double s11_i,double pressure) {
 		this.tireID = new SimpleStringProperty(tireID);
