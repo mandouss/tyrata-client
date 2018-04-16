@@ -44,10 +44,7 @@ public class MainApp extends Application {
 	private ArrayList<DailyS11> s11List = new ArrayList<DailyS11>();
 
 	public MainApp() {
-		tireData	.add(new Tire("T-1234","LF",-1.3332,3.5));
-		tireData	.add(new Tire("T-1302","RF",-2.4309,3.5));
-		tireData	.add(new Tire("T-4124","LR",-1.0223,3.5));
-		tireData	.add(new Tire("T-9175","RR",-2.222,3.5));
+
 	}
 
 	/**

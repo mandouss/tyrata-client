@@ -4,6 +4,7 @@ import javafx.collections.ListChangeListener;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
@@ -12,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -40,6 +42,7 @@ public class TireOverviewController {
 	@FXML private TableColumn<Tire, Number> initS11Column;  //Integer, Double ... Should be Number
 	@FXML private Text tireCountText;
 	@FXML private Label addTireLabel;
+	@FXML private ImageView instructionImage;
 	
 	@FXML private Label tireIDLabel;
 	@FXML private Label tirePosLabel;
@@ -108,8 +111,10 @@ public class TireOverviewController {
 		tireCountText.setText(String.valueOf(count));
 		if(count == 0) { 
 			addTireLabel.setVisible(true);
+			instructionImage.setVisible(true);
 		} else {
 			addTireLabel.setVisible(false);
+			instructionImage.setVisible(false);
 		}
 	}
 
@@ -532,6 +537,7 @@ public class TireOverviewController {
 		// Initialize the tire table with the two columns.
 		tireTable.setFocusTraversable(true);
 		addTireLabel.setVisible(false);
+		instructionImage.setVisible(false);
 		tireIDColumn.setCellValueFactory(cellData -> cellData.getValue().getTireIDProperty());
 		initS11Column.setCellValueFactory(cellData -> cellData.getValue().getInitS11Property());
 
@@ -571,7 +577,7 @@ public class TireOverviewController {
 		// Add observable list data to the table
 		tireTable.setItems(mainApp.getTireData());
 		// Listen for changes in tire number and display on Screen
-		tireCountText.setText(String.valueOf(tireTable.getItems().size()));
+		setTireCount();
 		mainApp.getTireData().addListener(
 				(ListChangeListener<Tire>) ((change) -> {
 					setTireCount();
