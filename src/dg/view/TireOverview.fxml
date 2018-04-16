@@ -40,7 +40,7 @@
                                     <Font name="Helvetica Bold" size="16.0" />
                                  </font>
                               </Label>
-                              <ImageView fx:id="instructionImage" fitHeight="101.0" fitWidth="125.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="5.0">
+                              <ImageView fx:id="instructionImage" fitHeight="94.0" fitWidth="150.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="5.0">
                                  <image>
                                     <Image url="@../../../file/Instruction.png" />
                                  </image>
