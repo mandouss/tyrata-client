@@ -2,6 +2,7 @@ package dg;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
 import javax.xml.bind.JAXBContext;
@@ -12,9 +13,9 @@ import dg.model.DGListWrapper;
 import dg.model.DailyS11;
 import dg.model.Tire;
 import dg.model.TireListWrapper;
+import dg.view.GenerateTireDialogController;
 import dg.view.GeneratedDataViewController;
 import dg.view.RootLayoutController;
-import dg.view.GenerateTireDialogController;
 import dg.view.TireEditDialogController;
 import dg.view.TireOverviewController;
 import javafx.application.Application;
@@ -88,7 +89,11 @@ public class MainApp extends Application {
 			RootLayoutController controller = loader.getController();
 			controller.setMainApp(this);
 			primaryStage.show();
-		} catch (IOException e) {
+			
+			//clear the path preference when opening the simulator
+			Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
+			prefs.clear();
+		} catch (IOException | BackingStoreException e) {
 			e.printStackTrace();
 		}
 
@@ -314,65 +319,8 @@ public class MainApp extends Application {
 	
 	
 
-	/****************************************************    
-	******************* Save Data Branch ****************
-	*****************************************************/
-	    
-
-	    /**
-	     * Sets the file path of the currently loaded file. The path is persisted in
-	     * the OS specific registry.
-	     * 
-	     * @param file the file or null to remove the path
-	     */
-	   /* public void setDGFilePath(File file) {
-	        Preferences prefs = Preferences.userNodeForPackage(MainApp.class);
-	        if (file != null) {
-	            prefs.put("filePath", file.getPath());
-
-	            // Update the stage title.
-	            primaryStage.setTitle("TyrataSimulator - " + file.getName());
-	        } else {
-	            prefs.remove("filePath");
-
-	            // Update the stage title.
-	            primaryStage.setTitle("TyrataSimulator");
-	        }
-	    }*/
-	    
-	    
-	    
-	    
-	    /**
-		 * Loads person data from the specified file. The current person data will
-		 * be replaced.
-		 * 
-		 * @param file
-		 */
-		/*public void loadDGDataFromFile(File file) {
-		    try {
-		        JAXBContext context = JAXBContext
-		                .newInstance(DGListWrapper.class);
-		        Unmarshaller um = context.createUnmarshaller();
-
-		        // Read XML from the file and unmarshal.
-		        DGListWrapper wrapper = (DGListWrapper) um.unmarshal(file);
-		        s11List.clear();
-		        s11List.addAll(wrapper.getDailyS11List());
-		        // Save the file path to the registry.
-		        //setDGFilePath(file);
-
-		    } catch (Exception e) { // catches ANY exception
-		        Alert alert = new Alert(AlertType.ERROR);
-		        alert.setTitle("Error");
-		        alert.setHeaderText("Could not load data");
-		        alert.setContentText("Could not load data from file:\n" + file.getPath());
-		        alert.showAndWait();
-		    }
-		}
-		*/
-	    
-	    
+	
+/******************* Save Data Branch ****************/     
 	    /**
 		 * Saves the current DG data to the specified file.
 		 * 
@@ -403,14 +351,8 @@ public class MainApp extends Application {
 		        alert.showAndWait();
 		    }
 		}
-
-	  
-	    /****************************************************    
-	    /*************************** Save Data Branch ************/ 
-	    
-	    
-	    
-	    
+/*************************** Save Data Branch ************/ 
+	    	    
 
 	public static void main(String[] args) {
 		launch(args);
