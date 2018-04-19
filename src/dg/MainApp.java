@@ -289,8 +289,8 @@ public class MainApp extends Application {
 		catch(Exception e) { //catches ANY exception
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Error");
-			alert.setHeaderText("Could not load data");
-			alert.setContentText("Could not load data from file:\n" + file.getPath());
+			alert.setHeaderText("Wrong format!");
+			alert.setContentText("Failed to import the TireConfigurations\n\n" + file.getPath() + "\nThe file's format doesn't match!\n");
 			alert.showAndWait();
 		}
 	}
