@@ -161,10 +161,11 @@ public class MainApp extends Application {
 	 * Opens a dialog to edit details for the specified tire. If the user clicks OK,
 	 * the changes are saved into the provided tire object and true is returned.
 	 * 
-	 * @param Tire the tire object to be edited
+	 * @param Tire the tire object to be edited 
+	 * @param String editType = 'Edit Tire', 'New Tire'
 	 * @return true if the user clicked OK, false otherwise.
 	 */
-	public boolean showTireEditDialog(Tire tire) {
+	public boolean showTireEditDialog(Tire tire, String editType) {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
 			FXMLLoader loader = new FXMLLoader();
@@ -173,7 +174,7 @@ public class MainApp extends Application {
 
 			// Create the dialog Stage.
 			Stage dialogStage = new Stage();
-			dialogStage.setTitle("Edit Tire");
+			dialogStage.setTitle(editType);
 			dialogStage.initModality(Modality.WINDOW_MODAL);
 			dialogStage.initOwner(primaryStage);
 			Scene scene = new Scene(page);

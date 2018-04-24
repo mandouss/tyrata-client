@@ -5,6 +5,7 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -60,6 +61,10 @@ public class TireOverviewController {
 	@FXML private ScrollPane commsPane;
 	@FXML private TextFlow commsFlow;
 	@FXML private TextArea commsArea;
+	
+	@FXML private Button editButton;
+	@FXML private Button deleteButton;
+	
 
 	// Reference to the main application.
 	private MainApp mainApp;
@@ -116,9 +121,13 @@ public class TireOverviewController {
 		if(count == 0) { 
 			addTireLabel.setVisible(true);
 			instructionImage.setVisible(true);
+			editButton.setDisable(true);
+			deleteButton.setDisable(true);
 		} else {
 			addTireLabel.setVisible(false);
 			instructionImage.setVisible(false);
+			editButton.setDisable(false);
+			deleteButton.setDisable(false);
 		}
 	}
 
@@ -182,7 +191,7 @@ public class TireOverviewController {
 	@FXML
 	private void handleNewTire() {
 		Tire newTire = new Tire();
-		boolean saveClicked = mainApp.showTireEditDialog(newTire);
+		boolean saveClicked = mainApp.showTireEditDialog(newTire, "New Tire");
 		if (saveClicked) {
 			mainApp.getTireData().add(newTire);
 		}
@@ -194,7 +203,7 @@ public class TireOverviewController {
 	private void handleEditTire() {
 		Tire selectedTire = tireTable.getSelectionModel().getSelectedItem();
 		if(selectedTire != null) {
-			boolean saveClicked = mainApp.showTireEditDialog(selectedTire);
+			boolean saveClicked = mainApp.showTireEditDialog(selectedTire, "Edit Tire");
 			if (saveClicked) {
 				showTireDetails(selectedTire);
 			}
@@ -557,10 +566,12 @@ public class TireOverviewController {
 		tireTable.setItems(mainApp.getTireData());
 		// Listen for changes in tire number and display on Screen
 		setTireCount();
+		
 		mainApp.getTireData().addListener(
 				(ListChangeListener<Tire>) ((change) -> {
 					setTireCount();
 				}));
+//		mainApp.getS11List().addListener
 	}
 	
 }
