@@ -11,7 +11,10 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-
+/*
+ * This DataGenerator class is responsible for generating s11 values (including ourliers)
+ * for a given time span.
+ */
 public class DataGenerator {
 
 	private int timeSpan;
@@ -63,6 +66,11 @@ public class DataGenerator {
 		this.startDate = startDate.get();
 	}
 	
+	/*
+	 * This method adds the functionality of generating outliers with varying intervals in days
+	 * instead of a fixed number of days. This adds more randomness to our algorithms and can 
+	 * be further used to test the outlier removal algorithms of the mobile app.
+	 */
 	private void generateRandomOutlierInterval() {
 		if(outlierEnabled) {
 			Random rand = new Random();
@@ -76,6 +84,11 @@ public class DataGenerator {
 		}
 	}
 	
+	/*
+	 * This method is the main algorithm for generating s11 data points. 
+	 * Depending on the day counter, the method will either generate a normal s11 value 
+	 * or a outlier value. 
+	 */
 	private DailyS11 computeNextS11() {
 		
 		DailyS11 result = new DailyS11(currentDate, currentMileage);
@@ -91,12 +104,10 @@ public class DataGenerator {
 			} else {
 				x = rollNormal();
 			}
-//			System.out.println("number " + x);
+
 			double s11_m = tireInfoList.get(i).getInitS11()  + this.currentMileage * 0.08 / 5000 * x;
 			
-			//remove show tire location, tyrata mobile will calibrate tire location
 			String tireinfo = tireInfoList.get(i).getTireID();
-					//+ " " + tireInfoList.get(i).getTirePos();
 			double pressure = tireInfoList.get(i).getPressure();
 			result.addTireS11(tireinfo, s11_m, pressure);
 		}
@@ -111,6 +122,9 @@ public class DataGenerator {
 		return result;
 	}
 	
+	/*
+	 * Generate a normal s11 value
+	 */
 	private double rollNormal() {
 		Random randomno = new Random();
 		double x = randomno.nextGaussian() * 0.1 + 1;
@@ -120,6 +134,10 @@ public class DataGenerator {
 		}
 		return x;
 	}
+	
+	/*
+	 * Generate an outlier s11 value
+	 */
 	private double rollOutlier() {
 		Random randomno = new Random();
 		double x = randomno.nextGaussian() * 10 + 1;
@@ -130,11 +148,16 @@ public class DataGenerator {
 		return x;
 	}
 	
+	/*
+	 * Check if the generated x value is a normal value or an outlier
+	 */
 	private boolean isNormal(double x) {
 		return !isOutlier(x);
 	}
 	
-	// Normal mean=1 std=0.1, consider [0,2] normal range 
+	/*
+	 * Normal mean=1 std=0.1. Consider [0,2] as the normal range for x
+	 */
 	private boolean isOutlier(double x) {
 		double ucl = 2;
 		double lcl = 0;
@@ -143,6 +166,10 @@ public class DataGenerator {
 		}
 		return false;
 	}
+	
+	/*
+	 * Generate a series of data points for the given time span.
+	 */
 	public ArrayList<DailyS11> generateSeries() {
 		ArrayList<DailyS11> result = new ArrayList<>();
 		for (int i = 0; i < timeSpan; i++) {
@@ -159,7 +186,9 @@ public class DataGenerator {
         return result;
     }
     
-	
+	/*
+	 * The ancillary main function used to test the data generator 
+	 */
     public static void main(String[] args) {
         //tireInfo_list
         Tire tireLF = new Tire("C-1", "LF", -2.0, 3.5);
@@ -179,7 +208,6 @@ public class DataGenerator {
         ArrayList<DailyS11> result = dataGen.generateSeries();
         String resultInString = DailyS11ToStringUtil.dailyS11ToString(result);
         System.out.println(resultInString);
-        //result.forEach((dailyResult) -> dailyResult.print());
         
     }
 	
