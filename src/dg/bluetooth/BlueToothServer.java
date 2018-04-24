@@ -43,7 +43,7 @@ public class BlueToothServer extends Task<Void> {
 			 if(local.getDiscoverable() != DiscoveryAgent.GIAC){
 				 local.setDiscoverable(DiscoveryAgent.GIAC);
 			 }
-				 //System.out.println("Please set your local bluetooth as discoverable");
+				 //System.out.println("Please set your local Bluetooth as discoverable");
 	 //btspp stands for RFCOMM connection
 		 //System.out.println(new UUID("fa87c0d0afac11de8a390800200c9a66",false).toString());
 		 System.out.println("Make Service visible to remote client!");
@@ -101,7 +101,7 @@ public class BlueToothServer extends Task<Void> {
   			 System.out.println("Writing completed....");	 
   			 int timer = 0;
   			 boolean has_succeeded = false;
-  			 while(timer < 10000) { //polling will end if the time elapses 10000 miliseconds
+  			 while(timer < 10000) { //polling will end if the time elapses 10000 milliseconds
   				 byte [] read_byte_array = new byte [1];
   				 if(isCancelled()) {
   					 return;
@@ -158,7 +158,7 @@ public class BlueToothServer extends Task<Void> {
 		 /*
 		 Platform.runLater(new Runnable(){
 	            @Override public void run() {
-	            	String msg = "Cancel scheduled bluetooth connection\n";
+	            	String msg = "Cancel scheduled Bluetooth connection\n";
 	            	Text txt = new Text();
 	            	txt.setStyle("-fx-fill: #C8595C;-fx-font-weight:bold;");
 	            	txt.setText(msg);
