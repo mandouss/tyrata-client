@@ -14,7 +14,6 @@ import javafx.beans.property.StringProperty;
 
 /**
  * 
- * @author haohongzhao
  * 
  * tire data (for one tire):
  * - tirePosition (where this tire located)
