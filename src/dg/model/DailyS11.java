@@ -12,6 +12,23 @@ import dg.util.LocalDateAdapter;
 
 @XmlRootElement(name = "dailyS11")
 
+/**
+ * 
+ * @author haohongzhao
+ * data for one measurement of one car(with many tires), including
+ *  - timestamp (timestamp for the measurement)
+ *  - mileage (mileage of the car at the moment of measurement)
+ *  - sensorIdAndS11_list (list of measured data for each tire)
+ *  
+ *  measured data for each tire contains
+ * 	- sensorID (used as tire ID)
+ *  - S11 (S11 value measured)
+ *  - pressure (pressure of the tire)
+ * 
+ * important methods:
+ * convertToString() string : convert this measurement to string
+ * print() void : convert this measurement to string & print on stdout
+ */
 public class DailyS11 {
 	
 	private LocalDate timestamp;
@@ -73,7 +90,7 @@ public class DailyS11 {
 			System.out.println("Pressure: " + sensorIdAndS11_list.get(i).getPressure());
 		}
 	}
-
+	
 	public String convertToString() {
 		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
 		String result = "";
