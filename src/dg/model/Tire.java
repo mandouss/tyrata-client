@@ -5,10 +5,8 @@ import java.time.LocalDate;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import dg.util.LocalDateAdapter;
-//import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.ObjectProperty;
-//import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -19,7 +17,6 @@ public class Tire {
 	private final StringProperty tirePosition;
 	private final DoubleProperty s11_i;
     private final ObjectProperty<LocalDate> startDate;
-  //private final IntegerProperty timeInterval;
   	private final DoubleProperty pressure;
 	
 	
@@ -32,7 +29,6 @@ public class Tire {
 		this.tirePosition = new SimpleStringProperty(tirePosition);
 		this.s11_i = new SimpleDoubleProperty(s11_i);
 		this.startDate = new SimpleObjectProperty<LocalDate>(LocalDate.now()); //default: start from current time
-		//this.timeInterval = new SimpleIntegerProperty(1); //default: once a day
 		this.pressure = new SimpleDoubleProperty(pressure);
 	}
 	
@@ -41,7 +37,6 @@ public class Tire {
 		this.tirePosition = new SimpleStringProperty(tirePosition);
 		this.s11_i = new SimpleDoubleProperty(s11_i);
 		this.startDate = new SimpleObjectProperty<LocalDate>(startDate);
-		//this.timeInterval = new SimpleIntegerProperty(timeInterval); 
 		this.pressure = new SimpleDoubleProperty(pressure);
 	}
 
@@ -96,13 +91,4 @@ public class Tire {
         return pressure;
     }
     
-    /*public int getTimeInterval() {
-        return timeInterval.get();
-    }
-    public void setTimeInterval(int timeInterval) {
-        this.timeInterval.set(timeInterval);
-    }
-    public IntegerProperty getTimeIntervalProperty() {
-        return timeInterval;
-    }*/
 }
