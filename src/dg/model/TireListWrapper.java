@@ -7,15 +7,15 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Helper class to wrap a list of persons. This is used for saving the 
- * list of tires to XML
+ * Helper class to wrap a list of Tires. This is used for saving the 
+ * list of Tires to XML
  *
  */
-@XmlRootElement (name = "tires")
+@XmlRootElement (name = "tires") //tag <tires> in XML, list of tires
 public class TireListWrapper {
 	private List<Tire> tires;
 	
-	@XmlElement(name = "tire")
+	@XmlElement(name = "tire") //tag <tire> in XML
 	public List<Tire> getTires(){
 		return tires;
 	}

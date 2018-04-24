@@ -234,7 +234,7 @@ public class MainApp extends Application {
 
 
 	/**
-	 * Returns the person file preference, i.e the file that was lat opened.
+	 * Returns the person file preference, i.e the file that was last opened.
 	 * The preference is read from the OS specific registry. If no such
 	 * preference can be found, null is returned.
 	 * 
@@ -270,7 +270,13 @@ public class MainApp extends Application {
 			primaryStage.setTitle("TyrataSimulator");
 		}
 	}
-
+	
+	/**
+	 * Loads Tire data from the specified XML file. The current ObservableList tireData will
+	 * be replaced.
+	 * 
+	 * @param file
+	 */
 	public void loadTireDataFromFile(File file) {
 		try {
 			JAXBContext context = JAXBContext.newInstance(TireListWrapper.class);
@@ -294,7 +300,12 @@ public class MainApp extends Application {
 			alert.showAndWait();
 		}
 	}
-
+	
+	/**
+	 * Saves the current ObservableList tireData to the specified XML file.
+	 * 
+	 * @param file
+	 */
 	public void saveTireDataToFile(File file) {
 		try {
 			JAXBContext context = JAXBContext.newInstance(TireListWrapper.class);
@@ -317,12 +328,8 @@ public class MainApp extends Application {
 		}
 	}
 	
-	
-
-	
-/******************* Save Data Branch ****************/     
 	    /**
-		 * Saves the current DG data to the specified file.
+		 * Saves the current generated data (s11List) to the specified XML file.
 		 * 
 		 * @param file
 		 */
@@ -333,15 +340,13 @@ public class MainApp extends Application {
 		        Marshaller m = context.createMarshaller();
 		        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-		        // Wrapping our person data.
+		        // Wrapping the current generated data (s11List).
 		        DGListWrapper wrapper = new DGListWrapper();
 		        wrapper.setDailyS11List(s11List);
 
 		        // Marshalling and saving XML to the file.
 		        m.marshal(wrapper, file);
 
-		        // Save the file path to the registry.
-		        //ƒsetDGFilePath(file);
 		    } catch (Exception e) { // catches ANY exception
 		        Alert alert = new Alert(AlertType.ERROR);
 		        alert.setTitle("Error");
@@ -351,9 +356,10 @@ public class MainApp extends Application {
 		        alert.showAndWait();
 		    }
 		}
-/*************************** Save Data Branch ************/ 
 	    	    
-
+/**
+ * main function, launch
+ */
 	public static void main(String[] args) {
 		launch(args);
 	}
