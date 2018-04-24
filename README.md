@@ -80,6 +80,8 @@ ENTER - Confirm
 
 4 parameters are required to generate simulation data: start date, time span, daily mileage, and ourlier interval (optional).
 
+**In current version, outlier interval is randomly selected again after generating each outlier. The random outlier interval generated each time is around your input outlier interval**
+
 `Generate` - Generate Data
 
 `Save` - Save the data as .xml file
@@ -107,16 +109,16 @@ Integration into the main app will be completed in sprint 3.
 
 ```
  /
- |- src         -> The main source folder containing all Java files 
+ |- src           -> The main source folder containing all Java files 
  |- build         -> resources for build
  	|- build.xml  -> an Apache ANT script which compiles the source code and
  |                 provides several options to create distribution files.
- |- doc   		-> resources used for readme(this file)
- |- lib         -> 3rd party libraries needed for compilation and run. 
+ |- doc   		  -> resources used for readme(this file)
+ |- lib           -> 3rd party libraries needed for compilation and run. 
  bluecove: lib for bluetooth connection
- |- resources   -> A source folder containing required resource files. pictures used in app.
+ |- resources     -> A source folder containing required resource files. pictures used in app.
  |- build.fxbuild -> Maven support for the project
- |- README.md    -> this file
+ |- README.md     -> this file
 ```
 ## Authors
 
