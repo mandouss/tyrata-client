@@ -15,19 +15,16 @@
 	-fx-text-button-colored: #FFFFFF;
 	-fx-text-button-text: rgb(100.0, 100.0, 100.0);
 	-fx-text-title-color: rgb(45.0, 45.0, 45.0);
-	-fx-text-subtitle-color: rgb(65.0, 65.0, 65.0);
-	-fx-text-control-title-color: rgb(130.0, 130.0, 130.0);
 	-fx-text-fill: -fx-text-base-color;
 	/*default font */
 	-fx-font-family: 'Roboto Medium';
 	-fx-font-size: 14.0px;
-	-fx-disabled-opacity: 0.6;
 	/*default colors */
 	-swatch-grey: rgb(180.0, 180.0, 180.0);
 	-swatch-dark-grey: rgb(65.0, 65.0, 65.0);
 	-swatch-light-grey: rgb(230.0, 230.0, 230.0);
-	-swatch-toolbar: rgb(245.0, 245.0, 245.0);
-	-swatch-toolbar-selected: rgb(215.0, 215.0, 215.0);
+	-swatch-pale-grey: rgb(245.0, 245.0, 245.0);
+	
 	/* 
      Modena colors
      */
@@ -74,7 +71,7 @@
 }
 /*
  * 
-   -fx-background-color: -swatch-toolbar;
+   -fx-background-color: -swatch-pale-grey;
    -fx-box-border: -fx-faint-focus-color;
    -fx-border-width: 1;
    -fx-padding: 0;   
@@ -128,7 +125,7 @@
 
 
 .menu-bar { /* top */
-	-fx-background-color: -swatch-toolbar;
+	-fx-background-color: -swatch-pale-grey;
 	-fx-border-width: 0 0 2 0;
 	-fx-border-color: -swatch-grey;
 	-fx-min-height: 30;
