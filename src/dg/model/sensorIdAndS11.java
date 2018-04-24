@@ -6,6 +6,16 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "tire")
 @XmlType(propOrder = {"sensorID", "s11", "pressure"})
 
+/**
+ * 
+ *	
+ *	data for one measurement of one tire, including
+ * 	- sensorID (used as tire ID)
+ *  - S11 (S11 value measured)
+ *  - pressure (pressure of the tire)
+ *  
+ */ 
+
 public class sensorIdAndS11 {
 	private String sensorID;
 	private Double S11;
