@@ -25,6 +25,9 @@ import dg.util.LocalDateAdapter;
  *  - S11 (S11 value measured)
  *  - pressure (pressure of the tire)
  * 
+ * important methods:
+ * convertToString() string : convert this measurement to string
+ * print() void : convert this measurement to string & print on stdout
  */
 public class DailyS11 {
 	
