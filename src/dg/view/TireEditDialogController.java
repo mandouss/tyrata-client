@@ -23,10 +23,8 @@ public class TireEditDialogController {
 	private TextField tirePosField;
 	@FXML
 	private TextField initS11Field;
-
 	@FXML
 	private TextField pressureField; 
-	//changed to tire pressure
 	@FXML 
 	private DatePicker installDatePicker;
 
@@ -56,7 +54,8 @@ public class TireEditDialogController {
 	}
 
 	/**
-	 * Sets the tire to be edited in the dialog.
+	 * Sets the tire to be edited in the dialog. 
+	 * Don't pass null to it.
 	 * 
 	 * @param tire
 	 */
@@ -73,9 +72,9 @@ public class TireEditDialogController {
 	}
 
 	/**
-	 * Returns true if the user clicked Save, false otherwise.
+	 * Check if the user clicked Save.
+	 * @return isSaveClicked
 	 * 
-	 * @return
 	 */
 	public boolean isSaveClicked() {
 		return saveClicked;

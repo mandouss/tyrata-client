@@ -42,7 +42,7 @@
                               </Label>
                               <ImageView fx:id="instructionImage" fitHeight="94.0" fitWidth="150.0" layoutX="5.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="5.0">
                                  <image>
-                                    <Image url="@../../../file/Instruction.png" />
+                                    <Image url="@../../../resources/Instruction.png" />
                                  </image>
                               </ImageView>
                            </children>
@@ -220,7 +220,7 @@
                            <children>
                               <ImageView fitHeight="34.0" fitWidth="142.0" layoutX="137.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0">
                                  <image>
-                                    <Image url="@../../../file/tyrata%20logo.png" />
+                                    <Image url="@../../../resources/tyrata%20logo.png" />
                                  </image>
                               </ImageView>
                               <HBox layoutX="14.0" layoutY="10.0" spacing="8.0" AnchorPane.bottomAnchor="12.0" AnchorPane.leftAnchor="24.0">

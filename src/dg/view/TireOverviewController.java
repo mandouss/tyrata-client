@@ -4,7 +4,6 @@ import javafx.collections.ListChangeListener;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
@@ -104,7 +103,12 @@ public class TireOverviewController {
 		}
 	}
 	
-	
+	/**
+	 * Fills all text fields to show details about the tire.
+	 * If the specified tire is null, all text fields are cleared.
+	 * 
+	 * @param Tire or null
+	 */	
 	private void setTireCount() {
 //		System.out.println(tireTable.getItems().size());
 		int count = tireTable.getItems().size();
@@ -121,7 +125,7 @@ public class TireOverviewController {
 	@FXML
 	private void mouseClicked(MouseEvent mouseEvent) {
 		if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-			//TODO: can't cancel selection
+			//			cancel selections
 			//			int selectedIndex = tireTable.getSelectionModel().getSelectedIndex();
 			//			tireTable.getSelectionModel().clearAndSelect(selectedIndex);
 			//			Node selected = mouseEvent.getPickResult().getIntersectedNode();
@@ -286,9 +290,7 @@ public class TireOverviewController {
 			mainApp.showGeneratedData(); //the method returns a boolean if succeed
 		}
 		else {
-			//List is empty
-			//do nothing
-			//TODO: Maybe I can prompt a warning sign
+			//List is empty, do nothing
 		}
 	}
 
@@ -360,32 +362,9 @@ public class TireOverviewController {
 			errorMessage = errorMessage.substring(0, errorMessage.length() - 1);
 			statusText.setStyle("-fx-text-fill: #C8595C; -fx-font-size: 12px");
 			statusText.setText(errorMessage);
-			//TODO: Change color
 			return false;
 		}
 	}
-      /**
-	 * Opens a FileChooser to let the user select a file to save to.
-	 */
-
-/*	@FXML
-	private void DG_handleOpen() {
-		// getS11list clear
-		mainApp.getS11List().clear();
-		FileChooser fileChooser = new FileChooser();
-
-		// Set extension filter
-		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
-				"XML files (*.xml)", "*.xml");
-		fileChooser.getExtensionFilters().add(extFilter);
-
-		// Show open file dialog
-		File file = fileChooser.showOpenDialog(mainApp.getPrimaryStage());
-
-		if (file != null) {
-			mainApp.loadDGDataFromFile(file);
-		}
-	}*/
 
 	@FXML
 	private void DG_handleSaveAs() {
