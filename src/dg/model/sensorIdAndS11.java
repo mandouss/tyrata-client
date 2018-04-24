@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * 
- * @author haohongzhao
  *	
  *	data for one measurement of one tire, including
  * 	- sensorID (used as tire ID)

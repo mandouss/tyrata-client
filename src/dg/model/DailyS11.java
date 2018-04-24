@@ -14,7 +14,6 @@ import dg.util.LocalDateAdapter;
 
 /**
  * 
- * @author haohongzhao
  * data for one measurement of one car(with many tires), including
  *  - timestamp (timestamp for the measurement)
  *  - mileage (mileage of the car at the moment of measurement)

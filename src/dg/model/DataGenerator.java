@@ -11,7 +11,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
-/*
+/**
  * This DataGenerator class is responsible for generating s11 values (including ourliers)
  * for a given time span.
  */
