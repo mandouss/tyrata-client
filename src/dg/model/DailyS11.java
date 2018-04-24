@@ -10,14 +10,24 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import dg.util.LocalDateAdapter;
 
-@XmlRootElement(name = "dailyS11")
-
+@XmlRootElement(name = "dailyS11")  //tag <dailyS11> in XML
+/**
+ * Model class for generated data info of one day.
+ * elements: time stamp
+ *           mileage
+ *           List of multiple tire sensors' info of this day
+ *           each tire sensor info includes: 
+ *           1) sensor ID;
+ *           2) s11;
+ *           3) tire pressure
+ */
 public class DailyS11 {
 	
 	private LocalDate timestamp;
 	private int mileage;
 	private ArrayList<sensorIdAndS11> sensorIdAndS11_list;
-	@XmlElement(name = "tire")
+	@XmlElement(name = "tire")   //tag <tire> in XML
+								//every tire sensor info has a tag <tire> in XML
 	
 	public void setSensorIdAndS11_List(ArrayList<sensorIdAndS11> sensorIdAndS11_list) {
 		this.sensorIdAndS11_list = sensorIdAndS11_list;
@@ -58,10 +68,16 @@ public class DailyS11 {
 		this.sensorIdAndS11_list = new ArrayList<>();
 	}
 	
+	/**
+	 * add one tire sensor info to one day's data
+	 */
 	public void addTireS11(String sensorInfo, double s11, double pressure) {
 		sensorIdAndS11_list.add(new sensorIdAndS11(sensorInfo, s11, pressure));
 	}
 	
+	/**
+	 * Print out DailyS11 class info
+	 */
 	public void print() {
 		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
 		System.out.println("Timestamp:" + timestamp.format(formatter));
@@ -74,6 +90,9 @@ public class DailyS11 {
 		}
 	}
 
+	/**
+	 * Convert DailyS11 class info to String, for data Show function
+	 */
 	public String convertToString() {
 		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
 		String result = "";
