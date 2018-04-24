@@ -12,6 +12,17 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+/**
+ * 
+ * @author haohongzhao
+ * 
+ * tire data (for one tire):
+ * - tirePosition (where this tire located)
+ * - s11_i (initial S11 measurement of this tire)
+ * - startDate (when this tire is installed)	
+ * - pressure (tire pressure)
+ */
+
 public class Tire {
 	private final StringProperty tireID;
 	private final StringProperty tirePosition;
