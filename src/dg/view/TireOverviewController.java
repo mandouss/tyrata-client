@@ -62,8 +62,11 @@ public class TireOverviewController {
 	@FXML private TextFlow commsFlow;
 	@FXML private TextArea commsArea;
 	
-	@FXML private Button editButton;
-	@FXML private Button deleteButton;
+	@FXML private Button editTireButton;
+	@FXML private Button deleteTireButton;
+	
+	@FXML private Button saveDataButton;
+	@FXML private Button showDataButton;
 	
 
 	// Reference to the main application.
@@ -121,13 +124,13 @@ public class TireOverviewController {
 		if(count == 0) { 
 			addTireLabel.setVisible(true);
 			instructionImage.setVisible(true);
-			editButton.setDisable(true);
-			deleteButton.setDisable(true);
+			editTireButton.setDisable(true);
+			deleteTireButton.setDisable(true);
 		} else {
 			addTireLabel.setVisible(false);
 			instructionImage.setVisible(false);
-			editButton.setDisable(false);
-			deleteButton.setDisable(false);
+			editTireButton.setDisable(false);
+			deleteTireButton.setDisable(false);
 		}
 	}
 
@@ -287,6 +290,9 @@ public class TireOverviewController {
 			statusText.setText("Data Generated");
 			mainApp.getS11List().clear();
 			mainApp.getS11List().addAll(newS11List);
+			
+			saveDataButton.setDisable(false);
+			showDataButton.setDisable(false);
 		}
 	}
 
@@ -566,7 +572,8 @@ public class TireOverviewController {
 		tireTable.setItems(mainApp.getTireData());
 		// Listen for changes in tire number and display on Screen
 		setTireCount();
-		
+		saveDataButton.setDisable(true);
+		showDataButton.setDisable(true);
 		mainApp.getTireData().addListener(
 				(ListChangeListener<Tire>) ((change) -> {
 					setTireCount();
