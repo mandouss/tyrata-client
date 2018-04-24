@@ -51,9 +51,6 @@ public class GeneratedDataViewController {
 	}
 
 
-	/**
-	 * Called when the user clicks cancel.
-	 */
 	@FXML
 	private void handleClose() {
 		dialogStage.close();

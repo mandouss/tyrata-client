@@ -150,7 +150,7 @@ public class MainApp extends Application {
 			// Show the dialog and wait until the user closes it
 			dialogStage.showAndWait();
 
-			return controller.numoftires();
+			return controller.getTireNum();
 		} catch (IOException e) {
 			e.printStackTrace();
 			return 0;
