@@ -4,7 +4,7 @@
 
 TyrataSimulator is a pc program that generates simulated Tyrata sensors output and transmits the data through Bluetooth.
 
-![screen shot](./doc/Screen_Shot1_1.png)
+![screen shot](./doc/img/Screen_Shot1_1.png)
 
 ## Getting Started
 
@@ -35,7 +35,7 @@ If you wish to import or save the configuration, go to `menu bar` - `TireConfig`
 
 `Generate Tires` - Generate tires with customized number of tires
 
-![screen shot](./doc/Screen_Shot2.png)
+![screen shot](./doc/img/Screen_Shot2.png)
 
 > Sensor ID Format : `T-0000` Randomly generated 4 digit number
 
@@ -69,7 +69,7 @@ You can also do this using buttons on bottom-left screen:
 
 `Delete` - Delete selected tire
 
-![screen shot](./doc/Screen_Shot3.png)
+![screen shot](./doc/img/Screen_Shot3.png)
 
 **Key Board Control**
 
@@ -109,16 +109,14 @@ Integration into the main app will be completed in sprint 3.
 
 ```
  /
- |- src           -> The main source folder containing all Java files 
- |- build         -> resources for build
- 	|- build.xml  -> an Apache ANT script which compiles the source code and
- |                 provides several options to create distribution files.
- |- doc   		  -> resources used for readme(this file)
- |- lib           -> 3rd party libraries needed for compilation and run. 
+ |- src		   -> The main source folder containing all Java files 
+ |- build	   -> resources for build
+ |- doc		   -> resources used for readme(this file)
+ |- lib		   -> 3rd party libraries needed for compilation and run. 
  bluecove: lib for bluetooth connection
- |- resources     -> A source folder containing required resource files. pictures used in app.
- |- build.fxbuild -> Maven support for the project
- |- README.md     -> this file
+ |- resources  	   -> A source folder containing required resource files. pictures used in app.
+ |- build.fxbuild  -> Maven support for the project
+ |- README.md      -> this file
 ```
 ## Authors
 
