@@ -10,16 +10,26 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import dg.util.LocalDateAdapter;
 
+
 @XmlRootElement(name = "dailyS11")  //tag <dailyS11> in XML
+
+
 /**
- * Model class for generated data info of one day.
- * elements: time stamp
- *           mileage
- *           List of multiple tire sensors' info of this day
- *           each tire sensor info includes: 
- *           1) sensor ID;
- *           2) s11;
- *           3) tire pressure
+ * 
+ * @author haohongzhao
+ * data for one measurement of one car(with many tires), including
+ *  - timestamp (timestamp for the measurement)
+ *  - mileage (mileage of the car at the moment of measurement)
+ *  - sensorIdAndS11_list (list of measured data for each tire)
+ *  
+ *  measured data for each tire contains
+ * 	- sensorID (used as tire ID)
+ *  - S11 (S11 value measured)
+ *  - pressure (pressure of the tire)
+ * 
+ * important methods:
+ * convertToString() string : convert this measurement to string
+ * print() void : convert this measurement to string & print on stdout
  */
 public class DailyS11 {
 	
@@ -90,9 +100,11 @@ public class DailyS11 {
 		}
 	}
 
+
 	/**
 	 * Convert DailyS11 class info to String, for data Show function
 	 */
+
 	public String convertToString() {
 		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE;
 		String result = "";
