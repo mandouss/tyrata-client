@@ -38,7 +38,8 @@ public class RootLayoutController {
 	}
 
 	/**
-	 * Creates a Tire list if it is empty.
+	 * Clean current list and Creates a new tire list.
+	 *  
 	 */
 	@FXML
 	private void handleGenerateTires() {
@@ -58,6 +59,10 @@ public class RootLayoutController {
 		}
 	}
 	
+	/**
+	 * Clean current list, prompt a confirmation dialog.
+	 *  
+	 */
 	@FXML
 	private void handleClearAllTires() {
 		Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -75,12 +80,8 @@ public class RootLayoutController {
 		}
 	}
 
-
-	/*@FXML
-	private void handleNew() {
-		mainApp.getTireData().clear();
-		mainApp.setTireFilePath(null);
-	}
+	/**
+	 * Import tire configuration from file. 
 	 */
 	@FXML
 	private void handleOpen() {
@@ -113,6 +114,7 @@ public class RootLayoutController {
 			handleSaveAs();
 		}
 	}
+	
 	/**
 	 * Opens a FileChooser to let the user select a file to save to.
 	 * 
@@ -139,6 +141,9 @@ public class RootLayoutController {
 		}
 	}
 
+	/**
+	 * Import tire configuration from file. 
+	 */
 	@FXML
 	private void handleAbout() {
 		Alert alert = new Alert(AlertType.INFORMATION);

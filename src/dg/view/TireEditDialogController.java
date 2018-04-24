@@ -106,7 +106,10 @@ public class TireEditDialogController {
 	}
 
 	
-
+	/**
+	 * Called when the user click on keyboard
+	 * Only deals with ENTER for save 
+	 */
 	@FXML
 	private void keyReleased(KeyEvent keyEvent) {
 		//System.out.println("Release Detected " + keyEvent.getCode());
@@ -160,12 +163,6 @@ public class TireEditDialogController {
 		if (errorMessage.length() == 0) {
 			return true;
 		} else {
-			// Show the error message.
-			//	            Dialogs.create()
-			//	                .title("Invalid Fields")
-			//	                .masthead("Please correct invalid fields")
-			//	                .message(errorMessage)
-			//	                .showError();
 			errorMessage = errorMessage.substring(0, errorMessage.length() - 1);
 			warningText.setText(errorMessage);
 			return false;

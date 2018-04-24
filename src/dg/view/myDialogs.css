@@ -11,11 +11,8 @@
 	-swatch-400: #2E383F;
 	/*default colors */
 	
-	-fx-text-button-colored: #FFFFFF;
-	
 	-swatch-grey: rgb(180.0, 180.0, 180.0);
 	-swatch-dark-grey: rgb(65.0, 65.0, 65.0);
-	-swatch-light-grey: rgb(230.0, 230.0, 230.0);
 	/* A bright blue for the focus indicator of objects. Typically used as the
      * first color in -fx-background-color for the "focused" pseudo-class. Also
      * typically used with insets of -1.4 to provide a glowing effect.
@@ -51,7 +48,7 @@
 }
 
  .dialog-pane .button {
-	-fx-text-fill: -fx-text-button-colored;
+	-fx-text-fill: #FFFFFF;
 	-fx-background-color: derive(-swatch-300, 50%);
 	-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.30), 6.0, 0.3, 0,
 		1);

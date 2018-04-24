@@ -5,6 +5,7 @@ import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -60,6 +61,13 @@ public class TireOverviewController {
 	@FXML private ScrollPane commsPane;
 	@FXML private TextFlow commsFlow;
 	@FXML private TextArea commsArea;
+	
+	@FXML private Button editTireButton;
+	@FXML private Button deleteTireButton;
+	
+	@FXML private Button saveDataButton;
+	@FXML private Button showDataButton;
+	
 
 	// Reference to the main application.
 	private MainApp mainApp;
@@ -116,9 +124,13 @@ public class TireOverviewController {
 		if(count == 0) { 
 			addTireLabel.setVisible(true);
 			instructionImage.setVisible(true);
+			editTireButton.setDisable(true);
+			deleteTireButton.setDisable(true);
 		} else {
 			addTireLabel.setVisible(false);
 			instructionImage.setVisible(false);
+			editTireButton.setDisable(false);
+			deleteTireButton.setDisable(false);
 		}
 	}
 
@@ -182,7 +194,7 @@ public class TireOverviewController {
 	@FXML
 	private void handleNewTire() {
 		Tire newTire = new Tire();
-		boolean saveClicked = mainApp.showTireEditDialog(newTire);
+		boolean saveClicked = mainApp.showTireEditDialog(newTire, "New Tire");
 		if (saveClicked) {
 			mainApp.getTireData().add(newTire);
 		}
@@ -194,7 +206,7 @@ public class TireOverviewController {
 	private void handleEditTire() {
 		Tire selectedTire = tireTable.getSelectionModel().getSelectedItem();
 		if(selectedTire != null) {
-			boolean saveClicked = mainApp.showTireEditDialog(selectedTire);
+			boolean saveClicked = mainApp.showTireEditDialog(selectedTire, "Edit Tire");
 			if (saveClicked) {
 				showTireDetails(selectedTire);
 			}
@@ -278,6 +290,9 @@ public class TireOverviewController {
 			statusText.setText("Data Generated");
 			mainApp.getS11List().clear();
 			mainApp.getS11List().addAll(newS11List);
+			
+			saveDataButton.setDisable(false);
+			showDataButton.setDisable(false);
 		}
 	}
 
@@ -557,10 +572,13 @@ public class TireOverviewController {
 		tireTable.setItems(mainApp.getTireData());
 		// Listen for changes in tire number and display on Screen
 		setTireCount();
+		saveDataButton.setDisable(true);
+		showDataButton.setDisable(true);
 		mainApp.getTireData().addListener(
 				(ListChangeListener<Tire>) ((change) -> {
 					setTireCount();
 				}));
+//		mainApp.getS11List().addListener
 	}
 	
 }

@@ -34,6 +34,17 @@ public class GenerateTireDialogController {
 		this.dialogStage = dialogStage;
 	}
 
+	/**
+	 * Return the number of tires user entered
+	 */
+	public int getTireNum() {
+		if(isInputValid() && isSaveClicked()) {
+			return Integer.parseInt(numberOfTiresField.getText());
+		} else {
+			return 0;
+		}
+	}
+
 	public boolean isSaveClicked() {
 		return saveClicked;
 	}
@@ -46,22 +57,11 @@ public class GenerateTireDialogController {
 		}
 	}
 
-	/**
-	 * Called when the user clicks cancel.
-	 */
 	@FXML
 	private void handleCancel() {
 		dialogStage.close();
 	}
 	
-	public int numoftires() {
-		if(isInputValid() && isSaveClicked()) {
-			return Integer.parseInt(numberOfTiresField.getText());
-		} else {
-			return 0;
-		}
-	}
-
 	@FXML
 	private void keyReleased(KeyEvent keyEvent) {
 		//System.out.println("Release Detected " + keyEvent.getCode());
