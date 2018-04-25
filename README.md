@@ -23,94 +23,6 @@ TyrataSimulator is a pc program that generates simulated Tyrata sensors output a
 - BlueCove 2.1.2
 
 
-## Functions
-
-### Part 1 TireSensor Configuration and View
-
-#### Tire Table
-
-*In* `menu bar` - `TireConfig` 
-
-`Generate Tires` - Generate tires with customized number of tires
-
-> Sensor ID Format : `T-0000` Randomly generated 4 digit number
-
-> Init S11 Range: Between [-2.5, -1], with precision of 4 decimal places
-
-> Tire Location: Set to UNKOWN
-
-`Clear All Tires` - Clear all tires in the list
-
-`Save` - Save the file to opened file path (path shown on the title)
-
-`Save As` - Save the configuration as a new .xml file
-
-`Import` - Import tire configuration from file system
-
-#### Tire
-
-*In the TableView on the left of Main Interface*
-
-Each tire comes with <u>sensor ID</u>, <u>Location indicator</u>, <u>initial S11</u>, <u>install date</u>, and <u>tire pressure</u>. Only initial S11 is used for computation, install date and tire pressure are listed for reference.
-
-**Mouse/Keyboard Control** 
-
-`Click` on a tire to see details, `double-click` to edit, and press `Delete` or `BackSpace` on keyboard to delete. Hit `Enter` on keyboard to confirm.
-
-**Components**
-
-`New` - Define a new tire
-
-`Edit` - Edit parameters of a tire
-
-`Delete` - Delete selected tire
-
-### Part 2 Data Generator 
-
-*In the Panel on top-right of Main Interface*
-
-**Code** package `dg.model `
-
-4 parameters are required to generate simulation data: <u>start date</u>, <u>time span</u>, <u>daily mileage</u>, and <u>outlier interval</u> (optional).
-
-**Components**
-
-`Generate` - Generate Data
-
-`Save` - Save the data as .xml file
-
-`Show` - Show the data in a new window
-
-### Part 3 Data Broadcasting via Bluetooth
-
-In the Panel on bottom-right of Main Interface
-
-**Code** package `dg.bluetooth `
-
-**Components**
-
-textFlow - displaying feedback
-
-`Broadcast` - Start broadcasting
-
-`Cancel` - Cancel broadcasting
-
-### Part 4 Help
-
-*In* `menu bar` - `Help` 
-
-`HelpDoc` - A Hyperlink to User Manual
-
-`About` - Copyright info
-
-Copyright info
-
-```
-Version: 1.2.0 
-Author: ECE651 Tyrata Client Team
-(c) Copyright TyrataSimulator contributors and others 2018.  All rights reserved. Tyrata logo is trademark of the Tyrata Inc., https://www.tyrata.com/.
-```
-
 ## File structure
 
 ```
@@ -124,6 +36,7 @@ Author: ECE651 Tyrata Client Team
  |- build.fxbuild  -> JavaFx build support file
  |- README.md      -> this file
 ```
+
 ## Sprints
 
 \* Details in [Sprint Log](./doc/sprint_log.md)
@@ -147,6 +60,96 @@ Author: ECE651 Tyrata Client Team
 2. Modified Data Generating Algorithm (random outlier interval)
 3. Improved User Interface Control (disable buttons for clarity, add help document link, etc.)
 4. Performed code refactoring
+
+## Functions
+
+### Part 1 TireSensor Configuration and View
+
+#### Tire Table
+
+In *menu bar* - *TireConfig*
+
+`Generate Tires` - Generate tires with customized number of tires
+
+> Sensor ID Format : T-0001 (4 digit number starts from 0001)
+
+> Init S11 Range: Between [-2.5, -1], with precision of 4 decimal places
+
+> Tire Location: Set to UNKNOWN
+
+`Clear All Tires` - Clear all tires in the list
+
+`Save` - Save the file to opened file path (path shown on the title)
+
+`Save As` - Save the configuration as a new .xml file
+
+`Import` - Import tire configuration from file system
+
+#### Tire
+
+*In the TableView on the left of Main Interface*
+
+Each tire comes with <u>sensor ID</u>, <u>Location indicator</u>, <u>initial S11</u>, <u>install date</u>, and <u>tire pressure</u>. Only initial S11 is used for computation, install date and tire pressure are listed for reference.
+
+###### Mouse/Keyboard Control 
+
+Click on a tire to see details, double-click to edit.
+
+Press *Delete* or *BackSpace* on keyboard to delete. Hit *Enter* on keyboard to confirm.
+
+###### Components
+
+`New` - Define a new tire
+
+`Edit` - Edit parameters of a tire
+
+`Delete` - Delete selected tire
+
+### Part 2 Data Generator 
+
+*In the Panel on top-right of Main Interface*
+
+**Code** package *dg.model*
+
+4 parameters are required to generate simulation data: *start date*, *time span*, *daily mileage*, and *outlier interval* (optional).
+
+###### Components
+
+`Generate` - Generate Data
+
+`Save` - Save the data as .xml file
+
+`Show` - Show the data in a new window
+
+### Part 3 Data Broadcasting via Bluetooth
+
+*In the Panel on bottom-right of Main Interface*
+
+**Code** package `dg.bluetooth `
+
+###### **Components**
+
+textFlow - displaying feedback
+
+`Broadcast` - Start broadcasting
+
+`Cancel` - Cancel broadcasting
+
+### Part 4 Help
+
+In *menu bar* - *Help*
+
+`HelpDoc` - A Hyperlink to User Manual
+
+`About` - Copyright info
+
+Copyright info
+
+```
+Version: 1.2.0 
+Author: ECE651 Tyrata Client Team
+(c) Copyright TyrataSimulator contributors and others 2018.  All rights reserved. Tyrata logo is trademark of the Tyrata Inc., https://www.tyrata.com/.
+```
 
 ## Built with
 
