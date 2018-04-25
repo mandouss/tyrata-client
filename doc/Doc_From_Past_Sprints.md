@@ -4,7 +4,7 @@
 
 TyrataSimulator is a pc program that generates simulated Tyrata sensors output and transmits the data through Bluetooth.
 
-![screen shot](./doc/Screen_Shot1_1.png)
+![screen shot](./img/Screen_Shot1_1.png)
 
 ## Getting Started
 
@@ -35,7 +35,7 @@ If you wish to import or save the configuration, go to `menu bar` - `TireConfig`
 
 `Generate Tires` - Generate tires with customized number of tires
 
-![screen shot](./doc/Screen_Shot2.png)
+![screen shot](./img/Screen_Shot2.png)
 
 > Sensor ID Format : `T-0000` Randomly generated 4 digit number
 
@@ -69,7 +69,7 @@ You can also do this using buttons on bottom-left screen:
 
 `Delete` - Delete selected tire
 
-![screen shot](./doc/Screen_Shot3.png)
+![screen shot](./img/Screen_Shot3.png)
 
 **Key Board Control**
 
@@ -120,7 +120,7 @@ Haohong Zhao
 
 # Sprint 1 TyrataSimulator 1.0.0
 
-![screen shot](./doc/Screen_Shot0.png)
+![screen shot](./img/Screen_Shot0.png)
 
 The project now implements following functionality on the client application. 
 
