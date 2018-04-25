@@ -8,6 +8,8 @@ TyrataSimulator is a pc program that generates simulated Tyrata sensors output a
 
 ## Getting Started
 
+\* Details in [User Manual](./doc/Tyrata_Simulator_User_Manual.pdf)
+
 1. Clone the project to Eclipse 
     `File` => `Import`, select `Git` => `Projects from Git`
 2. Build the project and Run 
@@ -22,7 +24,6 @@ TyrataSimulator is a pc program that generates simulated Tyrata sensors output a
 
 
 ## Functions
-
 
 ### Part 1 TireSensor Configuration and View
 
@@ -94,9 +95,13 @@ textFlow - displaying feedback
 
 `Cancel` - Cancel broadcasting
 
-### Part 4 About
+### Part 4 Help
 
 *In* `menu bar` - `Help` 
+
+`HelpDoc` - A Hyperlink to User Manual
+
+`About` - Copyright info
 
 Copyright info
 
@@ -105,13 +110,6 @@ Version: 1.2.0
 Author: ECE651 Tyrata Client Team
 (c) Copyright TyrataSimulator contributors and others 2018.  All rights reserved. Tyrata logo is trademark of the Tyrata Inc., https://www.tyrata.com/.
 ```
-
-
-## Built with
-
-- Java SE 8 [1.8.0_162]
-- [JavaFX 8](http://www.oracle.com/technetwork/java/javase/overview/javafx-overview-2158620.html) - GUI library for JAVA
-- [Scene Builder 2.0](http://www.oracle.com/technetwork/java/javase/downloads/javafxscenebuilder-1x-archive-2199384.html) A Visual Layout Tool for JavaFX Applications
 
 ## File structure
 
@@ -126,6 +124,36 @@ Author: ECE651 Tyrata Client Team
  |- build.fxbuild  -> JavaFx build support file
  |- README.md      -> this file
 ```
+## Sprints
+
+\* Details in [Sprint Log](./doc/sprint_log.md)
+
+#### Sprint1 (2.19 ~ 3.4)
+
+1. Evaluated requirements for tyrata simulator, did architecture design
+2. Deployed development Environment
+3. Developed data generator model 
+4. Built a functioning User Interface with control
+
+#### Sprint2 (3.5 ~ 3.25)
+
+1. Re-designed User Interface
+2. Implemented XML File Storage
+3. Established bluetooth connection & transmission
+
+#### Sprint3 (3.26 ~ 4.8)
+
+1. Integrated bluetooth package into application
+2. Modified Data Generating Algorithm (random outlier interval)
+3. Improved User Interface Control (disable buttons for clarity, add help document link, etc.)
+4. Performed code refactoring
+
+## Built with
+
+- Java SE 8 [1.8.0_162]
+- [JavaFX 8](http://www.oracle.com/technetwork/java/javase/overview/javafx-overview-2158620.html) - GUI library for JAVA
+- [Scene Builder 2.0](http://www.oracle.com/technetwork/java/javase/downloads/javafxscenebuilder-1x-archive-2199384.html) A Visual Layout Tool for JavaFX Applications
+
 ## Authors
 
 Zike Qin
