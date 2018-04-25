@@ -63,7 +63,7 @@ TyrataSimulator is a pc program that generates simulated Tyrata sensors output a
 
 ## Functions
 
-![Components0](/Users/Grandiose/Documents/eclipse-workspace/DataGen/doc/img/Components0.png)
+![Components0](./doc/img/Components0.png)
 
 ### Part 1 TireSensor Configuration and View
 
@@ -71,7 +71,7 @@ TyrataSimulator is a pc program that generates simulated Tyrata sensors output a
 
 In *menu bar* - *TireConfig*
 
-![Components1](/Users/Grandiose/Documents/eclipse-workspace/DataGen/doc/img/Components1.png)
+![Components1](./doc/img/Components1.png)
 
 `Generate Tires` - Generate tires with customized number of tires
 
@@ -93,7 +93,7 @@ In *menu bar* - *TireConfig*
 
 *In the TableView on the left of Main Interface*
 
-![Components2](/Users/Grandiose/Documents/eclipse-workspace/DataGen/doc/img/Components2.png)
+![Components2](./doc/img/Components2.png)
 
 Each tire comes with <u>sensor ID</u>, <u>Location indicator</u>, <u>initial S11</u>, <u>install date</u>, and <u>tire pressure</u>. Only initial S11 is used for computation, install date and tire pressure are listed for reference.
 
@@ -147,7 +147,7 @@ In *menu bar* - *Help*
 
 `HelpDoc` - A Hyperlink to User Manual
 
-![Components3](/Users/Grandiose/Documents/eclipse-workspace/DataGen/doc/img/Components3.png)
+![Components3](./doc/img/Components3.png)
 
 `About` - Copyright info
 
