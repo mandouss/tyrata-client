@@ -1,13 +1,13 @@
-## work log
+# Sprint log
 
 ### Sprint1
 
 In sprint 1, we:
 
 1. Evaluated requirements for tyrata simulator, did architecture design
-2. Built coding environment
-3. Worked on data generator module (including XML module)
-4. Worked on a basic UI, built a plain one
+2. Deployed development Environment
+3. Developed data generator model 
+4. Built a functioning User Interface with control
 
 Sprint1 workflow:
 
@@ -29,8 +29,9 @@ After building coding env
 
 In sprint 2, we:
 
-1. Focused on UI improvement  
-2. Focused on bluetooth connection & transmission
+1. Re-designed User Interface
+2. Implemented XML File Storage
+3. Established bluetooth connection & transmission
 
 Sprint2 workflow:
 
@@ -44,10 +45,10 @@ Time span: 3 weeks, 1st week for UI improvement & bluetooth connection, 2nd week
 
 In sprint 3, we:
 
-1. Integrated bluetooth component into app
-2. Additional funcs(random outlier interval)
-3. Further UI improvement
-4. system test & debug
+1. Integrated bluetooth package into application
+2. Modified Data Generating Algorithm (random outlier interval)
+3. Improved User Interface Control (disable buttons for clarity, add help document link, etc.)
+4. Performed code refactoring
 
 Sprint3 workflow:
 

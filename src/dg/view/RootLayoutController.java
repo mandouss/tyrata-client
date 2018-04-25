@@ -7,6 +7,7 @@ import java.util.Random;
 import dg.MainApp;
 import dg.model.Tire;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
@@ -15,7 +16,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.web.WebEngine;
+import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import jdk.internal.org.objectweb.asm.Handle;
 
 /**
  * The controller for the root layout. The root layout provides the 
@@ -141,9 +147,30 @@ public class RootLayoutController {
 		}
 	}
 
-	/**
-	 * Import tire configuration from file. 
-	 */
+//	@Override 
+//	public void start(Stage stage) throws Exception {
+//		WebView web = new WebView();
+//		web.getEngine().load("https://gitlab.oit.duke.edu/ECE651_S18/tyrata-client/blob/master/doc/Tyrata_Simulator_User_Manual.pdf");
+//		Scene scene = new Scene(web);
+//		stage.setScene(scene);
+//		stage.show();
+//	}
+
+	@FXML
+	private void handleHelpLink() {
+		Stage webpageStage = new Stage();
+		webpageStage.setTitle("UserManual");
+		
+		final WebView webView = new WebView();
+		final WebEngine engine = webView.getEngine();
+        engine.load("https://drive.google.com/open?id=1qLVi1TEUJRrYDvau_aYHmNLeoIxxuJnG");
+
+		Scene scene = new Scene(webView);
+		webpageStage.setScene(scene);
+		webpageStage.show();
+		
+        	}
+
 	@FXML
 	private void handleAbout() {
 		Alert alert = new Alert(AlertType.INFORMATION);
@@ -154,7 +181,7 @@ public class RootLayoutController {
 		alert.setTitle("TyrataSimulator");
 		//alert.setHeaderText("About");
 		alert.setHeaderText(null);
-		String versionInfo = "Version: 1.1.0 \nAuthor: ECE651 Tyrata Client Team\n";
+		String versionInfo = "Version: 1.2.0 \nAuthor: ECE651 Tyrata Client Team\n";
 		alert.setContentText(versionInfo);
 
 		String copyrightInfo = versionInfo + "(c) Copyright TyrataSimulator contributors and others 2018.  All rights reserved. Tyrata logo is trademark of the Tyrata Inc., https://www.tyrata.com/.";
@@ -189,3 +216,4 @@ public class RootLayoutController {
 		System.exit(0);
 	}
 }	
+

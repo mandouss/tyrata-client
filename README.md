@@ -8,6 +8,8 @@ TyrataSimulator is a pc program that generates simulated Tyrata sensors output a
 
 ## Getting Started
 
+\* Details in [User Manual](./doc/Tyrata_Simulator_User_Manual.pdf)
+
 1. Clone the project to Eclipse 
     `File` => `Import`, select `Git` => `Projects from Git`
 2. Build the project and Run 
@@ -18,30 +20,66 @@ TyrataSimulator is a pc program that generates simulated Tyrata sensors output a
 - Java SE 8 [1.8.0_162]
 - Windows 10 (for Bluetooth to run)
 - [JavaFX 8](http://www.oracle.com/technetwork/java/javase/overview/javafx-overview-2158620.html) - GUI library for JAVA
+- BlueCove 2.1.2
 
 
-## Tire Configuration
+## File structure
 
-Upon launching, the program gives 4 default tires listed in a table.
+```
+ /
+ |- src			  -> The main source folder containing all Java files 
+ |- build		  -> resources for build
+ |- doc 		  -> resources used for readme(this file)
+ |- lib			  -> 3rd party libraries needed for compilation and run. 
+ |- resources      -> A source folder containing required resource files. 
+	|- img         -> Image files for the app
+ |- build.fxbuild  -> JavaFx build support file
+ |- README.md      -> this file
+```
 
-**Key Board Control**
+## Sprints
 
-DELETE / BACKSPACE - Delete selected tire
+\* Details in [Sprint Log](./doc/sprint_log.md)
 
+#### Sprint1 (2.19 ~ 3.4)
 
-#### Tire Configuration on Menu Bar
+1. Evaluated requirements for tyrata simulator, did architecture design
+2. Deployed development Environment
+3. Developed data generator model 
+4. Built a functioning User Interface with control
 
-If you wish to import or save the configuration, go to `menu bar` - `TireConfig` 
+#### Sprint2 (3.5 ~ 3.25)
+
+1. Re-designed User Interface
+2. Implemented XML File Storage
+3. Established bluetooth connection & transmission
+
+#### Sprint3 (3.26 ~ 4.8)
+
+1. Integrated bluetooth package into application
+2. Modified Data Generating Algorithm (random outlier interval)
+3. Improved User Interface Control (disable buttons for clarity, add help document link, etc.)
+4. Performed code refactoring
+
+## Functions
+
+![Components0](./doc/img/Components0.png)
+
+### Part 1 TireSensor Configuration and View
+
+#### Tire Table
+
+In *menu bar* - *TireConfig*
+
+![Components1](./doc/img/Components1.png)
 
 `Generate Tires` - Generate tires with customized number of tires
 
-![screen shot](./doc/img/Screen_Shot2.png)
-
-> Sensor ID Format : `T-0000` Randomly generated 4 digit number
+> Sensor ID Format : T-0001 (4 digit number starts from 0001)
 
 > Init S11 Range: Between [-2.5, -1], with precision of 4 decimal places
 
-> Tire Location: Set to UNKOWN
+> Tire Location: Set to UNKNOWN
 
 `Clear All Tires` - Clear all tires in the list
 
@@ -51,17 +89,21 @@ If you wish to import or save the configuration, go to `menu bar` - `TireConfig`
 
 `Import` - Import tire configuration from file system
 
+#### Tire
 
-#### Edit Tires
+*In the TableView on the left of Main Interface*
 
-Each tire comes with sensor ID, Location indicator, initial S11, install date, and tire pressure. 
-Only initial S11 is used for computation, install date and tire pressure are listed for reference.
+![Components2](./doc/img/Components2.png)
 
-In the table, three actions are allowed: 
+Each tire comes with <u>sensor ID</u>, <u>Location indicator</u>, <u>initial S11</u>, <u>install date</u>, and <u>tire pressure</u>. Only initial S11 is used for computation, install date and tire pressure are listed for reference.
 
-`Click` on a tire to see details, `double-click` to edit, and press `Delete` or `BackSpace` on keyboard to delete.
+###### Mouse/Keyboard Control 
 
-You can also do this using buttons on bottom-left screen:
+Click on a tire to see details, double-click to edit.
+
+Press *Delete* or *BackSpace* on keyboard to delete. Hit *Enter* on keyboard to confirm.
+
+###### Components
 
 `New` - Define a new tire
 
@@ -69,35 +111,53 @@ You can also do this using buttons on bottom-left screen:
 
 `Delete` - Delete selected tire
 
-![screen shot](./doc/img/Screen_Shot3.png)
+### Part 2 Data Generator 
 
-**Key Board Control**
+*In the Panel on top-right of Main Interface*
 
-ENTER - Confirm
+**Code** package *dg.model*
 
+4 parameters are required to generate simulation data: *start date*, *time span*, *daily mileage*, and *outlier interval* (optional).
 
-## Data Generator 
-
-4 parameters are required to generate simulation data: start date, time span, daily mileage, and ourlier interval (optional).
-
-**In current version, outlier interval is randomly selected again after generating each outlier. The random outlier interval generated each time is around your input outlier interval**
+###### Components
 
 `Generate` - Generate Data
 
 `Save` - Save the data as .xml file
 
-`Show` - Show the data in UI
+`Show` - Show the data in a new window
 
-## Data Broadcast via Bluetooth
+### Part 3 Data Broadcasting via Bluetooth
 
-We successfully implemented Bluetooth connection seperately, and tested with Android app. 
-Code can be found in dg.bluetooth package. UI interface for connection is also implemented. 
-Integration into the main app will be completed in sprint 3. 
+*In the Panel on bottom-right of Main Interface*
 
-`Broadcast` - Start broadcasting (feedback info in the textFlow)
+**Code** package `dg.bluetooth `
 
-`Cancel` - Stop broadcasting (feedback info in the textFlow)
+###### **Components**
 
+textFlow - displaying feedback
+
+`Broadcast` - Start broadcasting
+
+`Cancel` - Cancel broadcasting
+
+### Part 4 Help
+
+In *menu bar* - *Help*
+
+`HelpDoc` - A Hyperlink to User Manual
+
+![Components3](./doc/img/Components3.png)
+
+`About` - Copyright info
+
+Copyright info
+
+```
+Version: 1.2.0 
+Author: ECE651 Tyrata Client Team
+(c) Copyright TyrataSimulator contributors and others 2018.  All rights reserved. Tyrata logo is trademark of the Tyrata Inc., https://www.tyrata.com/.
+```
 
 ## Built with
 
@@ -105,19 +165,6 @@ Integration into the main app will be completed in sprint 3.
 - [JavaFX 8](http://www.oracle.com/technetwork/java/javase/overview/javafx-overview-2158620.html) - GUI library for JAVA
 - [Scene Builder 2.0](http://www.oracle.com/technetwork/java/javase/downloads/javafxscenebuilder-1x-archive-2199384.html) A Visual Layout Tool for JavaFX Applications
 
-## File structure
-
-```
- /
- |- src		   -> The main source folder containing all Java files 
- |- build	   -> resources for build
- |- doc		   -> resources used for readme(this file)
- |- lib		   -> 3rd party libraries needed for compilation and run. 
- bluecove: lib for bluetooth connection
- |- resources  	   -> A source folder containing required resource files. pictures used in app.
- |- build.fxbuild  -> Maven support for the project
- |- README.md      -> this file
-```
 ## Authors
 
 Zike Qin
