@@ -18,24 +18,19 @@ TyrataSimulator is a pc program that generates simulated Tyrata sensors output a
 - Java SE 8 [1.8.0_162]
 - Windows 10 (for Bluetooth to run)
 - [JavaFX 8](http://www.oracle.com/technetwork/java/javase/overview/javafx-overview-2158620.html) - GUI library for JAVA
+- BlueCove 2.1.2
 
 
-## Tire Configuration
-
-Upon launching, the program gives 4 default tires listed in a table.
-
-**Key Board Control**
-
-DELETE / BACKSPACE - Delete selected tire
+## Functions
 
 
-#### Tire Configuration on Menu Bar
+### Part 1 TireSensor Configuration and View
 
-If you wish to import or save the configuration, go to `menu bar` - `TireConfig` 
+#### Tire Table
+
+*In* `menu bar` - `TireConfig` 
 
 `Generate Tires` - Generate tires with customized number of tires
-
-![screen shot](./doc/img/Screen_Shot2.png)
 
 > Sensor ID Format : `T-0000` Randomly generated 4 digit number
 
@@ -51,17 +46,17 @@ If you wish to import or save the configuration, go to `menu bar` - `TireConfig`
 
 `Import` - Import tire configuration from file system
 
+#### Tire
 
-#### Edit Tires
+*In the TableView on the left of Main Interface*
 
-Each tire comes with sensor ID, Location indicator, initial S11, install date, and tire pressure. 
-Only initial S11 is used for computation, install date and tire pressure are listed for reference.
+Each tire comes with <u>sensor ID</u>, <u>Location indicator</u>, <u>initial S11</u>, <u>install date</u>, and <u>tire pressure</u>. Only initial S11 is used for computation, install date and tire pressure are listed for reference.
 
-In the table, three actions are allowed: 
+**Mouse/Keyboard Control** 
 
-`Click` on a tire to see details, `double-click` to edit, and press `Delete` or `BackSpace` on keyboard to delete.
+`Click` on a tire to see details, `double-click` to edit, and press `Delete` or `BackSpace` on keyboard to delete. Hit `Enter` on keyboard to confirm.
 
-You can also do this using buttons on bottom-left screen:
+**Components**
 
 `New` - Define a new tire
 
@@ -69,34 +64,41 @@ You can also do this using buttons on bottom-left screen:
 
 `Delete` - Delete selected tire
 
-![screen shot](./doc/img/Screen_Shot3.png)
+### Part 2 Data Generator 
 
-**Key Board Control**
+*In the Panel on top-right of Main Interface*
 
-ENTER - Confirm
+**Code** package `dg.model `
 
+4 parameters are required to generate simulation data: <u>start date</u>, <u>time span</u>, <u>daily mileage</u>, and <u>outlier interval</u> (optional).
 
-## Data Generator 
-
-4 parameters are required to generate simulation data: start date, time span, daily mileage, and ourlier interval (optional).
-
-**In current version, outlier interval is randomly selected again after generating each outlier. The random outlier interval generated each time is around your input outlier interval**
+**Components**
 
 `Generate` - Generate Data
 
 `Save` - Save the data as .xml file
 
-`Show` - Show the data in UI
+`Show` - Show the data in a new window
 
-## Data Broadcast via Bluetooth
+### Part 3 Data Broadcasting via Bluetooth
 
-We successfully implemented Bluetooth connection seperately, and tested with Android app. 
-Code can be found in dg.bluetooth package. UI interface for connection is also implemented. 
-Integration into the main app will be completed in sprint 3. 
+In the Panel on bottom-right of Main Interface
 
-`Broadcast` - Start broadcasting (feedback info in the textFlow)
+**Code** package `dg.bluetooth `
 
-`Cancel` - Stop broadcasting (feedback info in the textFlow)
+**Components**
+
+textFlow - displaying feedback
+
+`Broadcast` - Start broadcasting
+
+`Cancel` - Cancel broadcasting
+
+### Part 4 About
+
+*In* `menu bar` - `About` 
+
+Copyright info
 
 
 ## Built with
@@ -109,13 +111,13 @@ Integration into the main app will be completed in sprint 3.
 
 ```
  /
- |- src		   -> The main source folder containing all Java files 
- |- build	   -> resources for build
- |- doc		   -> resources used for readme(this file)
- |- lib		   -> 3rd party libraries needed for compilation and run. 
- bluecove: lib for bluetooth connection
- |- resources  	   -> A source folder containing required resource files. pictures used in app.
- |- build.fxbuild  -> Maven support for the project
+ |- src			  -> The main source folder containing all Java files 
+ |- build		  -> resources for build
+ |- doc 		  -> resources used for readme(this file)
+ |- lib			  -> 3rd party libraries needed for compilation and run. 
+ |- resources      -> A source folder containing required resource files. 
+	|- img         -> Image files for the app
+ |- build.fxbuild  -> JavaFx build support file
  |- README.md      -> this file
 ```
 ## Authors
