@@ -26,6 +26,8 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
+                  <MenuItem mnemonicParsing="false" onAction="#handleHelpLink" text="HelpDoc" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
               <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
             </items>
           </Menu>

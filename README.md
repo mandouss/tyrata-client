@@ -96,9 +96,15 @@ textFlow - displaying feedback
 
 ### Part 4 About
 
-*In* `menu bar` - `About` 
+*In* `menu bar` - `Help` 
 
 Copyright info
+
+```
+Version: 1.2.0 
+Author: ECE651 Tyrata Client Team
+(c) Copyright TyrataSimulator contributors and others 2018.  All rights reserved. Tyrata logo is trademark of the Tyrata Inc., https://www.tyrata.com/.
+```
 
 
 ## Built with
