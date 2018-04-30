@@ -19,9 +19,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.FileChooser;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
-import jdk.internal.org.objectweb.asm.Handle;
 
 /**
  * The controller for the root layout. The root layout provides the 
@@ -163,7 +161,7 @@ public class RootLayoutController {
 		
 		final WebView webView = new WebView();
 		final WebEngine engine = webView.getEngine();
-        engine.load("https://drive.google.com/open?id=1qLVi1TEUJRrYDvau_aYHmNLeoIxxuJnG");
+        engine.load("https://drive.google.com/open?id=1d1NAtgDyfQSPhr4b033Wr090reGTBT-7");
 
 		Scene scene = new Scene(webView);
 		webpageStage.setScene(scene);
