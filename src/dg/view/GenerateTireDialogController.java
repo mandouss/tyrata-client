@@ -12,6 +12,8 @@ public class GenerateTireDialogController {
 	@FXML 
 	private TextField numberOfTiresField;
 	@FXML
+	private TextField startingNoField;
+	@FXML
 	private Text warningText;
 	
 	
@@ -44,6 +46,19 @@ public class GenerateTireDialogController {
 			return 0;
 		}
 	}
+	
+	public class Generated {
+	    public final int numTire;
+	    public final int startingNo;
+	    public Generated(int numTire, int startingNo) {
+	        this.numTire = numTire; this.startingNo = startingNo;
+	    }
+	}
+	
+	public Generated getGenerated() {
+		return new Generated(Integer.parseInt(numberOfTiresField.getText()),Integer.parseInt(startingNoField.getText()));
+	}
+	
 
 	public boolean isSaveClicked() {
 		return saveClicked;
@@ -73,15 +88,14 @@ public class GenerateTireDialogController {
 	private boolean isInputValid() {
 		String errorMessage = "";
 
-		
 		if (numberOfTiresField.getText() == null || numberOfTiresField.getText().length() == 0) {
 			errorMessage += "Missing Number!\n"; 
 		} else {
 			// try to parse the time interval into an int.
 			try {
 				int numOfTires = Integer.parseInt(numberOfTiresField.getText());
-				
-				if(numOfTires <= 2 || numOfTires > 18 || numOfTires % 2 == 1) {
+				int startingNo = Integer.parseInt(startingNoField.getText());
+				if(numOfTires <= 2 || numOfTires > 18 || numOfTires % 2 == 1 || startingNo < 0) {
 					errorMessage += "Invalid number of tires \n(Even Num between 4 and 18)\n";
 				}
 			} catch (NumberFormatException e) {

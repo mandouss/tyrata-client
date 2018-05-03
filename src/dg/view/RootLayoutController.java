@@ -6,6 +6,7 @@ import java.util.Random;
 
 import dg.MainApp;
 import dg.model.Tire;
+import dg.view.GenerateTireDialogController.Generated;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -47,20 +48,25 @@ public class RootLayoutController {
 	 */
 	@FXML
 	private void handleGenerateTires() {
-		int numOfTires = mainApp.showGenerateTireDialog();
-		if (numOfTires != 0) {
-			if(!mainApp.getTireData().isEmpty()) {
-				mainApp.getTireData().clear();
-			}
-			for(int i=0; i<numOfTires; i++) {
-				Random rand = new Random();
-				//Double newTireS11 = rand.nextDouble()*1.5 - 2.5;
-				Double newTireS11 = (rand.nextInt(15000) - 25000)/10000.0;  // 4-digit precision
-				//String newTireID = "T-" + String.format("%04d", rand.nextInt(9999)); //4-digit id
-				String newTireID = "T-" + String.format("%04d", i+1); //4-digit id
-				mainApp.getTireData().add(new Tire(newTireID,"UNKOWN",newTireS11,35));
+		Generated fields = mainApp.showGenerateTireDialog();
+		if (fields != null) {
+			int numOfTires = fields.numTire;
+			int startingNo = fields.startingNo;
+			if (numOfTires != 0) {
+				if(!mainApp.getTireData().isEmpty()) {
+					mainApp.getTireData().clear();
+				}
+				for(int i=0; i<numOfTires; i++) {
+					Random rand = new Random();
+					//Double newTireS11 = rand.nextDouble()*1.5 - 2.5;
+					Double newTireS11 = (rand.nextInt(15000) - 25000)/10000.0;  // 4-digit precision
+					//String newTireID = "T-" + String.format("%04d", rand.nextInt(9999)); //4-digit id
+					String newTireID = "T-" + String.format("%04d", i+startingNo); //4-digit id
+					mainApp.getTireData().add(new Tire(newTireID,"UNKOWN",newTireS11,35));
+				}
 			}
 		}
+		
 	}
 	
 	/**
