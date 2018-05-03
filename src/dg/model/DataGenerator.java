@@ -36,7 +36,7 @@ public class DataGenerator {
 		this.tireInfoList = tireInfoList;
 		this.startDate = startDate.get();
 		this.currentDate = startDate.get();
-		this.currentMileage = 0;
+		this.currentMileage = dailyMileage.get();
 		this.outlierInterval = outlierInterval.get();
 		this.outlierEnabled = outlierEnabled.get();
 		this.dayCounter = 0;
@@ -51,7 +51,7 @@ public class DataGenerator {
         this.tireInfoList = tireInfoList;
         this.startDate = startDate;
         this.currentDate = startDate;
-        this.currentMileage = 0;
+        this.currentMileage = dailyMileage;
         this.outlierEnabled = outlierEnabled;
         this.outlierInterval = outlierInterval;
         this.dayCounter = 0;
