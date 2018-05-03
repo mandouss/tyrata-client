@@ -14,6 +14,7 @@ import dg.model.DailyS11;
 import dg.model.Tire;
 import dg.model.TireListWrapper;
 import dg.view.GenerateTireDialogController;
+import dg.view.GenerateTireDialogController.Generated;
 import dg.view.GeneratedDataViewController;
 import dg.view.RootLayoutController;
 import dg.view.TireEditDialogController;
@@ -127,7 +128,7 @@ public class MainApp extends Application {
 		}
 	}
 	
-	public int showGenerateTireDialog() {
+	public Generated showGenerateTireDialog() {
 		try {
 			// Load the fxml file and create a new stage for the popup dialog.
 			FXMLLoader loader = new FXMLLoader();
@@ -149,11 +150,14 @@ public class MainApp extends Application {
 
 			// Show the dialog and wait until the user closes it
 			dialogStage.showAndWait();
-
-			return controller.getTireNum();
-		} catch (IOException e) {
+			if (controller.isSaveClicked()) {
+				return controller.getGenerated();	
+			} else {
+				return null;
+			}
+		}catch (IOException e) {
 			e.printStackTrace();
-			return 0;
+			return null;
 		}
 	}
 
